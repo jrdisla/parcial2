@@ -4,15 +4,20 @@
              version="2.1">
     <persistence-unit name="MiUnidadPersistencia" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>Clases.User</class>
-        <class>Clases.Article</class>
-        <class>Clases.Tag</class>
-        <class>Clases.Comment</class>
-        <class>Clases.ArticleLikes</class>
-        <class>Clases.CommentLikes</class>
+        <class>Logica.Album</class>
+        <class>Logica.AlbumPreferencia</class>
+        <class>Logica.Articulo</class>
+        <class>Logica.ArticuloPreferencia</class>
+        <class>Logica.ComentarioAlbum</class>
+        <class>Logica.ComentarioAlbumPrefe</class>
+        <class>Logica.ComentarioArticulo</class>
+        <class>Logica.ComentarioPreferenciaArti</class>
+        <class>Logica.Usuario</class>
+        <class>Logica.Imagenes</class>
+        <class>Logica.Idiomas</class>
         <properties>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/test11" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/parcial2" />
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="javax.persistence.jdbc.user" value="sa" />
             <property name="javax.persistence.jdbc.password" value="" />
