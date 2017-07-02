@@ -20,13 +20,23 @@ public class Rutas {
 
         public static void StartProyect() {
 
-            staticFiles.location("/public");
+            staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
 
             Spark.get("/Login", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/Login.ftl");
+                StringWriter writer = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+
+                resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
+            Spark.get("/profile", (request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/profile.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 

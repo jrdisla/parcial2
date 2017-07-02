@@ -14,7 +14,6 @@
         <class>Logica.ComentarioPreferenciaArti</class>
         <class>Logica.Usuario</class>
         <class>Logica.Imagenes</class>
-        <class>Logica.Idiomas</class>
         <properties>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />-->
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/parcial2" />
