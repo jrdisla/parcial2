@@ -24,15 +24,26 @@ public class Rutas {
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
 
-            Spark.get("/RegistrarUsuario", (request, response) -> {
+            Spark.get("/Login", (request, response) -> {
 
-                Template resultTemplate = configuration.getTemplate("templates/registrarUsuario.ftl");
+                Template resultTemplate = configuration.getTemplate("templates/Login.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
+
         }
+
+    private static void autorizado(Request request, Response response) {
+
+        Session ses = request.session(true);
+        Usuario user = ses.attribute("usuario");
+
+        if(user == null){
+            halt(401, "No Autorizado");
+        }
+    }
 
 }
