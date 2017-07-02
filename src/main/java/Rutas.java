@@ -81,6 +81,7 @@ public class Rutas {
                 return writer;
             });
 
+
         }
 
     private static void autorizado(Request request, Response response) {
