@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Dobble Social Network: Profile Page</title>
+    <title>Facebook 2.0 Social Network: Profile Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -19,8 +19,8 @@
   <body>
 
   <header>
-    <div class="container">
-      <img src="img/logo.png" class="logo" alt="">
+    <div class="container" >
+      <img src="img/Social_Media.png" width="360px" height="200px" class="logo" alt="">
       <form class="form-inline">
         <div class="form-group">
           <label class="sr-only" for="exampleInputEmail3">Email address</label>
@@ -31,11 +31,13 @@
           <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-default">Sign in</button><br>
-        <div class="checkbox">
+
+          <!-- <div class="checkbox">
           <label>
             <input type="checkbox"> Remember me
           </label>
-        </div>
+        </div>-->
+          
       </form>
     </div>
   </header>
@@ -164,7 +166,7 @@
 
     <footer>
       <div class="container">
-        <p>Dobble Copyright &copy, 2015</p>
+        <p>Pucmm Student, copyright 2017</p>
       </div>
     </footer>
 

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Dobble Social Network</title>
+    <title>Facebook 2.0 Social Network</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -91,7 +91,7 @@
               <div class="panel-body">
                  <div class="row">
                    <div class="col-sm-2">
-                     <a href="profile.html" class="post-avatar thumbnail"><img src="img/user.png" alt=""><div class="text-center">DevUser1</div></a>
+                     <a href="profile.ftl" class="post-avatar thumbnail"><img src="img/user.png" alt=""><div class="text-center">DevUser1</div></a>
                      <div class="likes text-center">7 Likes</div>
                    </div>
                    <div class="col-sm-10">
@@ -136,7 +136,7 @@
               <div class="panel-body">
                  <div class="row">
                    <div class="col-sm-2">
-                     <a href="profile.html" class="post-avatar thumbnail"><img src="img/user.png" alt=""><div class="text-center">DevUser1</div></a>
+                     <a href="profile.ftl" class="post-avatar thumbnail"><img src="img/user.png" alt=""><div class="text-center">DevUser1</div></a>
                      <div class="likes text-center">7 Likes</div>
                    </div>
                    <div class="col-sm-10">
@@ -181,7 +181,7 @@
               <div class="panel-body">
                  <div class="row">
                    <div class="col-sm-2">
-                     <a href="profile.html" class="post-avatar thumbnail"><img src="img/user.png" alt=""><div class="text-center">DevUser1</div></a>
+                     <a href="profile.ftl" class="post-avatar thumbnail"><img src="img/user.png" alt=""><div class="text-center">DevUser1</div></a>
                      <div class="likes text-center">7 Likes</div>
                    </div>
                    <div class="col-sm-10">
@@ -277,7 +277,7 @@
 
     <footer>
       <div class="container">
-        <p>Dobble Copyright &copy, 2015</p>
+        <p>Pucmm students, copyright 2017</p>
       </div>
     </footer>
 

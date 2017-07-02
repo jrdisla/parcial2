@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Dobble Social Network: Photos Page</title>
+    <title>Facebook 2.0 Social Network: Profile Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -133,7 +133,7 @@
 
     <footer>
       <div class="container">
-        <p>Dobble Copyright &copy, 2015</p>
+        <p>Pucmm Students, copyright 2017</p>
       </div>
     </footer>
 
