@@ -521,35 +521,39 @@ ETIQUETAS_ID</ColNames>
       <DataType>VARCHAR(255)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="114" parent="17" name="CONSTRAINT_39">
+    <index id="114" parent="17" name="UK_KFSP0S1TFLM1CWLJ8IDHQSAD0_INDEX_3">
+      <ColNames>EMAIL</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="115" parent="17" name="CONSTRAINT_39">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="115" parent="18" name="USUARIO_ID">
+    <column id="116" parent="18" name="USUARIO_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="116" parent="18" name="AMIGOS_ID">
+    <column id="117" parent="18" name="AMIGOS_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="117" parent="18" name="CONSTRAINT_1">
+    <key id="118" parent="18" name="CONSTRAINT_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USUARIO_ID
 AMIGOS_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="118" parent="18" name="FKDPUJD62F3DVGR432424K9B8RB">
+    <foreign-key id="119" parent="18" name="FKDPUJD62F3DVGR432424K9B8RB">
       <ColNames>USUARIO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="119" parent="18" name="FKFG6STXRS3W8HTY6M1DPHISQLB">
+    <foreign-key id="120" parent="18" name="FKFG6STXRS3W8HTY6M1DPHISQLB">
       <ColNames>AMIGOS_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>

@@ -17,7 +17,7 @@
 <body>
 
 <div class="wrapper">
-    <form class="form-signin" method="post">
+    <form class="form-signin" action="/loginProcess" method="post">
 
         <h1 style="font-size: 60px; font-family: 'Helvetica Neue'" class="text-center text-primary text-uppercase">Facebook</h1>
 

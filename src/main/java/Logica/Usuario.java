@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
     @GeneratedValue
     @Expose
     private int id;
-    @Column(name = "email",nullable = false)
+    @Column(name = "email",nullable = false,unique = true)
     private String email;
     @Column(name = "nombre",nullable = false)
     private String nombre;
