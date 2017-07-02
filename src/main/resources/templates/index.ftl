@@ -80,8 +80,27 @@
                   <div class="pull-right">
                     <div class="btn-toolbar">
                       <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
-                      <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>
+                        <a id="flip"  class="btn btn-danger"  role="button">Image</a>
                       <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button>
+                        <div id = "panel">
+
+                            <div class="form-group">
+                                <label>Upload Image</label>
+                                <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                    Browse… <input type="file" id="imgInp">
+                </span>
+            </span>
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+                                <img id='img-upload'/>
+                            </div>
+
+
+
+
+                        </div>
                     </div>
                   </div>
                 </form>
@@ -286,5 +305,58 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
+  <script>
+      $(document).ready(function(){
+          $("#flip").click(function(){
+              $("#panel").slideDown("slow");
+          });
+      });
+  </script>
+  <script>
+      $(document).ready(function(){
+          $("#flip").dblclick(function(){
+              $("#panel").hide();
+          });
+      });
+  </script>
+
+  <style>
+      #panel, #flip {
+          padding: 5px;
+          text-align: center;
+          border: solid 1px #c3c3c3;
+      }
+
+      #panel {
+          padding: 5px;
+          display: none;
+      }
+  </style>
+  <style>
+      .btn-file {
+          position: relative;
+          overflow: hidden;
+      }
+      .btn-file input[type=file] {
+          position: absolute;
+          top: 0;
+          right: 0;
+          min-width: 100%;
+          min-height: 100%;
+          font-size: 100px;
+          text-align: right;
+          filter: alpha(opacity=0);
+          opacity: 0;
+          outline: none;
+          background: white;
+          cursor: inherit;
+          display: block;
+      }
+
+      #img-upload{
+          width: 100%;
+      }
+      </style>
+
   </body>
 </html>
