@@ -44,12 +44,15 @@ public class Rutas {
                 Session session = request.session(true);
                 String username = request.queryParams("username");
                 String password = request.queryParams("password");
+
                 System.out.println(username);
                 ManejadorUsuario userHandler = ManejadorUsuario.getInstance();
                 Usuario usuario = userHandler.GetUser(username);
+
                 if (usuario != null && usuario.getContraseña().equalsIgnoreCase(password))
                 {
                     session.attribute("username",usuario);
+                    response.redirect("/profile");
                 }
                 else
                 {
@@ -58,6 +61,7 @@ public class Rutas {
                 Template resultTemplate = configuration.getTemplate("templates/index.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
+
                 attributes.put("user",usuario.getNombre());
                 resultTemplate.process(attributes, writer);
                 return writer;
@@ -68,6 +72,8 @@ public class Rutas {
                 Template resultTemplate = configuration.getTemplate("templates/profile.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
+
+                System.out.println(attributes);
 
                 resultTemplate.process(attributes, writer);
                 return writer;
@@ -88,16 +94,22 @@ public class Rutas {
                 String password = request.queryParams("password");
 
                 Date publishedDate = new Date();
+                String[] birthday = date_b.split("-");
 
-                int day = Integer.parseInt(date_b.substring(0,2));
-                int month = Integer.parseInt(date_b.substring(3,5));
-                int year = Integer.parseInt(date_b.substring(6,10));
+                int day = Integer.parseInt(birthday[2]);
+                int month = Integer.parseInt(birthday[1]);
+                int year = Integer.parseInt(birthday[0]);
+
                 year -=1900;
                 month-=1;
+
                 Date date_bir = new Date(year,month,day);
+
                 Usuario user = new Usuario(email, name, lastname, date_bir, countrie, city,publishedDate, language, password);
-                if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null){
-                ManejadorUsuario.getInstance().insertIntoDatabase(user);
+
+                if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null)
+                {
+                    ManejadorUsuario.getInstance().insertIntoDatabase(user);
                     Session session = request.session(true);
                     session.attribute("username",user);
                 }
@@ -118,13 +130,16 @@ public class Rutas {
                 return writer;
             });
 
+            before("/profile",(request, response) -> {
+                autorizado(request,response);
+            });
 
         }
 
     private static void autorizado(Request request, Response response) {
 
         Session ses = request.session(true);
-        Usuario user = ses.attribute("usuario");
+        Usuario user = ses.attribute("username");
         if(user == null){
             halt(401, "No Autorizado");
         }

@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-md-8">
                   <ul>
-                    <li><strong>Name:</strong>Doug Walter</li>
+                    <li><strong>Name:</strong> Cesar</li>
                     <li><strong>Email:</strong>doug@gmail.com</li>
                     <li><strong>City:</strong>Boston</li>
                     <li><strong>State:</strong>Massachusetts</li>

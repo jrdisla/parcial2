@@ -37,12 +37,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="members.html">Members</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="groups.html">Groups</a></li>
-            <li><a href="photos.html">Photos</a></li>
-            <li><a href="profile.html">Profile</a></li>
+            <li class="active"><a href="index.ftl">Home</a></li>
+            <li><a href="members.ftl">Members</a></li>
+            <li><a href="groups.ftl">Groups</a></li>
+            <li><a href="photos.ftl">Photos</a></li>
+            <li><a href="profile.ftl">Profile</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
