@@ -77,6 +77,7 @@ public class Rutas {
 
                 Template resultTemplate = configuration.getTemplate("templates/index.ftl");
                 StringWriter writer = new StringWriter();
+
                 String name = request.queryParams("firstname");
                 String lastname = request.queryParams("lastname");
                 String email = request.queryParams("email");
@@ -85,7 +86,9 @@ public class Rutas {
                 String language = request.queryParams("language");
                 String date_b = request.queryParams("date_b");
                 String password = request.queryParams("password");
+
                 Date publishedDate = new Date();
+
                 int day = Integer.parseInt(date_b.substring(0,2));
                 int month = Integer.parseInt(date_b.substring(3,5));
                 int year = Integer.parseInt(date_b.substring(6,10));

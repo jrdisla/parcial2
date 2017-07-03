@@ -50,16 +50,16 @@
               <input type="text" id="email" name="email" placeholder="Your Email" value="" class="radius" />
             </p>
             <p>
-            <input type="text" id="remail" name="countrie" placeholder="Countrie" class="radius" />
+            <input type="text" id="remail" name="countrie" placeholder="Countries" class="radius" />
             </p>
               <p>
                   <input type="text" id="remail" name="city" placeholder="City" class="radius" />
               </p>
               <p>
-                  <input type="text" id="remail" name="language" placeholder="Langueges" class="radius" />
+                  <input type="text" id="remail" name="language" placeholder="Languages" class="radius" />
               </p>
               <p>
-                  <input type="text" id="remail" name="date_b" placeholder="Birthday" class="radius" />
+                  <input type="date" id="remail" name="date_b" placeholder="Birthday" class="radius" />
               </p>
             <p>
               <input type="password" id="password" name="password" placeholder="New Password" class="radius" />
