@@ -55,10 +55,10 @@ public class Rutas {
                 {
                     response.redirect("/Login");
                 }
-                Template resultTemplate = configuration.getTemplate("templates/Index.ftl");
+                Template resultTemplate = configuration.getTemplate("templates/index.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
-
+                attributes.put("user",usuario.getNombre());
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -100,7 +100,7 @@ public class Rutas {
                 }
 
                 Map<String, Object> attributes = new HashMap<>();
-
+                attributes.put("user",user.getNombre());
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
