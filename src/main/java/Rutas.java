@@ -11,6 +11,8 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 import spark.Spark;
+
+import java.io.File;
 import java.io.StringWriter;
 import java.util.*;
 import static spark.Spark.*;
@@ -88,7 +90,6 @@ public class Rutas {
 
         Session ses = request.session(true);
         Usuario user = ses.attribute("usuario");
-
         if(user == null){
             halt(401, "No Autorizado");
         }
