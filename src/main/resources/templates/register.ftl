@@ -41,7 +41,7 @@
         </div>
         <!--loginheader-->
         <div class="loginform">
-          <form id="login" action="" method="post">
+          <form id="login" action="/addUser" method="post">
             <p>
               <input type="text" id="firstname" name="firstname" placeholder="First Name" value="" class="radius mini" />
               <input type="text" id="lastname" name="lastname" placeholder="Last Name" value="" class="radius mini" />
@@ -50,8 +50,17 @@
               <input type="text" id="email" name="email" placeholder="Your Email" value="" class="radius" />
             </p>
             <p>
-    <input type="text" id="remail" name="remail" placeholder="Re-enter Email" class="radius" />
+            <input type="text" id="remail" name="countrie" placeholder="Countrie" class="radius" />
             </p>
+              <p>
+                  <input type="text" id="remail" name="city" placeholder="City" class="radius" />
+              </p>
+              <p>
+                  <input type="text" id="remail" name="language" placeholder="Langueges" class="radius" />
+              </p>
+              <p>
+                  <input type="text" id="remail" name="date_b" placeholder="Birthday" class="radius" />
+              </p>
             <p>
               <input type="password" id="password" name="password" placeholder="New Password" class="radius" />
             </p>

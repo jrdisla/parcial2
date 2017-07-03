@@ -27,6 +27,7 @@ import java.util.Set;
 public class Usuario implements Serializable {
     public static String getUser = "User.findUserByUsername";
     public static String chekUserPassword = "User.findUserByUsernameAndPassword";
+
     @Id
     @GeneratedValue
     @Expose
@@ -70,6 +71,19 @@ public class Usuario implements Serializable {
 
     public Usuario() {
     }
+
+    public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, Date fecha_registro, String idiomas, String contraseña) {
+        this.email = email;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.lugar_nacimiento = lugar_nacimiento;
+        this.ciudad = ciudad;
+        this.fecha_registro = fecha_registro;
+        this.idiomas = idiomas;
+        this.contraseña = contraseña;
+    }
+
     public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, String lugares_estudio, String lugares_trabajo, String ig_cuenta, byte[] foto_perfil, Set<Album> albums, Set<Articulo> articulos, Set<Usuario> amigos, String descripcion, Date fecha_registro, String idiomas, boolean esAdmin, String contraseña) {
         this.email = email;
         this.nombre = nombre;

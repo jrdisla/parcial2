@@ -22,6 +22,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        Rutas.StartProyect();
+      Rutas.StartProyect();
+
     }
 }

@@ -73,9 +73,41 @@ public class Rutas {
                 return writer;
             });
 
-            Spark.get("/home", (request, response) -> {
+            Spark.post("/addUser", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/index.ftl");
+                StringWriter writer = new StringWriter();
+                String name = request.queryParams("firstname");
+                String lastname = request.queryParams("lastname");
+                String email = request.queryParams("email");
+                String countrie = request.queryParams("countrie");
+                String city = request.queryParams("city");
+                String language = request.queryParams("language");
+                String date_b = request.queryParams("date_b");
+                String password = request.queryParams("password");
+                Date publishedDate = new Date();
+                int day = Integer.parseInt(date_b.substring(0,2));
+                int month = Integer.parseInt(date_b.substring(3,5));
+                int year = Integer.parseInt(date_b.substring(6,10));
+                year -=1900;
+                month-=1;
+                Date date_bir = new Date(year,month,day);
+                Usuario user = new Usuario(email, name, lastname, date_bir, countrie, city,publishedDate, language, password);
+                if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null){
+                ManejadorUsuario.getInstance().insertIntoDatabase(user);
+                    Session session = request.session(true);
+                    session.attribute("username",user);
+                }
+
+                Map<String, Object> attributes = new HashMap<>();
+
+                resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
+            Spark.get("/home", (request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/register.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
