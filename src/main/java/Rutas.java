@@ -12,9 +12,13 @@ import spark.Response;
 import spark.Session;
 import spark.Spark;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.StringWriter;
+import java.nio.file.Files;
 import java.util.*;
+import java.util.jar.Attributes;
+
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
@@ -27,6 +31,7 @@ public class Rutas {
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
             enableDebugScreen();
+
             Spark.get("/Login", (request, response) -> {
 
 
@@ -56,15 +61,10 @@ public class Rutas {
                 }
                 else
                 {
-                    response.redirect("/Login");
+                    response.redirect("/home");
                 }
-                Template resultTemplate = configuration.getTemplate("templates/index.ftl");
-                StringWriter writer = new StringWriter();
-                Map<String, Object> attributes = new HashMap<>();
 
-                attributes.put("user",usuario.getNombre());
-                resultTemplate.process(attributes, writer);
-                return writer;
+                return "";
             });
 
             Spark.get("/profile", (request, response) -> {
@@ -73,8 +73,9 @@ public class Rutas {
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
-                System.out.println(attributes);
+                Usuario usuario = request.session().attribute("username");
 
+                attributes.put("user",usuario);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -130,16 +131,21 @@ public class Rutas {
                 return writer;
             });
 
-            before("/profile",(request, response) -> {
-                autorizado(request,response);
-            });
+
+
+
+
+
+            //before("/profile",(request, response) -> {
+            //    autorizado(request,response);
+           // });
 
         }
 
     private static void autorizado(Request request, Response response) {
 
         Session ses = request.session(true);
-        Usuario user = ses.attribute("username");
+        Usuario user = ses.attribute("user");
         if(user == null){
             halt(401, "No Autorizado");
         }

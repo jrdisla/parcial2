@@ -20,8 +20,13 @@
 
   <header>
     <div class="container" >
-      <img src="img/Social_Media.png" width="360px" height="200px" class="logo" alt="">
-      <form class="form-inline">
+      <img src="img/logo.png" class="logo" alt="">
+      <#if user??>
+          <div>
+              <label for="name" > Hello: ${user.nombre}</label>
+          </div>
+      <#else>
+          <form class="form-inline">
         <div class="form-group">
           <label class="sr-only" for="exampleInputEmail3">Email address</label>
           <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
@@ -31,6 +36,7 @@
           <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-default">Sign in</button><br>
+      </#if>
 
           <!-- <div class="checkbox">
           <label>
@@ -54,12 +60,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="members.html">Members</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="groups.html">Groups</a></li>
-            <li><a href="photos.html">Photos</a></li>
-            <li><a href="profile.html">Profile</a></li>
+            <li class="active"><a href="index.ftl">Home</a></li>
+            <li><a href="members.ftl">Members</a></li>
+            <li><a href="groups.ftl">Groups</a></li>
+            <li><a href="photos.ftl">Photos</a></li>
+            <li><a href="profile.ftl">Profile</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -77,12 +82,11 @@
                 </div>
                 <div class="col-md-8">
                   <ul>
-                    <li><strong>Name:</strong> Cesar</li>
-                    <li><strong>Email:</strong>doug@gmail.com</li>
-                    <li><strong>City:</strong>Boston</li>
-                    <li><strong>State:</strong>Massachusetts</li>
-                    <li><strong>Gender:</strong>Male</li>
-                    <li><strong>DOB:</strong>September 16th</li>
+                    <li><strong>Name: </strong> ${user.nombre}</li>
+                    <li><strong>Email :</strong> ${user.email}</li>
+                    <li><strong>City: </strong> ${user.ciudad}</li>
+                    <li><strong>Gender: </strong>Male</li>
+                    <li><strong>DOB: </strong> ${user.fecha_naci}</li>
                   </ul>
                 </div>
               </div><br><br>
@@ -119,15 +123,15 @@
               </div>
               <div class="panel-body">
                 <ul>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
                 </ul>
                 <div class="clearfix"></div>
                 <a class="btn btn-primary" href="#">View All Friends</a>

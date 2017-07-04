@@ -38,6 +38,8 @@ public class Usuario implements Serializable {
     private String nombre;
     @Column(name = "apellido",nullable = false)
     private String apellido;
+    @Column(name = "genero")
+    private String genero;
     @Column(name = "fecha_naci")
     private Date fecha_nacimiento;
     @Column(name = "lugar_naci")
@@ -143,6 +145,14 @@ public class Usuario implements Serializable {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public Date getFecha_nacimiento() {

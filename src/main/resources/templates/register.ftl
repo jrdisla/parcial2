@@ -20,12 +20,6 @@
                   <td ><input type="password" tabindex="2" id="pass" placeholder="Password" name="password" class="inputtext radius1" ></td>
                   <td ><input type="submit" class="fbbutton" name="login" value="Login" /></td>
                 </tr>
-                <tr>
-                  <td><label>
-                      <input id="persist_box" type="checkbox" name="persistent" value="1" checked="1"/>
-                      <span style="color:#ccc;">Keep me logged in</span></label></td>
-                  <td><label><a href="" style="color:#ccc; text-decoration:none">forgot your password?</a></label></td>
-                </tr>
               </table>
             </form>
           </div>
@@ -42,31 +36,31 @@
         <!--loginheader-->
         <div class="loginform">
           <form id="login" action="/addUser" method="post">
-            <p>
+            <div>
               <input type="text" id="firstname" name="firstname" placeholder="First Name" value="" class="radius mini" />
               <input type="text" id="lastname" name="lastname" placeholder="Last Name" value="" class="radius mini" />
-            </p>
-            <p>
+            </div>
+            <div>
               <input type="text" id="email" name="email" placeholder="Your Email" value="" class="radius" />
-            </p>
-            <p>
+            </div>
+            <div>
             <input type="text" id="remail" name="countrie" placeholder="Countries" class="radius" />
-            </p>
-              <p>
+            </div>
+              <div>
                   <input type="text" id="remail" name="city" placeholder="City" class="radius" />
-              </p>
-              <p>
+              </div>
+              <div>
                   <input type="text" id="remail" name="language" placeholder="Languages" class="radius" />
-              </p>
-              <p>
+              </div>
+              <div>
                   <input type="date" id="remail" name="date_b" placeholder="Birthday" class="radius" />
-              </p>
-            <p>
+              </div>
+            <div>
               <input type="password" id="password" name="password" placeholder="New Password" class="radius" />
-            </p>
-            <p>
+            </div>
+              <div>
               <button class="radius title" name="signup">Sign Up for Facebook</button>
-            </p>
+            </div>
           </form>
         </div>
         <!--loginform-->
