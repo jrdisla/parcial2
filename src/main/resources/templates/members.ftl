@@ -52,11 +52,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="members.html">Members</a></li>
-            <li><a href="groups.html">Groups</a></li>
-            <li><a href="photos.html">Photos</a></li>
-            <li><a href="profile.html">Profile</a></li>
+            <li class="active"><a href="/index">Home</a></li>
+            <li><a href="/members">Members</a></li>
+            <!--<li><a href="groups.ftl">Groups</a></li> -->
+            <li><a href="/photos">Photos</a></li>
+            <li><a href="/profile">Profile</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -145,21 +145,22 @@
               </div>
               <div class="panel-body">
                 <ul>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
                 </ul>
                 <div class="clearfix"></div>
                 <a class="btn btn-primary" href="#">View All Friends</a>
               </div>
             </div>
-            <div class="panel panel-default groups">
+
+              <!--<div class="panel panel-default groups">
               <div class="panel-heading">
                 <h3 class="panel-title">Latest Groups</h3>
               </div>
@@ -184,7 +185,7 @@
                 <div class="clearfix"></div>
                 <a href="#" class="btn btn-primary">View All Groups</a>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

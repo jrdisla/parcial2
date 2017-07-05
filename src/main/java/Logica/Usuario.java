@@ -38,8 +38,8 @@ public class Usuario implements Serializable {
     private String nombre;
     @Column(name = "apellido",nullable = false)
     private String apellido;
-    @Column(name = "genero")
-    private String genero;
+    @Column(name = "sexo")
+    private String sexo;
     @Column(name = "fecha_naci")
     private Date fecha_nacimiento;
     @Column(name = "lugar_naci")
@@ -72,12 +72,26 @@ public class Usuario implements Serializable {
     private String contraseña;
 
     public Usuario() {
+
     }
 
-    public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, Date fecha_registro, String idiomas, String contraseña) {
+    public Usuario(String email, String nombre, String apellido ,Date fecha_nacimiento, String lugar_nacimiento, String ciudad, Date fecha_registro, String idiomas, String contraseña) {
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.lugar_nacimiento = lugar_nacimiento;
+        this.ciudad = ciudad;
+        this.fecha_registro = fecha_registro;
+        this.idiomas = idiomas;
+        this.contraseña = contraseña;
+    }
+
+    public Usuario(String email, String nombre, String apellido, String sexo ,Date fecha_nacimiento, String lugar_nacimiento, String ciudad, Date fecha_registro, String idiomas, String contraseña) {
+        this.email = email;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.sexo = sexo;
         this.fecha_nacimiento = fecha_nacimiento;
         this.lugar_nacimiento = lugar_nacimiento;
         this.ciudad = ciudad;
@@ -147,12 +161,12 @@ public class Usuario implements Serializable {
         this.apellido = apellido;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public Date getFecha_nacimiento() {

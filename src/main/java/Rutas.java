@@ -30,7 +30,7 @@ public class Rutas {
             staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
-            enableDebugScreen();
+            //enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
 
@@ -50,7 +50,6 @@ public class Rutas {
                 String username = request.queryParams("username");
                 String password = request.queryParams("password");
 
-                System.out.println(username);
                 ManejadorUsuario userHandler = ManejadorUsuario.getInstance();
                 Usuario usuario = userHandler.GetUser(username);
 
@@ -63,13 +62,25 @@ public class Rutas {
                 {
                     response.redirect("/home");
                 }
-
                 return "";
             });
 
             Spark.get("/profile", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/profile.ftl");
+                StringWriter writer = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+
+                Usuario usuario = request.session().attribute("username");
+
+                attributes.put("user",usuario);
+                resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
+            Spark.get("/index", (request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/index.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
@@ -106,7 +117,7 @@ public class Rutas {
 
                 Date date_bir = new Date(year,month,day);
 
-                Usuario user = new Usuario(email, name, lastname, date_bir, countrie, city,publishedDate, language, password);
+                Usuario user = new Usuario(email, name, lastname, "masculino", date_bir, countrie, city,publishedDate, language, password);
 
                 if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null)
                 {
@@ -116,7 +127,7 @@ public class Rutas {
                 }
 
                 Map<String, Object> attributes = new HashMap<>();
-                attributes.put("user",user.getNombre());
+                attributes.put("user",user);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -134,21 +145,24 @@ public class Rutas {
 
 
 
+            before("/profile",(request, response) -> {
+                autorizado(request,response);
+            });
 
-
-            //before("/profile",(request, response) -> {
-            //    autorizado(request,response);
-           // });
-
+            before("/index",(request, response) -> {
+                autorizado(request,response);
+            });
         }
 
-    private static void autorizado(Request request, Response response) {
+        private static void autorizado(Request request, Response response) {
 
         Session ses = request.session(true);
-        Usuario user = ses.attribute("user");
-        if(user == null){
+        Usuario user = ses.attribute("username");
+
+        if(user == null)
+        {
             halt(401, "No Autorizado");
         }
     }
-
 }
+
