@@ -3,17 +3,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Facebook Style Home Page Design - demo by w3lessons.info</title>
+    <title>Facebook Style Home Page Design</title>
     <link rel="stylesheet" href="css/reg.css">
     </head>
 <body class="login">
 <!-- header starts here -->
 <div id="facebook-Bar">
       <div id="facebook-Frame">
-        <div id="logo"> <a href="http://w3lessons.info">Facebook 2.0</a> </div>
+        <div id="logo"> <a href="/Login"> Facebook 2.0</a> </div>
         <div id="header-main-right">
           <div id="header-main-right-nav">
-            <form method="post" action="/loginProcess" id="login_form" name="login_form">
+           <!-- <form method="post" action="/loginProcess" id="login_form" name="login_form">
               <table border="0" style="border:none">
                 <tr>
                   <td ><input type="text" tabindex="1"  id="email" placeholder="Email or Phone" name="username" class="inputtext radius1" value=""></td>
@@ -22,6 +22,7 @@
                 </tr>
               </table>
             </form>
+            -->
           </div>
         </div>
   </div>
@@ -37,29 +38,29 @@
         <div class="loginform">
           <form id="login" action="/addUser" method="post">
             <div>
-              <input type="text" id="firstname" name="firstname" placeholder="First Name" value="" class="radius mini" />
-              <input type="text" id="lastname" name="lastname" placeholder="Last Name" value="" class="radius mini" />
+              <input type="text" id="firstname" name="firstname" placeholder="First Name" value="" class="radius mini" required />
+              <input type="text" id="lastname" name="lastname" placeholder="Last Name" value="" class="radius mini" required/>
             </div>
             <div>
-              <input type="text" id="email" name="email" placeholder="Your Email" value="" class="radius" />
+              <input type="email" id="email" name="email" placeholder="Your Email" value="" class="radius" required/>
             </div>
             <div>
-            <input type="text" id="remail" name="countrie" placeholder="Countries" class="radius" />
+            <input type="text" id="remail" name="countries" placeholder="Countries" class="radius" required/>
             </div>
               <div>
-                  <input type="text" id="remail" name="city" placeholder="City" class="radius" />
+                  <input type="text" id="remail" name="city" placeholder="City" class="radius" required/>
               </div>
               <div>
-                  <input type="text" id="remail" name="language" placeholder="Languages" class="radius" />
+                  <input type="text" id="remail" name="languages" placeholder="Languages" class="radius" required />
               </div>
               <div>
-                  <input type="date" id="remail" name="date_b" placeholder="Birthday" class="radius" />
+                  <input type="date" id="remail" name="date_b" placeholder="Birthday" class="radius" required />
               </div>
             <div>
-              <input type="password" id="password" name="password" placeholder="New Password" class="radius" />
+              <input type="password" id="password" name="password" placeholder="New Password" class="radius" required />
             </div>
               <div>
-              <button class="radius title" name="signup">Sign Up for Facebook</button>
+              <button class="radius title" style="margin-top: 20px" name="signup">Sign Up for Facebook</button>
             </div>
           </form>
         </div>

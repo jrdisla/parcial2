@@ -35,7 +35,12 @@
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+        <a href="/register" style="margin-top: 30px" class="btn btn-lg btn-success btn-block" type="submit">Registrarse</a>
+
     </form>
+
+
 </div>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>

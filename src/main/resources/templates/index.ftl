@@ -21,7 +21,12 @@
   <header>
     <div class="container">
       <img src="img/logo.png" class="logo" alt="">
-        Hello: ${user.nombre}
+    <#if user??>
+        <div>
+            <label for="name" > Hello: ${user.nombre}</label>
+            <a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Desconectarse</a>
+        </div>
+    </#if>
     </div>
   </header>
 

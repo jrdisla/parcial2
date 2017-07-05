@@ -11,6 +11,7 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 import spark.Spark;
+import sun.util.calendar.BaseCalendar;
 
 import javax.swing.*;
 import java.io.File;
@@ -33,7 +34,6 @@ public class Rutas {
             //enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
-
 
                 Template resultTemplate = configuration.getTemplate("templates/Login.ftl");
                 StringWriter writer = new StringWriter();
@@ -67,7 +67,7 @@ public class Rutas {
 
             Spark.get("/profile", (request, response) -> {
 
-                Template resultTemplate = configuration.getTemplate("templates/index.ftl");
+                Template resultTemplate = configuration.getTemplate("templates/profile.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
@@ -93,15 +93,12 @@ public class Rutas {
 
             Spark.post("/addUser", (request, response) -> {
 
-                Template resultTemplate = configuration.getTemplate("templates/index.ftl");
-                StringWriter writer = new StringWriter();
-
                 String name = request.queryParams("firstname");
                 String lastname = request.queryParams("lastname");
                 String email = request.queryParams("email");
-                String countrie = request.queryParams("countrie");
+                String country = request.queryParams("countries");
                 String city = request.queryParams("city");
-                String language = request.queryParams("language");
+                String language = request.queryParams("languages");
                 String date_b = request.queryParams("date_b");
                 String password = request.queryParams("password");
 
@@ -117,7 +114,7 @@ public class Rutas {
 
                 Date date_bir = new Date(year,month,day);
 
-                Usuario user = new Usuario(email, name, lastname, "masculino", date_bir, countrie, city,publishedDate, language, password);
+                Usuario user = new Usuario(email, name, lastname, date_bir, country, city,publishedDate, language, password);
 
                 if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null)
                 {
@@ -126,15 +123,36 @@ public class Rutas {
                     session.attribute("username",user);
                 }
 
-                Map<String, Object> attributes = new HashMap<>();
-                attributes.put("user",user);
-                resultTemplate.process(attributes, writer);
-                return writer;
+                return "";
             });
 
-            Spark.get("/home", (request, response) -> {
+            Spark.post("/addText",(request, response) -> {
 
-                Template resultTemplate = configuration.getTemplate("templates/moreDataUser.ftl");
+                Session session = request.session(true);
+                Usuario usuario = session.attribute("username");
+
+                String text = request.queryParams("opinion");
+                Articulo articulo = new Articulo();
+                articulo.setBody(text);
+                articulo.setUsuario(usuario);
+
+                Set<Articulo> articulos = usuario.getArticulos();
+                articulos.add(articulo);
+
+                usuario.setArticulos(articulos);
+
+                System.out.println(articulos);
+
+                ManejadorUsuario.getInstance().updateObject(usuario);
+
+                response.redirect("/profile");
+
+                return "";
+            });
+
+            Spark.get("/register", (request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/register.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
@@ -142,8 +160,14 @@ public class Rutas {
                 return writer;
             });
 
+            Spark.get("/logout",(request, response) -> {
 
+                Session session = request.session(true);
+                session.invalidate();
 
+                response.redirect("/Login");
+                return "";
+            });
 
             before("/profile",(request, response) -> {
                 autorizado(request,response);
