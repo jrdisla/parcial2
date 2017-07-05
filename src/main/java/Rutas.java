@@ -40,7 +40,7 @@ public class Rutas {
 
 
     public static void StartProyect(File upload, File Do) {
-         File uploadDir = new File("/resources/public/uploads");
+
             staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
@@ -262,20 +262,16 @@ public class Rutas {
 
                 try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
 
-                    File file = null;
-
                     Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
                     System.out.println("Tamano de image: " +temp.toFile().length());
 
-                    file = temp.toFile();
-                    System.out.println(input.toString());
+
                     byte [] byteP ;
                     byteP = Files.readAllBytes(temp);
                     Imagenes imagen = new Imagenes();
                     imagen.setImagen(byteP);
                     ManejadorImagen.getInstance().insertIntoDatabase(imagen);
-                    System.out.println("Tamano de bytes: "+ byteP.length);
-                    System.out.println(Arrays.toString(byteP));
+
                     FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/public/do.jpeg");
                     fileOutputStream.write(ManejadorImagen.getInstance().findObjectWithId(imagen.getId()).getImagen());
                     fileOutputStream.close();
