@@ -19,12 +19,12 @@ public class ManejadorUsuario extends ManejadorDB<Usuario> {
         return instance;
     }
 
-    public Usuario getUserBuUP(String username,String password) {
+    public Usuario getUserBuUP(String lugar_naci,String ciudad) {
         EntityManager em = getEntityManager();
         try {
             return (Usuario) em.createNamedQuery(Usuario.chekUserPassword)
-                    .setParameter("email",username)
-                    .setParameter("contraseñ",password)
+                    .setParameter("lugar_naci",lugar_naci)
+                    .setParameter("ciudad",ciudad)
                     .getSingleResult();
         }  finally {
             em.close();

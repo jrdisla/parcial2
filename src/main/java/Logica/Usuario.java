@@ -20,7 +20,7 @@ import java.util.Set;
         ),
         @NamedQuery(
                 name = "User.findUserByUsernameAndPassword",
-                query = "SELECT user FROM Logica.Usuario user WHERE user.contraseña = :contraseña AND user.email = :email"
+                query = "SELECT user FROM Logica.Usuario user WHERE user.lugar_nacimiento = :lugar_naci AND user.ciudad = :ciudad"
         )
 })
 public class Usuario implements Serializable {
