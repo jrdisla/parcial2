@@ -66,7 +66,10 @@
             <label class="btn btn-default btn-file">
                 <span>Browse</span>
                 <!-- The file is stored here. -->
-                <input type="file" name="image-file">
+                <form action="/file" method="post" enctype="multipart/form-data">
+
+                <input type="file"  name="image-file" formenctype="multipart/form-data">
+
             </label>
             <button type="button" class="btn btn-default">Remove</button>
         </div>
@@ -84,10 +87,10 @@
     </div>
 
     <!-- bootstrap-imageupload method buttons. -->
-    <button type="button" id="imageupload-disable" class="btn btn-danger">Disable</button>
-    <button type="button" id="imageupload-enable" class="btn btn-success">Enable</button>
-    <button type="button" id="imageupload-reset" class="btn btn-primary">Reset</button>
-
+    <button type="submit" id="imageupload-disable" class="btn btn-danger">Disable</button>
+    <button type="submit" id="imageupload-enable" class="btn btn-success">Enable</button>
+    <button type="submit" id="imageupload-reset" class="btn btn-primary">Reset</button>
+    </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="crossorigin="anonymous"></script>

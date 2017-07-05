@@ -11,27 +11,40 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 import spark.Spark;
+import spark.utils.IOUtils;
 import sun.util.calendar.BaseCalendar;
 
+import javax.imageio.ImageIO;
+import javax.servlet.MultipartConfigElement;
 import javax.swing.*;
-import java.io.File;
-import java.io.StringWriter;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.jar.Attributes;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 
 public class Rutas {
 
-        public static void StartProyect() {
 
+    public static void StartProyect(File upload, File Do) {
+         File uploadDir = new File("/resources/public/uploads");
             staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
-            //enableDebugScreen();
+            enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
 
@@ -225,6 +238,62 @@ public class Rutas {
                 return writer;
             });
 
+            before("/home",(request, response) -> {
+                System.out.println(request.contentType());
+            });
+            Spark.get("/home", (request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/test.ftl");
+                StringWriter writer = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+
+                resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
+            Spark.post("/file", (request, response) -> {
+                String aver = request.params("image-url");
+                System.out.println("Esto es: " + aver);
+                Date nowDate = new Date();
+                String file_name = "img_exampple" ;
+
+                Path temp = Paths.get(upload.getAbsolutePath() + file_name+".jpeg");
+                request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+                try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
+
+                    File file = null;
+
+                    Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println("Tamano de image: " +temp.toFile().length());
+
+                    file = temp.toFile();
+                    System.out.println(input.toString());
+                    byte [] byteP ;
+                    byteP = Files.readAllBytes(temp);
+
+
+                    System.out.println("Tamano de bytes: "+ byteP.length);
+                    System.out.println(Arrays.toString(byteP));
+                    FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/public/do.jpeg");
+                    fileOutputStream.write(byteP);
+                    fileOutputStream.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw e;
+                }
+
+
+
+              //  Template resultTemplate = configuration.getTemplate("templates/test.ftl");
+                StringWriter writer = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+                System.out.println("llego");
+             //   resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
             Spark.get("/logout",(request, response) -> {
 
                 Session session = request.session(true);
@@ -252,6 +321,21 @@ public class Rutas {
         {
             halt(401, "No Autorizado");
         }
+    }
+    private static String convertStreamToString(InputStream input) {
+        Scanner scanner = new Scanner(input).useDelimiter("\\A");
+        return scanner.hasNext() ? scanner.next() : "";
+    }
+    public static byte[] readFully(InputStream input, int sise) throws IOException
+    {
+        byte[] buffer = new byte[sise];
+        int bytesRead;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        while ((bytesRead = input.read(buffer)) != -1)
+        {
+            output.write(buffer, 0, bytesRead);
+        }
+        return output.toByteArray();
     }
 }
 

@@ -392,12 +392,11 @@ COMENTARIOPREFERENCIAARTIS_ID</ColNames>
     </column>
     <column id="87" parent="15" name="IMAGEN">
       <Position>2</Position>
-      <DataType>VARBINARY(255)|-3</DataType>
+      <DataType>VARBINARY(500000000)|-3</DataType>
     </column>
     <column id="88" parent="15" name="ALBUM">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
-      <NotNull>1</NotNull>
     </column>
     <key id="89" parent="15" name="CONSTRAINT_F">
       <NameSurrogate>1</NameSurrogate>
@@ -496,34 +495,34 @@ ETIQUETAS_ID</ColNames>
       <Position>10</Position>
       <DataType>VARBINARY(255)|-3</DataType>
     </column>
-    <column id="108" parent="17" name="GENERO">
+    <column id="108" parent="17" name="IDIOMAS">
       <Position>11</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="109" parent="17" name="IDIOMAS">
+    <column id="109" parent="17" name="CUENTA_IG">
       <Position>12</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="110" parent="17" name="CUENTA_IG">
+    <column id="110" parent="17" name="LUGAR_NACI">
       <Position>13</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="111" parent="17" name="LUGAR_NACI">
+    <column id="111" parent="17" name="LUGARES_ESTUDIO">
       <Position>14</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="112" parent="17" name="LUGARES_ESTUDIO">
+    <column id="112" parent="17" name="LUGARES_TRABAJO">
       <Position>15</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="113" parent="17" name="LUGARES_TRABAJO">
+    <column id="113" parent="17" name="NOMBRE">
       <Position>16</Position>
       <DataType>VARCHAR(255)|12</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="114" parent="17" name="NOMBRE">
+    <column id="114" parent="17" name="SEXO">
       <Position>17</Position>
       <DataType>VARCHAR(255)|12</DataType>
-      <NotNull>1</NotNull>
     </column>
     <index id="115" parent="17" name="UK_KFSP0S1TFLM1CWLJ8IDHQSAD0_INDEX_3">
       <ColNames>EMAIL</ColNames>
