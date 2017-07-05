@@ -30,16 +30,20 @@
 
         <div class="row">
             <div class="col-md-4">
-                <img src="img/user.png" class="img-thumbnail" alt="">
-
+                <!--<img src="img/user.png" class="img-thumbnail" alt=""> -->
+                <form action="/addPicture" method="post">
+                    <input type='file' id='getval' name="images" class="btn-file"/> <br/><br/>
+                    <div id='clock'></div>
+                    <button type="submit" style="margin-top: 30px" class="btn-file"> Enviar</button>
+                </form>
             </div>
             <div>
                 <p>
                 </p>
             </div>
-            <div>
+            <!--<div>
                 <a id="flip"  class="btn btn-danger"  role="button">Image</a>
-            </div>
+            </div> -->
 
 
         <!--loginform-->
@@ -47,6 +51,21 @@
     <!--loginboxinner-->
 </div>
 <!--loginbox-->
+
+    <script>
+        document.getElementById('getval').addEventListener('change', readURL, true);
+         function readURL(){
+         var file = document.getElementById("getval").files[0];
+         var reader = new FileReader();
+            reader.onloadend = function(){
+            document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+         }
+             if(file){
+         reader.readAsDataURL(file);
+         }else{
+         }
+    }
+    </script>
 
 <script>
     $(document).ready(function(){
@@ -100,5 +119,15 @@
         width: 100%;
     }
 </style>
+
+    <style>
+        #clock{
+            background-image:url('');
+            background-size:cover;
+            background-position: center;
+            height: 200px; width: 200px;
+            border: 1px solid #bbb;
+        }
+    </style>
 </body>
 </html>

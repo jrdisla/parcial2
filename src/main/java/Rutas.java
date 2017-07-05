@@ -177,6 +177,23 @@ public class Rutas {
                 return "";
             });
 
+            Spark.post("/addPicture",(request, response) -> {
+
+                Session session = request.session(true);
+                Usuario usuario = session.attribute("username");
+
+                String profileImage = request.queryParams("images");
+                byte[] image = profileImage.getBytes();
+                usuario.setFoto_perfil(image);
+
+                ManejadorUsuario.getInstance().updateObject(usuario);
+
+                session.attribute("username",usuario);
+                response.redirect("/profile");
+
+                return "";
+            });
+
             Spark.post("/addText",(request, response) -> {
 
                 Session session = request.session(true);
@@ -191,9 +208,6 @@ public class Rutas {
                 articulos.add(articulo);
 
                 usuario.setArticulos(articulos);
-
-                System.out.println(articulos);
-
                 ManejadorUsuario.getInstance().updateObject(usuario);
 
                 response.redirect("/profile");
