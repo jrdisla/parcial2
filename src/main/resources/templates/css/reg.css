@@ -70,13 +70,20 @@ h2 { font-size: 30px; line-height:38px; font-weight:normal; }
           position: relative;
           width: 160px;
       }
-#logo a {
+#logo2 {
           position: absolute;
           top: 20px;
           font-size:23px; font-weight:bold; color:#FFF;
           text-decoration:none;
           font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
       }
+#logo  {
+    position: absolute;
+    top: 20px;
+    font-size:23px; font-weight:bold; color:#FFF;
+    text-decoration:none;
+    font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
 
 /*-------Login-----------*/
 #header-main-right {

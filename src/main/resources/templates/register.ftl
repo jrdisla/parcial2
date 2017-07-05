@@ -10,7 +10,7 @@
 <!-- header starts here -->
 <div id="facebook-Bar">
       <div id="facebook-Frame">
-        <div id="logo"> <a href="/Login"> Facebook 2.0</a> </div>
+        <div id="logo2"> Facebook 2.0 </div>
         <div id="header-main-right">
           <div id="header-main-right-nav">
            <!-- <form method="post" action="/loginProcess" id="login_form" name="login_form">

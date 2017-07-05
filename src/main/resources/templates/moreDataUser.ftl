@@ -9,7 +9,7 @@
 <body class="login">
 <div id="facebook-Bar">
     <div id="facebook-Frame">
-        <div id="logo"> <a href="/Login">Facebook 2.0 </div>
+        <div id="logo2"> >Facebook 2.0 </div>
         <div id="header-main-right">
 
         </div>
@@ -23,7 +23,7 @@
         </div>
         <!--loginheader-->
 
-            <form id="login" action="/addUser" method="post">
+            <form id="login" action="/addUserPart2" method="post">
 
                 <div>
                     <input type="text" id="email" name="estudios" placeholder="Study's Places" value="" class="radius" />
@@ -31,9 +31,10 @@
                 <div>
                     <input type="text" id="remail" name="ig" placeholder="Your IG Account" class="radius" />
                 </div>
-                <div>
+                <!--<div>
                     <input type="text" id="remail" name="idiomas" placeholder="Languages" class="radius" />
                 </div>
+                -->
                 <div>
                     <br />
                     <label>Male: </label><input type="radio" name="sex" value="male" />
@@ -43,15 +44,14 @@
                 </div>
                 <div>
                     <label style="margin-bottom: 20px">Describe Yourself:</label>
-
-                    <form >
+                    <!--<form > -->
                         <div class="form-group">
                             <textarea name="description" style="margin-bottom: 20px" class="form-control" rows="6" cols="60" required></textarea>
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
                 <div>
-                    <button style="margin-top: 20px" class="radius title" name="cont">Continues</button>
+                    <button style="margin-top: 20px" class="radius title" type="submit" name="cont">Continues</button>
                 </div>
             </form>
 

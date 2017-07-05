@@ -91,6 +91,32 @@ public class Rutas {
                 return writer;
             });
 
+            Spark.get("/moreDataUser", (request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/moreDataUser.ftl");
+                StringWriter writer = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+
+                Usuario usuario = request.session().attribute("username");
+
+                attributes.put("user",usuario);
+                resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
+            Spark.get("/addProfilePicture", (request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/addProfilePicture.ftl");
+                StringWriter writer = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+
+                Usuario usuario = request.session().attribute("username");
+
+                attributes.put("user",usuario);
+                resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
             Spark.post("/addUser", (request, response) -> {
 
                 String name = request.queryParams("firstname");
@@ -119,9 +145,34 @@ public class Rutas {
                 if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null)
                 {
                     ManejadorUsuario.getInstance().insertIntoDatabase(user);
-                    Session session = request.session(true);
-                    session.attribute("username",user);
                 }
+
+                Session session = request.session(true);
+                session.attribute("username",user);
+                response.redirect("/moreDataUser");
+                return "";
+            });
+
+            Spark.post("/addUserPart2",(request, response) -> {
+
+                Session session = request.session(true);
+                Usuario usuario = session.attribute("username");
+
+                String igAccount = request.queryParams("ig");
+                String lugarEstudio = request.queryParams("estudios");
+                String sexo = request.queryParams("sex");
+                String descripcion = request.queryParams("description");
+
+
+                usuario.setIg_cuenta(igAccount);
+                usuario.setLugares_estudio(lugarEstudio);
+                usuario.setSexo(sexo);
+                usuario.setDescripcion(descripcion);
+
+                ManejadorUsuario.getInstance().updateObject(usuario);
+
+                session.attribute("username",usuario);
+                response.redirect("/addProfilePicture");
 
                 return "";
             });
