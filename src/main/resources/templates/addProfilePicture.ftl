@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Facebook Style Home Page Design - demo by w3lessons.info</title>
     <link rel="stylesheet" href="css/reg.css">
+    <link rel="stylesheet" href="css/bootstrap-imageupload.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-imageupload.js"></script>
 </head>
 <body class="login">
 <div id="facebook-Bar">
@@ -35,29 +40,14 @@
             <div>
                 <a id="flip"  class="btn btn-danger"  role="button">Image</a>
             </div>
-            <div id = "panel">
-                <div class="form-group">
-                    <label>Upload Image</label>
-                    <div class="input-group">
-                    <span class="input-group-btn">
-                        <span class="btn btn-default btn-file">
-                            Browse… <input type="file" id="imgInp">
-                        </span>
-                    </span>
-                        <input type="text" class="form-control" readonly>
-                    </div>
-                    <img id='img-upload'/>
-                </div>
-            </div>
-        </div><br><br>
+
 
         <!--loginform-->
     </div>
     <!--loginboxinner-->
 </div>
 <!--loginbox-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
+
 <script>
     $(document).ready(function(){
         $("#flip").click(function(){

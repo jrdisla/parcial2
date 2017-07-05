@@ -134,10 +134,12 @@ public class Rutas {
 
             Spark.get("/home", (request, response) -> {
 
-                Template resultTemplate = configuration.getTemplate("templates/moreDataUser.ftl");
+                Template resultTemplate = configuration.getTemplate("templates/test.ftl");
                 StringWriter writer = new StringWriter();
-                Map<String, Object> attributes = new HashMap<>();
 
+                Map<String, Object> attributes = new HashMap<>();
+                String image = request.params("image-file");
+                System.out.println(image);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });

@@ -132,7 +132,9 @@ if (typeof jQuery === 'undefined') {
         return html.join('');
     }
 
-    function getImageThumbnailHtml(src) {
+    $.function
+    getImageThumbnailHtml(src)
+    {
         return '<img src="' + src + '" alt="Image preview" class="thumbnail" style="max-width: ' + options.maxWidth + 'px; max-height: ' + options.maxHeight + 'px">';
     }
 
