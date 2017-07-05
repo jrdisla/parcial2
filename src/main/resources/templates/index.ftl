@@ -21,7 +21,7 @@
   <header>
     <div class="container">
       <img src="img/logo.png" class="logo" alt="">
-                                                                                        Hello: ${user}
+        Hello: ${user.nombre}
     </div>
   </header>
 
@@ -37,11 +37,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.ftl">Home</a></li>
-            <li><a href="members.ftl">Members</a></li>
-            <li><a href="groups.ftl">Groups</a></li>
-            <li><a href="photos.ftl">Photos</a></li>
-            <li><a href="profile.ftl">Profile</a></li>
+            <li class="active"><a href="/index">Home</a></li>
+            <li><a href="/members">Members</a></li>
+           <!-- <li><a href="groups.ftl">Groups</a></li> -->
+            <li><a href="/photos">Photos</a></li>
+            <li><a href="/profile">Profile</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -243,7 +243,7 @@
                 <a class="btn btn-primary" href="#">View All Friends</a>
               </div>
             </div>
-            <div class="panel panel-default groups">
+            <!--<div class="panel panel-default groups">
               <div class="panel-heading">
                 <h3 class="panel-title">Latest Groups</h3>
               </div>
@@ -268,7 +268,7 @@
                 <div class="clearfix"></div>
                 <a href="#" class="btn btn-primary">View All Groups</a>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

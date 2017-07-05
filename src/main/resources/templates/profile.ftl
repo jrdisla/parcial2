@@ -25,17 +25,6 @@
           <div>
               <label for="name" > Hello: ${user.nombre}</label>
           </div>
-      <#else>
-          <form class="form-inline">
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail3">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-default">Sign in</button><br>
       </#if>
 
           <!-- <div class="checkbox">
@@ -60,11 +49,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.ftl">Home</a></li>
-            <li><a href="members.ftl">Members</a></li>
-            <li><a href="groups.ftl">Groups</a></li>
-            <li><a href="photos.ftl">Photos</a></li>
-            <li><a href="profile.ftl">Profile</a></li>
+            <li class="active"><a href="/index">Home</a></li>
+            <li><a href="/members">Members</a></li>
+            <!--<li><a href="groups.ftl">Groups</a></li> -->
+            <li><a href="/photos">Photos</a></li>
+            <li><a href="/profile">Profile</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -75,18 +64,20 @@
         <div class="row">
           <div class="col-md-8">
             <div class="profile">
-              <h1 class="page-header">Douglas Walter</h1>
+              <h1 class="page-header">${user.nombre}</h1>
               <div class="row">
                 <div class="col-md-4">
                   <img src="img/user.png" class="img-thumbnail" alt="">
                 </div>
                 <div class="col-md-8">
                   <ul>
+                      <#if user??>
                     <li><strong>Name: </strong> ${user.nombre}</li>
                     <li><strong>Email :</strong> ${user.email}</li>
                     <li><strong>City: </strong> ${user.ciudad}</li>
-                    <li><strong>Gender: </strong>Male</li>
-                    <li><strong>DOB: </strong> ${user.fecha_naci}</li>
+                    <li><strong>Gender: </strong>${user.sexo}</li>
+                    <li><strong>DOB: </strong> ${user.fecha_nacimiento?string.long}</li>
+                      </#if>
                   </ul>
                 </div>
               </div><br><br>
@@ -104,9 +95,9 @@
                         <button type="submit" class="btn btn-default">Submit</button>
                         <div class="pull-right">
                           <div class="btn-toolbar">
-                            <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
+                         <!--<button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button> -->
                             <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>
-                            <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button>
+                            <!--<button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
                           </div>
                         </div>
                       </form>
@@ -137,8 +128,9 @@
                 <a class="btn btn-primary" href="#">View All Friends</a>
               </div>
             </div>
-            <div class="panel panel-default groups">
-              <div class="panel-heading">
+
+            <!--<div class="panel panel-default groups">
+                <div class="panel-heading">
                 <h3 class="panel-title">Latest Groups</h3>
               </div>
               <div class="panel-body">
@@ -162,7 +154,7 @@
                 <div class="clearfix"></div>
                 <a href="#" class="btn btn-primary">View All Groups</a>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
