@@ -28,26 +28,53 @@
         </div>
         <!--loginheader-->
 
-        <div class="row">
-            <div class="col-md-4">
-                <!--<img src="img/user.png" class="img-thumbnail" alt=""> -->
-                <form action="/addPicture" method="post">
-                    <input type='file' id='getval' name="images" class="btn-file"/> <br/><br/>
-                    <div id='clock'></div>
-                    <button type="submit" style="margin-top: 30px" class="btn-file"> Enviar</button>
+        <div class="container">
+
+
+            <div class="container">
+
+                <div class="imageupload panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left">Upload Image</h3>
+                        <div class="btn-group pull-right">
+                        </div>
+                    </div>
+                    <div class="file-tab panel-body">
+                        <label class="btn btn-default btn-file">
+                            <div>
+                                <span>Browse</span></div>
+                            <!-- The file is stored here. -->
+                            <form action="/file" method="post" enctype="multipart/form-data">
+
+                                <input type="file"  name="image-file" formenctype="multipart/form-data">
+
+                        </label>
+                        <button type="button" class="btn btn-default">Remove</button>
+                    </div>
+                    <div class="url-tab panel-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control hasclear" placeholder="Image URL">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-default">Remove</button>
+                        <!-- The URL is stored here. -->
+                        <input type="hidden" name="image-url">
+                    </div>
+                </div>
+
+                <!-- bootstrap-imageupload method buttons. -->
+
+                <button type="submit" id="imageupload-enable" class="btn btn-success">Upload</button>
+
                 </form>
             </div>
-            <div>
-                <p>
-                </p>
-            </div>
-            <!--<div>
-                <a id="flip"  class="btn btn-danger"  role="button">Image</a>
-            </div> -->
 
+            <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <script src="js/bootstrap-imageupload.js"></script>
 
-        <!--loginform-->
-    </div>
     <!--loginboxinner-->
 </div>
 <!--loginbox-->
@@ -129,5 +156,29 @@
             border: 1px solid #bbb;
         }
     </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/bootstrap-imageupload.js"></script>
+
+    <script>
+        var $imageupload = $('.imageupload');
+        $imageupload.imageupload();
+
+        $('#imageupload-disable').on('click', function() {
+            $imageupload.imageupload('disable');
+            $(this).blur();
+        })
+
+        $('#imageupload-enable').on('click', function() {
+            $imageupload.imageupload('enable');
+            $(this).blur();
+        })
+
+        $('#imageupload-reset').on('click', function() {
+            $imageupload.imageupload('reset');
+            $(this).blur();
+        });
+    </script>
 </body>
 </html>

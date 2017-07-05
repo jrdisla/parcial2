@@ -68,7 +68,7 @@
               <div class="row">
                 <div class="col-md-4">
                  <!-- <img src="img/user.png" class="img-thumbnail" alt=""> -->
-                    <img src="${user.foto_perfil.png}" class="img-thumbnail" alt="error" />
+                    <img src="${ver}" class="img-thumbnail" alt="error" />
                 </div>
                 <div class="col-md-8">
                   <ul>

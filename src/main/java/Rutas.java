@@ -85,7 +85,9 @@ public class Rutas {
                 Map<String, Object> attributes = new HashMap<>();
 
                 Usuario usuario = request.session().attribute("username");
-
+                Imagenes imagenes = usuario.getFoto_perfil();
+                String path = imagenes.getPath();
+                attributes.put("ver","/temp/"+path);
                 attributes.put("user",usuario);
                 resultTemplate.process(attributes, writer);
                 return writer;
@@ -196,8 +198,8 @@ public class Rutas {
                 Usuario usuario = session.attribute("username");
 
                 String profileImage = request.queryParams("images");
-                byte[] image = profileImage.getBytes();
-                usuario.setFoto_perfil(image);
+              //  byte[] image = profileImage.getBytes();
+               // usuario.setFoto_perfil(image);
 
                 ManejadorUsuario.getInstance().updateObject(usuario);
 
@@ -238,24 +240,26 @@ public class Rutas {
                 return writer;
             });
 
-            before("/home",(request, response) -> {
-                System.out.println(request.contentType());
-            });
             Spark.get("/home", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/test.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
-
+                Usuario user = request.session().attribute("username");
+                Imagenes imagenes = user.getFoto_perfil();
+              //  imagenes.getPath("uploadsimg_example_354508.jpeg");
+                System.out.println(imagenes.getPath());
+                attributes.put("ver","/temp/"+imagenes.getPath());
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
 
             Spark.post("/file", (request, response) -> {
+                Usuario user = request.session().attribute("username");
                 String aver = request.params("image-url");
                 System.out.println("Esto es: " + aver);
                 Date nowDate = new Date();
-                String file_name = "img_exampple" ;
+                String file_name = "img_example_" + user.getId() + nowDate.getSeconds() + (ManejadorImagen.getInstance().getAllObjects().size() +1)  ;
 
                 Path temp = Paths.get(upload.getAbsolutePath() + file_name+".jpeg");
                 request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
@@ -270,11 +274,14 @@ public class Rutas {
                     byteP = Files.readAllBytes(temp);
                     Imagenes imagen = new Imagenes();
                     imagen.setImagen(byteP);
+                    imagen.setPath(temp.getFileName().toString());
+                    user.setFoto_perfil(imagen);
                     ManejadorImagen.getInstance().insertIntoDatabase(imagen);
-
+                    ManejadorUsuario.getInstance().updateObject(user);
                     FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/public/do.jpeg");
                     fileOutputStream.write(ManejadorImagen.getInstance().findObjectWithId(imagen.getId()).getImagen());
                     fileOutputStream.close();
+                    input.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -283,7 +290,7 @@ public class Rutas {
 
 
 
-              //  Template resultTemplate = configuration.getTemplate("templates/test.ftl");
+             response.redirect("/index");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
                 System.out.println("llego");

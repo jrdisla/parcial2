@@ -16,6 +16,8 @@ public class Imagenes implements Serializable {
     private int id;
     @Column(name = "imagen",length = 500000000)
     private byte [] imagen;
+    @Column(name = "path")
+    private String path;
     @ManyToOne
     @JoinColumn(name = "album")
     @Expose
@@ -42,6 +44,14 @@ public class Imagenes implements Serializable {
 
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public Album getAlbum() {
