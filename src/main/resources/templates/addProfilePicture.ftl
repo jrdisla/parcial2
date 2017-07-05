@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Facebook Style Home Page Design - demo by w3lessons.info</title>
+    <title>Facebook Style Home Page Design</title>
     <link rel="stylesheet" href="css/reg.css">
     <link rel="stylesheet" href="css/bootstrap-imageupload.css">
 
@@ -14,7 +14,7 @@
 <body class="login">
 <div id="facebook-Bar">
     <div id="facebook-Frame">
-        <div id="logo"> <a href="http://w3lessons.info">Facebook 2.0</a> </div>
+        <div id="logo"> Facebook 2.0 </div>
         <div id="header-main-right">
 
         </div>

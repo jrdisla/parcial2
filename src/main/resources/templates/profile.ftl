@@ -24,9 +24,9 @@
       <#if user??>
           <div>
               <label for="name" > Hello: ${user.nombre}</label>
+              <a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Desconectarse</a>
           </div>
       </#if>
-
           <!-- <div class="checkbox">
           <label>
             <input type="checkbox"> Remember me
@@ -88,11 +88,11 @@
                       <h3 class="panel-title">Profile Wall</h3>
                     </div>
                     <div class="panel-body">
-                      <form>
+                      <form action = "/addText" method="post">
                         <div class="form-group">
-                          <textarea class="form-control" placeholder="Write on the wall"></textarea>
+                          <textarea class="form-control" name= "opinion"placeholder="Write on the wall"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" style="margin-bottom: 30px" class="btn btn-default">Submit</button>
                         <div class="pull-right">
                           <div class="btn-toolbar">
                          <!--<button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button> -->
@@ -101,6 +101,13 @@
                           </div>
                         </div>
                       </form>
+                        <#if user??>
+                            <#if user.articulos??>
+                              <#list user.articulos as Articulos>
+                                  <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" contenteditable="false"> ${Articulos.body}</textarea>
+                              </#list>
+                            </#if>
+                        </#if>
                     </div>
                   </div>
                 </div>
@@ -114,6 +121,14 @@
               </div>
               <div class="panel-body">
                 <ul>
+                  <!-- <#--<#if user??>
+                      <#if user.amigos??>
+                        <#list amigos as Usuario>
+                            <li> <a href="/profile"$Usuario.email></a></li>
+                        </#list>
+                      </#if>
+                   </#if>
+                   -->-->
                   <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
                   <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
                   <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
