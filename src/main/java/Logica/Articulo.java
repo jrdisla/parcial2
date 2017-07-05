@@ -59,7 +59,7 @@ public class Articulo implements Serializable {
     private String body;
     @Column(name = "titulo")
     private String titulo;
-    @Column(name = "imagen")
+    @Column(name = "imagen",length = 500000000)
     private byte [] imagen;
 
     public Articulo() {

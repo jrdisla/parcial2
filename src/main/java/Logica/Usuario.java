@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -52,8 +51,8 @@ public class Usuario implements Serializable {
     private String lugares_trabajo;
     @Column(name = "cuenta_ig")
     private String ig_cuenta;
-    @Column(name = "foto")
-    private byte [] foto_perfil;
+    @Column(name = "foto",length = 500000000)
+    private Imagenes foto_perfil;
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
     private Set<Album> albums = new HashSet<>();
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
@@ -100,7 +99,7 @@ public class Usuario implements Serializable {
         this.contraseña = contraseña;
     }
 
-    public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, String lugares_estudio, String lugares_trabajo, String ig_cuenta, byte[] foto_perfil, Set<Album> albums, Set<Articulo> articulos, Set<Usuario> amigos, String descripcion, Date fecha_registro, String idiomas, boolean esAdmin, String contraseña) {
+    public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, String lugares_estudio, String lugares_trabajo, String ig_cuenta, Imagenes foto_perfil, Set<Album> albums, Set<Articulo> articulos, Set<Usuario> amigos, String descripcion, Date fecha_registro, String idiomas, boolean esAdmin, String contraseña) {
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -217,11 +216,11 @@ public class Usuario implements Serializable {
         this.ig_cuenta = ig_cuenta;
     }
 
-    public byte[] getFoto_perfil() {
+    public Imagenes getFoto_perfil() {
         return foto_perfil;
     }
 
-    public void setFoto_perfil(byte[] foto_perfil) {
+    public void setFoto_perfil(Imagenes foto_perfil) {
         this.foto_perfil = foto_perfil;
     }
 
