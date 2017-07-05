@@ -79,6 +79,7 @@ if (typeof jQuery === 'undefined') {
         $submitUrlButton.off();
         $removeUrlButton.off();
 
+
         $fileTabButton.on('click', function() {
             $(this).blur();
             showFileTab($fileTab);
@@ -260,10 +261,12 @@ if (typeof jQuery === 'undefined') {
 
                 fileReader.onload = function(e) {
                     // Show thumbnail and remove button.
-                    $fileTab.prepend(getImageThumbnailHtml(e.target.result));
-                    $browseFileButton.find('span').text('Change');
+                   $fileTab.prepend(getImageThumbnailHtml(e.target.result));
+                   $browseFileButton.find('span').text('Change');
                     $removeFileButton.css('display', 'inline-block');
                 };
+
+
 
                 fileReader.onerror = function() {
                     $fileTab.prepend(getAlertHtml('Error loading image file.'));

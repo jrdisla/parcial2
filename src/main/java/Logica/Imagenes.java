@@ -14,10 +14,10 @@ public class Imagenes implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    @Column(name = "imagen")
+    @Column(name = "imagen",length = 500000000)
     private byte [] imagen;
     @ManyToOne
-    @JoinColumn(name = "album",nullable = false)
+    @JoinColumn(name = "album")
     @Expose
     private Album album;
 
