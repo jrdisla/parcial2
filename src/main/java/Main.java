@@ -18,7 +18,7 @@ public class Main {
 
         try
         {
-            Server.createTcpServer("-tcpPort", "9093", "-tcpAllowOthers").start();
+            Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
 
         } catch (SQLException e)
         {

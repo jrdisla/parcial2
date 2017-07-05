@@ -271,12 +271,13 @@ public class Rutas {
                     System.out.println(input.toString());
                     byte [] byteP ;
                     byteP = Files.readAllBytes(temp);
-
-
+                    Imagenes imagen = new Imagenes();
+                    imagen.setImagen(byteP);
+                    ManejadorImagen.getInstance().insertIntoDatabase(imagen);
                     System.out.println("Tamano de bytes: "+ byteP.length);
                     System.out.println(Arrays.toString(byteP));
                     FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/public/do.jpeg");
-                    fileOutputStream.write(byteP);
+                    fileOutputStream.write(ManejadorImagen.getInstance().findObjectWithId(imagen.getId()).getImagen());
                     fileOutputStream.close();
 
                 } catch (IOException e) {
