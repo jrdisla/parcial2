@@ -496,64 +496,68 @@ ETIQUETAS_ID</ColNames>
       <Position>10</Position>
       <DataType>VARBINARY(255)|-3</DataType>
     </column>
-    <column id="108" parent="17" name="IDIOMAS">
+    <column id="108" parent="17" name="GENERO">
       <Position>11</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="109" parent="17" name="CUENTA_IG">
+    <column id="109" parent="17" name="IDIOMAS">
       <Position>12</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="110" parent="17" name="LUGAR_NACI">
+    <column id="110" parent="17" name="CUENTA_IG">
       <Position>13</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="111" parent="17" name="LUGARES_ESTUDIO">
+    <column id="111" parent="17" name="LUGAR_NACI">
       <Position>14</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="112" parent="17" name="LUGARES_TRABAJO">
+    <column id="112" parent="17" name="LUGARES_ESTUDIO">
       <Position>15</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="113" parent="17" name="NOMBRE">
+    <column id="113" parent="17" name="LUGARES_TRABAJO">
       <Position>16</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="114" parent="17" name="NOMBRE">
+      <Position>17</Position>
       <DataType>VARCHAR(255)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="114" parent="17" name="UK_KFSP0S1TFLM1CWLJ8IDHQSAD0_INDEX_3">
+    <index id="115" parent="17" name="UK_KFSP0S1TFLM1CWLJ8IDHQSAD0_INDEX_3">
       <ColNames>EMAIL</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="115" parent="17" name="CONSTRAINT_39">
+    <key id="116" parent="17" name="CONSTRAINT_39">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="116" parent="18" name="USUARIO_ID">
+    <column id="117" parent="18" name="USUARIO_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="117" parent="18" name="AMIGOS_ID">
+    <column id="118" parent="18" name="AMIGOS_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="118" parent="18" name="CONSTRAINT_1">
+    <key id="119" parent="18" name="CONSTRAINT_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USUARIO_ID
 AMIGOS_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="119" parent="18" name="FKDPUJD62F3DVGR432424K9B8RB">
+    <foreign-key id="120" parent="18" name="FKDPUJD62F3DVGR432424K9B8RB">
       <ColNames>USUARIO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="120" parent="18" name="FKFG6STXRS3W8HTY6M1DPHISQLB">
+    <foreign-key id="121" parent="18" name="FKFG6STXRS3W8HTY6M1DPHISQLB">
       <ColNames>AMIGOS_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>

@@ -69,7 +69,7 @@ public class Rutas {
 
             Spark.get("/profile", (request, response) -> {
 
-                Template resultTemplate = configuration.getTemplate("templates/profile.ftl");
+                Template resultTemplate = configuration.getTemplate("templates/index.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
@@ -123,7 +123,7 @@ public class Rutas {
 
             Spark.get("/home", (request, response) -> {
 
-                Template resultTemplate = configuration.getTemplate("templates/register.ftl");
+                Template resultTemplate = configuration.getTemplate("templates/moreDataUser.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 

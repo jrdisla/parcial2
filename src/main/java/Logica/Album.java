@@ -36,7 +36,7 @@ public class Album implements Serializable {
     @Expose
     private int id;
     @Expose
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usuario",nullable = false)
     private Usuario usuario;
     @Column(name = "titulo")
