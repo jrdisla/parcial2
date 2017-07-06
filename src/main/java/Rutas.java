@@ -44,7 +44,7 @@ public class Rutas {
             staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
-            enableDebugScreen();
+          //  enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
 
@@ -73,7 +73,7 @@ public class Rutas {
                 }
                 else
                 {
-                    response.redirect("/home");
+                    response.redirect("/Login");
                 }
                 return "";
             });
@@ -122,6 +122,19 @@ public class Rutas {
             Spark.get("/addProfilePicture", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/addProfilePicture.ftl");
+                StringWriter writer = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+
+                Usuario usuario = request.session().attribute("username");
+
+                attributes.put("user",usuario);
+                resultTemplate.process(attributes, writer);
+                return writer;
+            });
+
+            Spark.get("/adminUsuarios",(request, response) -> {
+
+                Template resultTemplate = configuration.getTemplate("templates/zonaAdmin.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
 
@@ -201,6 +214,7 @@ public class Rutas {
               //  byte[] image = profileImage.getBytes();
                // usuario.setFoto_perfil(image);
 
+                usuario.setEsAdmin(true);
                 ManejadorUsuario.getInstance().updateObject(usuario);
 
                 session.attribute("username",usuario);
@@ -218,6 +232,10 @@ public class Rutas {
                 Articulo articulo = new Articulo();
                 articulo.setBody(text);
                 articulo.setUsuario(usuario);
+                articulo.setFecha(new Date());
+
+                int size = usuario.getArticulos().size();
+                articulo.setTitulo("Articulo " + (size+1));
 
                 Set<Articulo> articulos = usuario.getArticulos();
                 articulos.add(articulo);
@@ -246,6 +264,7 @@ public class Rutas {
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
                 Usuario user = request.session().attribute("username");
+
                 Imagenes imagenes = user.getFoto_perfil();
               //  imagenes.getPath("uploadsimg_example_354508.jpeg");
                 System.out.println(imagenes.getPath());
@@ -291,8 +310,6 @@ public class Rutas {
                     throw e;
                 }
 
-
-
              response.redirect("/index");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
@@ -329,6 +346,18 @@ public class Rutas {
             before("/index",(request, response) -> {
                 autorizado(request,response);
             });
+
+        before("/adminUsuarios",(request, response) -> {
+            Usuario user = request.session().attribute("usuario");
+            if(user == null){
+                response.redirect("/login");
+            }
+            else{
+                if(!user.isEsAdmin()){
+                    response.redirect("/profile");
+                }
+            }
+        });
         }
 
         private static void autorizado(Request request, Response response) {
@@ -341,20 +370,24 @@ public class Rutas {
             halt(401, "No Autorizado");
         }
     }
-    private static String convertStreamToString(InputStream input) {
-        Scanner scanner = new Scanner(input).useDelimiter("\\A");
-        return scanner.hasNext() ? scanner.next() : "";
-    }
-    public static byte[] readFully(InputStream input, int sise) throws IOException
-    {
-        byte[] buffer = new byte[sise];
-        int bytesRead;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        while ((bytesRead = input.read(buffer)) != -1)
+        private static String convertStreamToString(InputStream input)
         {
-            output.write(buffer, 0, bytesRead);
+            Scanner scanner = new Scanner(input).useDelimiter("\\A");
+            return scanner.hasNext() ? scanner.next() : "";
         }
-        return output.toByteArray();
-    }
+
+
+        public static byte[] readFully(InputStream input, int size) throws IOException
+        {
+            byte[] buffer = new byte[size];
+            int bytesRead;
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+          while ((bytesRead = input.read(buffer)) != -1)
+          {
+            output.write(buffer, 0, bytesRead);
+          }
+          return output.toByteArray();
+        }
 }
 

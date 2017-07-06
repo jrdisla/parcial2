@@ -77,7 +77,9 @@
                     <li><strong>Email :</strong> ${user.email}</li>
                     <li><strong>City: </strong> ${user.ciudad}</li>
                     <li><strong>Gender: </strong>${user.sexo}</li>
-                    <li><strong>DOB: </strong> ${user.fecha_nacimiento?string('dd.MM.yyyy HH:mm:ss')}</li>
+                    <li><strong>DOB: </strong> ${user.fecha_nacimiento?date}</li>
+                    <li><strong>Pais: </strong>${user.lugar_nacimiento}</li>
+                    <li><strong>Instagram: </strong> ${user.ig_cuenta}</li>
                       </#if>
                   </ul>
                 </div>
@@ -105,7 +107,7 @@
                         <#if user??>
                             <#if user.articulos??>
                               <#list user.articulos as Articulos>
-                                  <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" contenteditable="false"> ${Articulos.body}</textarea>
+                                  <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
                               </#list>
                             </#if>
                         </#if>

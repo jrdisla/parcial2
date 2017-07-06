@@ -58,7 +58,7 @@
                                 <button type="button" class="btn btn-default">Submit</button>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-default">Remove</button>
+                        <button type="button" style="margin-top: 30px" class="btn btn-default">Remove</button>
                         <!-- The URL is stored here. -->
                         <input type="hidden" name="image-url">
                     </div>
@@ -66,7 +66,7 @@
 
                 <!-- bootstrap-imageupload method buttons. -->
 
-                <button type="submit" id="imageupload-enable" class="btn btn-success">Upload</button>
+                <button type="submit" id="imageupload-enable" style="margin-top: 30px" class="btn btn-success">Upload</button>
 
                 </form>
             </div>
