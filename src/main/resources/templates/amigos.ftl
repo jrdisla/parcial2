@@ -21,9 +21,9 @@
 <header>
     <div class="container" >
         <img src="img/logo.png" class="logo" alt="">
-    <#if user??>
+    <#if usera??>
         <div>
-            <label for="name" > Hello: ${user.nombre}</label>
+            <label for="name" > Hello: ${usera.nombre}</label>
             <a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Desconectarse</a>
         </div>
     </#if>
@@ -49,8 +49,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/index">Home</a></li>
-                <li><a href="/members">Members</a></li>
+                <li><a href="/index">Home</a></li>
+                <li class="active"><a href="/members">Members</a></li>
                 <!--<li><a href="groups.ftl">Groups</a></li> -->
                 <li><a href="/photos">Photos</a></li>
                 <li><a href="/profile">Profile</a></li>
@@ -64,21 +64,24 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="profile">
-                    <h1 class="page-header">${user.nombre}</h1>
+                    <h1 class="page-header">${usera.nombre}</h1>
                     <div class="row">
                         <div class="col-md-4">
                             <!-- <img src="img/user.png" class="img-thumbnail" alt=""> -->
-                            <img src="${ver}" class="img-thumbnail" alt="error" />
+
                         </div>
                         <div class="col-md-8">
                             <ul>
-                            <#if user??>
-                                <li><strong>Name: </strong> ${user.nombre}</li>
+                            <#list listuser as user>
+                                <h1 class="page-header">${user.nombre}</h1>
+                                <img src="/temp/${user.foto_perfil.path}" class="img-thumbnail" alt="error" />
                                 <li><strong>Email :</strong> ${user.email}</li>
                                 <li><strong>City: </strong> ${user.ciudad}</li>
                                 <li><strong>Gender: </strong>${user.sexo}</li>
                                 <li><strong>DOB: </strong> ${user.fecha_nacimiento?string.long}</li>
-                            </#if>
+                            </#list>
+
+
                             </ul>
                         </div>
                     </div><br><br>
