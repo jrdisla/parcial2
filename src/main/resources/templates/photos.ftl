@@ -53,6 +53,21 @@
         <div class="row">
           <div class="col-md-8">
             <h1 class="page-header">Photos</h1>
+
+              <form action="/photosUser" method="post" enctype="multipart/form-data">
+
+                  <input type="file"  name="image-file" formenctype="multipart/form-data">
+                  <button type="button" class="btn btn-default">Remove</button>
+          </div>
+            <div class="url-tab panel-body">
+                <!-- The URL is stored here. -->
+                <input type="hidden" name="image-url">
+            </div>
+        </div>
+          <!-- bootstrap-imageupload method buttons. -->
+          <button type="submit" id="imageupload-enable" style="margin-top: 30px" class="btn btn-success">Upload</button>
+
+          </form>
             <ul class="photos gallery-parent">
               <li><a href="img/sample1.jpg" data-hover="tooltip" data-placement="top" title="image" data-gallery="mygallery" data-parent=".gallery-parent" data-title="title" data-footer="this is a footer" data-toggle="lightbox"><img src="img/sample1.jpg" class="img-thumbnail" alt=""></a></li>
               <li><a href="img/sample2.jpg" data-hover="tooltip" data-placement="top" title="image" data-gallery="mygallery" data-parent=".gallery-parent" data-title="title" data-footer="this is a footer" data-toggle="lightbox"><img src="img/sample2.jpg" class="img-thumbnail" alt=""></a></li>
@@ -62,54 +77,55 @@
               <li><a href="img/sample6.jpg" data-hover="tooltip" data-placement="top" title="image" data-gallery="mygallery" data-parent=".gallery-parent" data-title="title" data-footer="this is a footer" data-toggle="lightbox"><img src="img/sample6.jpg" class="img-thumbnail" alt=""></a></li>
             </ul>
           </div>
-          <div class="col-md-4">
-            <div class="panel panel-default friends">
-              <div class="panel-heading">
-                <h3 class="panel-title">My Friends</h3>
-              </div>
-              <div class="panel-body">
-                <ul>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                </ul>
-                <div class="clearfix"></div>
-                <a class="btn btn-primary" href="#">View All Friends</a>
-              </div>
-            </div>
 
-           <!-- <div class="panel panel-default groups">
-              <div class="panel-heading">
-                <h3 class="panel-title">Latest Groups</h3>
-              </div>
-              <div class="panel-body">
-                <div class="group-item">
-                  <img src="img/group.png" alt="">
-                  <h4><a href="#" class="">Sample Group One</a></h4>
-                  <p>This is a paragraph of intro text, or whatever I want to call it.</p>
-                </div>
-                <div class="clearfix"></div>
-                <div class="group-item">
-                  <img src="img/group.png" alt="">
-                  <h4><a href="#" class="">Sample Group Two</a></h4>
-                  <p>This is a paragraph of intro text, or whatever I want to call it.</p>
-                </div>
-                <div class="clearfix"></div>
-                <div class="group-item">
-                  <img src="img/group.png" alt="">
-                  <h4><a href="#" class="">Sample Group Three</a></h4>
-                  <p>This is a paragraph of intro text, or whatever I want to call it.</p>
-                </div>
-                <div class="clearfix"></div>
-                <a href="#" class="btn btn-primary">View All Groups</a>
-              </div>
-            </div> -->
+        <!--  <div class="col-md-4">
+           <div class="panel panel-default friends">
+             <div class="panel-heading">
+               <h3 class="panel-title">My Friends</h3>
+             </div>
+             <div class="panel-body">
+               <ul>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+                 <li><a href="profile.html" class="thumbnail"><img src="img/user.png" alt=""></a></li>
+               </ul>
+               <div class="clearfix"></div>
+               <a class="btn btn-primary" href="#">View All Friends</a>
+             </div>
+           </div>
+
+          <div class="panel panel-default groups">
+             <div class="panel-heading">
+               <h3 class="panel-title">Latest Groups</h3>
+             </div>
+             <div class="panel-body">
+               <div class="group-item">
+                 <img src="img/group.png" alt="">
+                 <h4><a href="#" class="">Sample Group One</a></h4>
+                 <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+               </div>
+               <div class="clearfix"></div>
+               <div class="group-item">
+                 <img src="img/group.png" alt="">
+                 <h4><a href="#" class="">Sample Group Two</a></h4>
+                 <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+               </div>
+               <div class="clearfix"></div>
+               <div class="group-item">
+                 <img src="img/group.png" alt="">
+                 <h4><a href="#" class="">Sample Group Three</a></h4>
+                 <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+               </div>
+               <div class="clearfix"></div>
+               <a href="#" class="btn btn-primary">View All Groups</a>
+             </div>
+           </div> -->
           </div>
         </div>
       </div>

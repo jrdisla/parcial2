@@ -119,6 +119,19 @@ public class Rutas {
                 return writer;
             });
 
+        Spark.get("/photos", (request, response) -> {
+
+            Template resultTemplate = configuration.getTemplate("templates/photos.ftl");
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+
+            Usuario usuario = request.session().attribute("username");
+
+            attributes.put("user",usuario);
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
+
             Spark.get("/addProfilePicture", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/addProfilePicture.ftl");
@@ -219,6 +232,44 @@ public class Rutas {
 
                 session.attribute("username",usuario);
                 response.redirect("/profile");
+
+                return "";
+            });
+
+            Spark.post("/photosUser",(request, response) -> {
+
+                Usuario user = request.session().attribute("username");
+                String aver = request.params("image-url");
+
+                Date nowDate = new Date();
+                String file_name = "img_example_" + user.getId() + nowDate.getSeconds() + (ManejadorImagen.getInstance().getAllObjects().size() +1)  ;
+
+                Path temp = Paths.get(upload.getAbsolutePath() + file_name+".jpeg");
+                request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+                try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
+
+                    Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
+
+                    byte [] byteP ;
+                    byteP = Files.readAllBytes(temp);
+
+                    Imagenes imagen = new Imagenes();
+
+                    imagen.setImagen(byteP);
+                    imagen.setPath(temp.getFileName().toString());
+
+                    ManejadorImagen.getInstance().insertIntoDatabase(imagen);
+                    ManejadorUsuario.getInstance().updateObject(user);
+                    FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/public/do.jpeg");
+                    fileOutputStream.write(ManejadorImagen.getInstance().findObjectWithId(imagen.getId()).getImagen());
+                    // fileOutputStream.close();
+                    //   input.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw e;
+                }
 
                 return "";
             });

@@ -70,7 +70,7 @@
                     <div class="btn-toolbar">
                       <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
                         <a id="flip"  class="btn btn-danger"  role="button">Image</a>
-                      <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button>
+                     <!-- <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
                         <div id = "panel">
 
                             <div class="form-group">
