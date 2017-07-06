@@ -269,19 +269,22 @@ public class Rutas {
                     Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
                     System.out.println("Tamano de image: " +temp.toFile().length());
 
-
                     byte [] byteP ;
                     byteP = Files.readAllBytes(temp);
+
                     Imagenes imagen = new Imagenes();
+
                     imagen.setImagen(byteP);
                     imagen.setPath(temp.getFileName().toString());
+
                     user.setFoto_perfil(imagen);
+
                     ManejadorImagen.getInstance().insertIntoDatabase(imagen);
                     ManejadorUsuario.getInstance().updateObject(user);
                     FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/public/do.jpeg");
                     fileOutputStream.write(ManejadorImagen.getInstance().findObjectWithId(imagen.getId()).getImagen());
-                    fileOutputStream.close();
-                    input.close();
+                   // fileOutputStream.close();
+                 //   input.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -306,6 +309,18 @@ public class Rutas {
                 response.redirect("/Login");
                 return "";
             });
+        Spark.get("/members",(request, response) -> {
+            Template resultTemplate = configuration.getTemplate("templates/amigos.ftl");
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+            Usuario user = request.session().attribute("username");
+            List<Usuario> listuser = ManejadorUsuario.getInstance().getUserBuUP(user.getLugar_nacimiento(),user.getCiudad());
+            attributes.put("listuser",listuser);
+            attributes.put("usera",user);
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
+
 
             before("/profile",(request, response) -> {
                 autorizado(request,response);

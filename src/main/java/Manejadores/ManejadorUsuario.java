@@ -3,6 +3,7 @@ package Manejadores;
 import Logica.Usuario;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  * Created by jrdis on 16/6/2017.
@@ -19,13 +20,13 @@ public class ManejadorUsuario extends ManejadorDB<Usuario> {
         return instance;
     }
 
-    public Usuario getUserBuUP(String lugar_naci,String ciudad) {
+    public List<Usuario> getUserBuUP(String lugar_naci, String ciudad) {
         EntityManager em = getEntityManager();
         try {
-            return (Usuario) em.createNamedQuery(Usuario.chekUserPassword)
+            return (List<Usuario>) em.createNamedQuery(Usuario.chekUserPassword)
                     .setParameter("lugar_naci",lugar_naci)
                     .setParameter("ciudad",ciudad)
-                    .getSingleResult();
+                    .getResultList();
         }  finally {
             em.close();
         }

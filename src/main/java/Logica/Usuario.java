@@ -59,6 +59,8 @@ public class Usuario implements Serializable {
     private Set<Articulo> articulos = new HashSet<>();
     @OneToMany
     private Set<Usuario> amigos = new HashSet<>();
+    @OneToMany
+    private Set<Usuario> solicitudes = new HashSet<>();
     @Column(name = "descripcion")
     private String descripcion;
     @Column(name = "fecha_registro")
@@ -97,6 +99,14 @@ public class Usuario implements Serializable {
         this.fecha_registro = fecha_registro;
         this.idiomas = idiomas;
         this.contraseña = contraseña;
+    }
+
+    public Set<Usuario> getSolicitudes() {
+        return solicitudes;
+    }
+
+    public void setSolicitudes(Set<Usuario> solicitudes) {
+        this.solicitudes = solicitudes;
     }
 
     public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, String lugares_estudio, String lugares_trabajo, String ig_cuenta, Imagenes foto_perfil, Set<Album> albums, Set<Articulo> articulos, Set<Usuario> amigos, String descripcion, Date fecha_registro, String idiomas, boolean esAdmin, String contraseña) {

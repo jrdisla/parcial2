@@ -77,7 +77,7 @@
                     <li><strong>Email :</strong> ${user.email}</li>
                     <li><strong>City: </strong> ${user.ciudad}</li>
                     <li><strong>Gender: </strong>${user.sexo}</li>
-                    <li><strong>DOB: </strong> ${user.fecha_nacimiento?string.long}</li>
+                    <li><strong>DOB: </strong> ${user.fecha_nacimiento?string('dd.MM.yyyy HH:mm:ss')}</li>
                       </#if>
                   </ul>
                 </div>
