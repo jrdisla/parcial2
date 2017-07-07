@@ -54,8 +54,6 @@
                 <!--<li><a href="groups.ftl">Groups</a></li> -->
                 <li><a href="/photos">Photos</a></li>
                 <li><a href="/profile">Profile</a></li>
-                <li><a href="/acept">Solicitudes</a></li>
-
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -82,8 +80,7 @@
                                 <li><strong>Gender: </strong>${user.sexo}</li>
                                 <li><strong>DOB: </strong> ${user.fecha_nacimiento?string.long}</li>
 
-                                <button onclick="myX(${user.id})" type="submit" class="btn btn-primary">Enviar Solicitud</button>
-
+                                <button id="ola" onclick="myX(${user.id})" type="submit" class="btn btn-primary">Aceptar</button>
                             </#list>
 
 
@@ -95,34 +92,34 @@
             </div>
 
 
-                <!--<div class="panel panel-default groups">
-                    <div class="panel-heading">
-                    <h3 class="panel-title">Latest Groups</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="group-item">
-                      <img src="img/group.png" alt="">
-                      <h4><a href="#" class="">Sample Group One</a></h4>
-                      <p>This is a paragraph of intro text, or whatever I want to call it.</p>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="group-item">
-                      <img src="img/group.png" alt="">
-                      <h4><a href="#" class="">Sample Group Two</a></h4>
-                      <p>This is a paragraph of intro text, or whatever I want to call it.</p>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="group-item">
-                      <img src="img/group.png" alt="">
-                      <h4><a href="#" class="">Sample Group Three</a></h4>
-                      <p>This is a paragraph of intro text, or whatever I want to call it.</p>
-                    </div>
-                    <div class="clearfix"></div>
-                    <a href="#" class="btn btn-primary">View All Groups</a>
-                  </div>
-                </div> -->
-            </div>
+            <!--<div class="panel panel-default groups">
+                <div class="panel-heading">
+                <h3 class="panel-title">Latest Groups</h3>
+              </div>
+              <div class="panel-body">
+                <div class="group-item">
+                  <img src="img/group.png" alt="">
+                  <h4><a href="#" class="">Sample Group One</a></h4>
+                  <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+                </div>
+                <div class="clearfix"></div>
+                <div class="group-item">
+                  <img src="img/group.png" alt="">
+                  <h4><a href="#" class="">Sample Group Two</a></h4>
+                  <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+                </div>
+                <div class="clearfix"></div>
+                <div class="group-item">
+                  <img src="img/group.png" alt="">
+                  <h4><a href="#" class="">Sample Group Three</a></h4>
+                  <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+                </div>
+                <div class="clearfix"></div>
+                <a href="#" class="btn btn-primary">View All Groups</a>
+              </div>
+            </div> -->
         </div>
+    </div>
     </div>
 </section>
 
@@ -139,7 +136,7 @@
 <script src="js/bootstrap.js"></script>
 <script>
     function myX(id) {
-        $.get("/solicitud/"+id,function (data) {
+        $.get("/solicitud_acept/"+id,function (data) {
 
         })
 

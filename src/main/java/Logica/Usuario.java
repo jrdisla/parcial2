@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
     @GeneratedValue
     @Expose
     private int id;
-    @Column(name = "email",nullable = false,unique = true)
+    @Column(name = "email",unique = true)
     private String email;
     @Column(name = "nombre",nullable = false)
     private String nombre;
@@ -53,12 +53,12 @@ public class Usuario implements Serializable {
     private String ig_cuenta;
     @Column(name = "foto",length = 500000000)
     private Imagenes foto_perfil;
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+    @OneToMany
     private Set<Album> albums = new HashSet<>();
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+    @OneToMany
     private Set<Articulo> articulos = new HashSet<>();
     @OneToMany
-    private Set<Usuario> amigos = new HashSet<>();
+    private Set<Amigos> amigos = new HashSet<>();
     @OneToMany
     private Set<Usuario> solicitudes = new HashSet<>();
     @Column(name = "descripcion")
@@ -109,7 +109,7 @@ public class Usuario implements Serializable {
         this.solicitudes = solicitudes;
     }
 
-    public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, String lugares_estudio, String lugares_trabajo, String ig_cuenta, Imagenes foto_perfil, Set<Album> albums, Set<Articulo> articulos, Set<Usuario> amigos, String descripcion, Date fecha_registro, String idiomas, boolean esAdmin, String contraseña) {
+    public Usuario(String email, String nombre, String apellido, Date fecha_nacimiento, String lugar_nacimiento, String ciudad, String lugares_estudio, String lugares_trabajo, String ig_cuenta, Imagenes foto_perfil, Set<Album> albums, Set<Articulo> articulos, Set<Amigos> amigos, String descripcion, Date fecha_registro, String idiomas, boolean esAdmin, String contraseña) {
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -250,11 +250,11 @@ public class Usuario implements Serializable {
         this.articulos = articulos;
     }
 
-    public Set<Usuario> getAmigos() {
-        return amigos;
+    public Set<Amigos> getAmigos() {
+       return amigos;
     }
 
-    public void setAmigos(Set<Usuario> amigos) {
+  public void setAmigos(Set<Amigos> amigos) {
         this.amigos = amigos;
     }
 

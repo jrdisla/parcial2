@@ -382,13 +382,78 @@ public class Rutas {
             StringWriter writer = new StringWriter();
             Map<String, Object> attributes = new HashMap<>();
             Usuario user = request.session().attribute("username");
-            List<Usuario> listuser = ManejadorUsuario.getInstance().getUserBuUP(user.getLugar_nacimiento(),user.getCiudad());
+
+            List<Usuario> listuser = new ArrayList<>();
+            for (Usuario item: ManejadorUsuario.getInstance().getUserBuUP(user.getLugar_nacimiento(),user.getCiudad())
+                 ) {
+                if (!item.getEmail().equalsIgnoreCase(user.getEmail()))
+                {
+                    listuser.add(item);
+                    System.out.println(item.getEmail());
+                    System.out.println(user.getEmail());
+                }
+            }
             attributes.put("listuser",listuser);
             attributes.put("usera",user);
             resultTemplate.process(attributes, writer);
             return writer;
         });
 
+        Spark.get("/solicitud/:id",(request, response) -> {
+            int id = Integer.parseInt(request.params("id"));
+             //String id = request.params("id");
+           // int id_a = Integer.parseInt(request.params("id"));
+            System.out.println(id);
+         //   System.out.println("El id es: " +id);
+            Map<String, Object> attributes = new HashMap<>();
+            Usuario user = request.session().attribute("username");
+            Usuario user2 = ManejadorUsuario.getInstance().findObjectWithId(id);
+            if (user2 != user)
+            user2.getSolicitudes().add(user);
+            ManejadorUsuario.getInstance().updateObject(user2);
+            System.out.println(user2.getNombre());
+            return "";
+        });
+
+        Spark.get("/solicitud_acept/:id",(request, response) -> {
+            System.out.println("Llego aqui: ");
+            int id = Integer.parseInt(request.params("id"));
+            Usuario user = request.session().attribute("username");
+
+            Usuario user2 = ManejadorUsuario.getInstance().findObjectWithId(id);
+
+            Amigos amigo_new = new Amigos();
+
+            amigo_new.setUsuario(user2);
+            ManejadorAmigos.getInstance().insertIntoDatabase(amigo_new);
+
+            user.getAmigos().add(amigo_new);
+            ManejadorUsuario.getInstance().updateObject(user);
+
+            for (Amigos item: ManejadorUsuario.getInstance().findObjectWithId(user.getId()).getAmigos())
+                  {
+                      System.out.println(item.getUsuario().getEmail());
+            }
+            return "";
+        });
+
+        Spark.get("/acept",(request, response) -> {
+            Template resultTemplate = configuration.getTemplate("templates/solicitudes.ftl");
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+            Usuario user = request.session().attribute("username");
+            List<Usuario> listuser =new ArrayList<>();
+
+            for (Usuario item: user.getSolicitudes()
+                 ) {
+                listuser.add(item);
+            }
+            System.out.println("Tiene un sise de: "+listuser.size());
+            attributes.put("listuser",listuser);
+            attributes.put("usera",user);
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
 
             before("/profile",(request, response) -> {
                 autorizado(request,response);

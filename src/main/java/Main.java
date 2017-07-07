@@ -12,9 +12,9 @@ public class Main {
     public static File uploadDir = new File("./src/main/resources/templates/temp/uploads");
     public static File DowDir = new File("./src/main/resources/public/do");
     public static void main(String[] args) throws Exception {
-       Usuario usuario = new Usuario("admin@admin", "admin", "admin", true, "admin");
-        ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
-       manejadorUsuario.insertIntoDatabase(usuario);
+     //  Usuario usuario = new Usuario("admin@admin", "admin", "admin", true, "admin");
+     //   ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+    //   manejadorUsuario.insertIntoDatabase(usuario);
 
         try
         {
