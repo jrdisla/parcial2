@@ -44,7 +44,7 @@ public class Rutas {
             staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
-          //  enableDebugScreen();
+            enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
 
@@ -105,7 +105,6 @@ public class Rutas {
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
-
             Spark.get("/moreDataUser", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/moreDataUser.ftl");
@@ -317,9 +316,13 @@ public class Rutas {
                 Usuario user = request.session().attribute("username");
 
                 Imagenes imagenes = user.getFoto_perfil();
+                Date now = new Date();
               //  imagenes.getPath("uploadsimg_example_354508.jpeg");
                 System.out.println(imagenes.getPath());
-                attributes.put("ver","/temp/"+imagenes.getPath());
+                FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/templates/temp/"+ imagenes.getPath());
+                fileOutputStream.write(imagenes.getImagen());
+                String path = "/temp/"+ imagenes.getPath();
+                attributes.put("ver",path);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -388,11 +391,19 @@ public class Rutas {
                  ) {
                 if (!item.getEmail().equalsIgnoreCase(user.getEmail()))
                 {
-                    listuser.add(item);
-                    System.out.println(item.getEmail());
-                    System.out.println(user.getEmail());
+                    for (Amigos amigo: ManejadorAmigos.getInstance().getAllObjects()
+                         ) {
+                        if(!amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail()))
+                        {
+                            listuser.add(item);
+                        }
+                    }
+
+
                 }
             }
+
+
             attributes.put("listuser",listuser);
             attributes.put("usera",user);
             resultTemplate.process(attributes, writer);
@@ -408,8 +419,9 @@ public class Rutas {
             Map<String, Object> attributes = new HashMap<>();
             Usuario user = request.session().attribute("username");
             Usuario user2 = ManejadorUsuario.getInstance().findObjectWithId(id);
-            if (user2 != user)
+            if (user2 != user){
             user2.getSolicitudes().add(user);
+            }
             ManejadorUsuario.getInstance().updateObject(user2);
             System.out.println(user2.getNombre());
             return "";
@@ -426,14 +438,21 @@ public class Rutas {
 
             amigo_new.setUsuario(user2);
             ManejadorAmigos.getInstance().insertIntoDatabase(amigo_new);
-
+            List<Usuario> list_soli = new ArrayList<>();
             user.getAmigos().add(amigo_new);
+            for (Usuario item: user.getSolicitudes()
+                 ) {
+                list_soli.add(item);
+            }
+            user.getSolicitudes().removeIf(s -> s == user2);
+
+            for (Usuario item:user.getSolicitudes())
+            {
+                System.out.println(item.getEmail());
+            }
             ManejadorUsuario.getInstance().updateObject(user);
 
-            for (Amigos item: ManejadorUsuario.getInstance().findObjectWithId(user.getId()).getAmigos())
-                  {
-                      System.out.println(item.getUsuario().getEmail());
-            }
+
             return "";
         });
 
@@ -443,12 +462,20 @@ public class Rutas {
             Map<String, Object> attributes = new HashMap<>();
             Usuario user = request.session().attribute("username");
             List<Usuario> listuser =new ArrayList<>();
+            List<Amigos> amigos_add = ManejadorAmigos.getInstance().getAllObjects();
 
             for (Usuario item: user.getSolicitudes()
                  ) {
-                listuser.add(item);
+                for (Amigos amigo : amigos_add) {
+                    if (amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail())) {
+                        System.out.println("ya esta agregado");
+                    } else if (item.getEmail().equalsIgnoreCase(user.getEmail())) {
+                        System.out.println("es usted mismo");
+                    } else {
+                        listuser.add(item);
+                    }
+                }
             }
-            System.out.println("Tiene un sise de: "+listuser.size());
             attributes.put("listuser",listuser);
             attributes.put("usera",user);
             resultTemplate.process(attributes, writer);
