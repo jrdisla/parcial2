@@ -61,32 +61,56 @@
                 <h3 class="panel-title">Wall</h3>
               </div>
               <div class="panel-body">
-                <form method="post" action="/addText">
+                <form method="post" action="/addText" enctype="multipart/form-data">
                   <div class="form-group">
-                    <textarea class="form-control" placeholder="Write on the wall"></textarea>
+                    <textarea formenctype="multipart/form-data" name="opinion_2" class="form-control" placeholder="Write on the wall"></textarea>
                   </div>
-                  <button type="submit" class="btn btn-default">Submit</button>
+
                   <div class="pull-right">
                     <div class="btn-toolbar">
                       <!--<button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button> -->
                         <a id="flip"  class="btn btn-danger"  role="button">Image</a>
                      <!-- <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
                         <div id = "panel">
-                            <div class="form-group">
-                                <label>Upload Image</label>
-                                <div class="input-group">
-                        <span class="input-group-btn">
-                        <span class="btn btn-default btn-file">
-                            Browse… <input type="file" id="imgInp">
-                        </span>
-                        </span>
-                        <input type="text" class="form-control" readonly>
+                            <div class="imageupload panel panel-default">
+                                    <div class="panel-heading clearfix">
+                                        <h3 class="panel-title pull-left">Upload Image</h3>
+                                        <div class="btn-group pull-right">
+                                        </div>
+                                    </div>
+                                    <div class="file-tab panel-body">
+                                        <label class="btn btn-default btn-file">
+                                            <div>
+                                                <span>Browse</span></div>
+                                            <!-- The file is stored here. -->
+                                            <input type="file"  name="image-file" formenctype="multipart/form-data">
+
+                                        </label>
+                                        <button type="button" class="btn btn-default">Remove</button>
+                                    </div>
+                                    <div class="url-tab panel-body">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control hasclear" placeholder="Image URL">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default">Submit</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" style="margin-top: 30px" class="btn btn-default">Remove</button>
+                                        <!-- The URL is stored here. -->
+                                        <input type="hidden" name="image-url">
+                                    </div>
                                 </div>
-                          <img id='img-upload'/>
-                          </div>
+
+                                <!-- bootstrap-imageupload method buttons. -->
+
+                                <button type="submit" id="imageupload-enable" style="margin-top: 30px" class="btn btn-success">Upload</button>
+
+
+
                         </div>
                     </div>
                   </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
                 </form>
               </div>
             </div>
@@ -104,7 +128,7 @@
 
                                    <a href="">${Articulos.usuario.nombre}
                                    <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
-
+                                   <li><a href="/hola" class="thumbnail"><img src="${Articulos.imagen.path}" alt=""></a></li>
                                </#list>
                            </#if>
 
@@ -350,6 +374,28 @@
           width: 100%;
       }
       </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="js/bootstrap-imageupload.js"></script>
 
+  <script>
+      var $imageupload = $('.imageupload');
+      $imageupload.imageupload();
+
+      $('#imageupload-disable').on('click', function() {
+          $imageupload.imageupload('disable');
+          $(this).blur();
+      })
+
+      $('#imageupload-enable').on('click', function() {
+          $imageupload.imageupload('enable');
+          $(this).blur();
+      })
+
+      $('#imageupload-reset').on('click', function() {
+          $imageupload.imageupload('reset');
+          $(this).blur();
+      });
+  </script>
   </body>
 </html>

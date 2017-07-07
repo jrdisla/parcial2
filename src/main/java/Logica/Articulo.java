@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -60,7 +59,7 @@ public class Articulo implements Serializable {
     @Column(name = "titulo")
     private String titulo;
     @Column(name = "imagen",length = 500000000)
-    private byte [] imagen;
+    private Imagenes imagen;
 
     public Articulo() {
     }
@@ -161,11 +160,11 @@ public class Articulo implements Serializable {
         this.titulo = titulo;
     }
 
-    public byte[] getImagen() {
+    public Imagenes getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(Imagenes imagen) {
         this.imagen = imagen;
     }
 }

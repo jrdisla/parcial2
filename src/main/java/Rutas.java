@@ -78,6 +78,10 @@ public class Rutas {
 
                 for (Articulo item:usuario.getArticulos() )
                 {
+                    if(item.getBody() == null)
+                    {
+                        item.setBody("HOLA");
+                    }
                     articulos.add(item);
                 }
 
@@ -142,6 +146,7 @@ public class Rutas {
                         articulos.add(item2);
                     }
                 }
+
 
                 attributes.put("user",usuario);
                 attributes.put("articulos",articulos);
@@ -321,7 +326,6 @@ public class Rutas {
 
                 Session session = request.session(true);
                 Usuario usuario = session.attribute("username");
-
                 String text = request.queryParams("opinion_2");
                 Articulo articulo = new Articulo();
                 articulo.setBody(text);
@@ -331,6 +335,33 @@ public class Rutas {
                 int size = usuario.getArticulos().size();
                 articulo.setTitulo("Articulo " + (size+1));
                 usuario.getArticulos().add(articulo);
+
+                Date nowDate = new Date();
+                String file_name = "img_example_" + usuario.getId() + nowDate.getSeconds() + (ManejadorImagen.getInstance().getAllObjects().size() +1)  ;
+
+                Path temp = Paths.get(upload.getAbsolutePath() + file_name+".jpeg");
+                request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+                File ima = new File(System.getProperty("java.io.tmpdir"));
+                try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
+
+                    Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println("Tamano de image: " + temp.toFile().length());
+
+                    byte[] byteP;
+                    byteP = Files.readAllBytes(temp);
+                    File temp2 = File.createTempFile("image", "jpeg", ima);
+                    FileOutputStream fos = new FileOutputStream(temp2);
+                    fos.write(byteP);
+                    Imagenes imagen = new Imagenes();
+                    imagen.setImagen(byteP);
+                    imagen.setPath(temp2.getName());
+
+                    articulo.setImagen(imagen);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                    throw e;
+                }
                 ManejadorArticulo.getInstance().insertIntoDatabase(articulo);
                 ManejadorUsuario.getInstance().updateObject(usuario);
 
