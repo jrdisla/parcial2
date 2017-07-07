@@ -44,7 +44,7 @@ public class Rutas {
             staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
-            enableDebugScreen();
+          //  enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
 
@@ -152,10 +152,8 @@ public class Rutas {
                 Map<String, Object> attributes = new HashMap<>();
 
                 Usuario usuario = request.session().attribute("username");
-                List<Usuario> users = ManejadorUsuario.getInstance().getAllUsers();
 
                 attributes.put("user",usuario);
-                attributes.put("listaUsuarios",users);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -184,7 +182,6 @@ public class Rutas {
                 Date date_bir = new Date(year,month,day);
 
                 Usuario user = new Usuario(email, name, lastname, date_bir, country, city,publishedDate, language, password);
-                user.setEsAdmin(true);
 
                 if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null)
                 {
@@ -283,7 +280,6 @@ public class Rutas {
                 Usuario usuario = session.attribute("username");
 
                 String text = request.queryParams("opinion");
-                //System.out.println("Debug 1");
                 Articulo articulo = new Articulo();
                 articulo.setBody(text);
                 articulo.setUsuario(usuario);
@@ -291,15 +287,12 @@ public class Rutas {
 
                 int size = usuario.getArticulos().size();
                 articulo.setTitulo("Articulo " + (size+1));
-                //System.out.println("Debug 2");
 
                 Set<Articulo> articulos = usuario.getArticulos();
                 articulos.add(articulo);
 
                 usuario.setArticulos(articulos);
-                //System.out.println("Debug 3");
                 ManejadorUsuario.getInstance().updateObject(usuario);
-                //System.out.println("Debug 4");
 
                 response.redirect("/profile");
 
@@ -392,12 +385,17 @@ public class Rutas {
 
             List<Usuario> listuser = new ArrayList<>();
             for (Usuario item: ManejadorUsuario.getInstance().getUserBuUP(user.getLugar_nacimiento(),user.getCiudad())
-                 ) {
+                    ) {
                 if (!item.getEmail().equalsIgnoreCase(user.getEmail()))
                 {
-                    listuser.add(item);
-                    System.out.println(item.getEmail());
-                    System.out.println(user.getEmail());
+                    for (Amigos amigo: ManejadorAmigos.getInstance().getAllObjects()
+                                                ) {
+                        if(!amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail()))
+                        {
+                                                   listuser.add(item);
+                        }
+                    }
+
                 }
             }
             attributes.put("listuser",listuser);
@@ -408,11 +406,8 @@ public class Rutas {
 
         Spark.get("/solicitud/:id",(request, response) -> {
             int id = Integer.parseInt(request.params("id"));
-             //String id = request.params("id");
-           // int id_a = Integer.parseInt(request.params("id"));
+
             System.out.println(id);
-         //   System.out.println("El id es: " +id);
-            Map<String, Object> attributes = new HashMap<>();
             Usuario user = request.session().attribute("username");
             Usuario user2 = ManejadorUsuario.getInstance().findObjectWithId(id);
             if (user2 != user)
@@ -425,8 +420,8 @@ public class Rutas {
         Spark.get("/solicitud_acept/:id",(request, response) -> {
             System.out.println("Llego aqui: ");
             int id = Integer.parseInt(request.params("id"));
-            Usuario user = request.session().attribute("username");
 
+            Usuario user = request.session().attribute("username");
             Usuario user2 = ManejadorUsuario.getInstance().findObjectWithId(id);
 
             Amigos amigo_new = new Amigos();
@@ -437,22 +432,39 @@ public class Rutas {
             user.getAmigos().add(amigo_new);
             ManejadorUsuario.getInstance().updateObject(user);
 
-            for (Amigos item: ManejadorUsuario.getInstance().findObjectWithId(user.getId()).getAmigos())
-                  {
-                      System.out.println(item.getUsuario().getEmail());
-            }
+
             return "";
         });
 
         Spark.get("/acept",(request, response) -> {
+
             Template resultTemplate = configuration.getTemplate("templates/solicitudes.ftl");
             StringWriter writer = new StringWriter();
             Map<String, Object> attributes = new HashMap<>();
             Usuario user = request.session().attribute("username");
             List<Usuario> listuser =new ArrayList<>();
+            List<Amigos> amigos_add = ManejadorAmigos.getInstance().getAllObjects();
+            for (Usuario item: user.getSolicitudes()
+                    ) {
 
-            for (Usuario item: user.getSolicitudes()) {
-                listuser.add(item);
+                if(amigos_add.size()!= 0){
+                for (Amigos amigo : amigos_add) {
+                    System.out.println("llegue aqui mg1");
+                    if (amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail())) {
+                        System.out.println("ya esta agregado");
+                    } else if (item.getEmail().equalsIgnoreCase(user.getEmail())) {
+                        System.out.println("es usted mismo");
+                    } else {
+
+                        listuser.add(item);
+                    }
+                }
+                }
+                else
+                {
+                    listuser.add(item);
+                }
+
             }
             System.out.println("Tiene un sise de: "+listuser.size());
             attributes.put("listuser",listuser);
@@ -490,10 +502,6 @@ public class Rutas {
         if(user == null)
         {
             halt(401, "No Autorizado");
-        }
-        else if (user.isEsAdmin())
-        {
-            response.redirect("adminUsuarios");
         }
     }
         private static String convertStreamToString(InputStream input)
