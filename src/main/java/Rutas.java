@@ -90,9 +90,9 @@ public class Rutas {
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
-        Spark.get("/profile/:id", (request, response) -> {
+        Spark.get("/ver/:id", (request, response) -> {
             int id = Integer.parseInt(request.params("id"));
-            Template resultTemplate = configuration.getTemplate("templates/profile_aux.ftl");
+            Template resultTemplate = configuration.getTemplate("templates/profile.ftl");
             StringWriter writer = new StringWriter();
             Map<String, Object> attributes = new HashMap<>();
             Usuario user = request.session().attribute("username");
@@ -107,10 +107,10 @@ public class Rutas {
 
             String path = imagenes.getPath();
             attributes.put("ver","/temp/"+path);
-            attributes.put("user",user);
+            attributes.put("user",usuario);
             attributes.put("image",paths);
             resultTemplate.process(attributes, writer);
-            return writer;
+            return modelAndView(attributes,"profile.ftl");
         });
             Spark.get("/index", (request, response) -> {
 
@@ -446,13 +446,19 @@ public class Rutas {
             Usuario user2 = ManejadorUsuario.getInstance().findObjectWithId(id);
 
             Amigos amigo_new = new Amigos();
+            Amigos amigos_new_2 = new Amigos();
 
             amigo_new.setUsuario(user2);
+            amigos_new_2.setUsuario(user);
+
             ManejadorAmigos.getInstance().insertIntoDatabase(amigo_new);
+            ManejadorAmigos.getInstance().insertIntoDatabase(amigos_new_2);
 
             user.getAmigos().add(amigo_new);
-            ManejadorUsuario.getInstance().updateObject(user);
+            user2.getAmigos().add(amigos_new_2);
 
+            ManejadorUsuario.getInstance().updateObject(user);
+            ManejadorUsuario.getInstance().updateObject(user2);
 
             return "";
         });

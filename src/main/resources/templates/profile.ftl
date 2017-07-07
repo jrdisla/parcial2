@@ -137,7 +137,7 @@
                    </#if>
                    -->-->
                 <#list image as images>
-                    <li><a href="/profile/${images.usuario.id}" class="thumbnail"><img src="/temp/${images.usuario.foto_perfil.path}" alt="">${images.usuario.nombre}</a></li>
+                    <li><a href="/ver/${images.usuario.id}" class="thumbnail"><img src="/temp/${images.usuario.foto_perfil.path}" alt="">${images.usuario.nombre}</a></li>
                 </#list>
 
                 <div class="clearfix"></div>
