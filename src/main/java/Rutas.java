@@ -32,6 +32,7 @@ public class Rutas {
     public static void StartProyect(File upload, File Do) {
 
             staticFiles.location("templates");
+            staticFiles.externalLocation(System.getProperty("java.io.tmpdir"));
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
           //  enableDebugScreen();
@@ -84,7 +85,7 @@ public class Rutas {
                 }
 
                 String path = imagenes.getPath();
-                attributes.put("ver","/temp/"+path);
+                attributes.put("ver",usuario.getFoto_perfil().getPath());
                 attributes.put("user",usuario);
                 attributes.put("image",amigos);
                 resultTemplate.process(attributes, writer);
@@ -352,7 +353,7 @@ public class Rutas {
 
                 Path temp = Paths.get(upload.getAbsolutePath() + file_name+".jpeg");
                 request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
-
+                File ima = new File(System.getProperty("java.io.tmpdir"));
                 try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
 
                     Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
@@ -360,25 +361,23 @@ public class Rutas {
 
                     byte [] byteP ;
                     byteP = Files.readAllBytes(temp);
+                    File temp2 = File.createTempFile("image","jpeg",ima);
+                    FileOutputStream fos = new FileOutputStream(temp2);
+                    fos.write(byteP);
 
                     Imagenes imagen = new Imagenes();
-
                     imagen.setImagen(byteP);
-                    imagen.setPath(temp.getFileName().toString());
-
+                    imagen.setPath(temp2.getName());
                     user.setFoto_perfil(imagen);
 
                     ManejadorImagen.getInstance().insertIntoDatabase(imagen);
                     ManejadorUsuario.getInstance().updateObject(user);
-                    FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/public/do.jpeg");
-                    fileOutputStream.write(ManejadorImagen.getInstance().findObjectWithId(imagen.getId()).getImagen());
-                   // fileOutputStream.close();
-                 //   input.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                     throw e;
                 }
+
 
              response.redirect("/index");
                 StringWriter writer = new StringWriter();
@@ -386,6 +385,7 @@ public class Rutas {
                 System.out.println("llego");
              //   resultTemplate.process(attributes, writer);
                 return writer;
+
             });
 
             Spark.get("/logout",(request, response) -> {
