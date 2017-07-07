@@ -61,30 +61,29 @@
                 <h3 class="panel-title">Wall</h3>
               </div>
               <div class="panel-body">
-                <form>
+                <form method="post" action="/addText">
                   <div class="form-group">
                     <textarea class="form-control" placeholder="Write on the wall"></textarea>
                   </div>
                   <button type="submit" class="btn btn-default">Submit</button>
                   <div class="pull-right">
                     <div class="btn-toolbar">
-                      <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
+                      <!--<button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button> -->
                         <a id="flip"  class="btn btn-danger"  role="button">Image</a>
                      <!-- <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
                         <div id = "panel">
-
                             <div class="form-group">
                                 <label>Upload Image</label>
                                 <div class="input-group">
-                    <span class="input-group-btn">
+                        <span class="input-group-btn">
                         <span class="btn btn-default btn-file">
                             Browse… <input type="file" id="imgInp">
                         </span>
-                    </span>
-                                    <input type="text" class="form-control" readonly>
-                                        </div>
-                                        <img id='img-upload'/>
-                                    </div>
+                        </span>
+                        <input type="text" class="form-control" readonly>
+                                </div>
+                          <img id='img-upload'/>
+                          </div>
                         </div>
                     </div>
                   </div>
@@ -101,7 +100,13 @@
                    <div class="col-sm-10">
                      <div class="bubble">
                        <div class="pointer">
-                         <p>Hey I was wondering if you wanted to go check out the football game later. I heard they are supposed to be really good!</p>
+                       <#if user??>
+                           <#if user.articulos??>
+                               <#list user.articulos as Articulos>
+                                   <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
+                               </#list>
+                           </#if>
+                       </#if>
                        </div>
                        <div class="pointer-border"></div>
                      </div>
@@ -115,7 +120,6 @@
                       </form>
                      </div>
                      <div class="clearfix"></div>
-
                      <div class="comments">
                        <div class="comment">
                          <a href="#" class="comment-avatar pull-left"><img src="img/user.png" alt=""></a>
@@ -136,7 +140,7 @@
                  </div>
               </div>
             </div>
-            <div class="panel panel-default post">
+            <!--<div class="panel panel-default post">
               <div class="panel-body">
                  <div class="row">
                    <div class="col-sm-2">

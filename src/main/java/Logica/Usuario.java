@@ -15,6 +15,10 @@ import java.util.Set;
 @Table(name = "usuarios")
 @NamedQueries({
         @NamedQuery(
+                name = "User.findAll",
+                query = "SELECT user FROM Logica.Usuario user WHERE user.id > 0"
+        ),
+        @NamedQuery(
                 name = "User.findUserByUsername",
                 query = "SELECT user FROM Logica.Usuario user WHERE user.email = :email"
         ),
@@ -26,6 +30,7 @@ import java.util.Set;
 public class Usuario implements Serializable {
     public static String getUser = "User.findUserByUsername";
     public static String chekUserPassword = "User.findUserByUsernameAndPassword";
+    public static String getAllUsers = "User.findAll";
 
     @Id
     @GeneratedValue

@@ -44,7 +44,7 @@ public class Rutas {
             staticFiles.location("templates");
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
-          //  enableDebugScreen();
+            enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
 
@@ -152,8 +152,10 @@ public class Rutas {
                 Map<String, Object> attributes = new HashMap<>();
 
                 Usuario usuario = request.session().attribute("username");
+                List<Usuario> users = ManejadorUsuario.getInstance().getAllUsers();
 
                 attributes.put("user",usuario);
+                attributes.put("listaUsuarios",users);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -182,6 +184,7 @@ public class Rutas {
                 Date date_bir = new Date(year,month,day);
 
                 Usuario user = new Usuario(email, name, lastname, date_bir, country, city,publishedDate, language, password);
+                user.setEsAdmin(true);
 
                 if(ManejadorUsuario.getInstance().GetUser(user.getEmail()) == null)
                 {
@@ -280,6 +283,7 @@ public class Rutas {
                 Usuario usuario = session.attribute("username");
 
                 String text = request.queryParams("opinion");
+                //System.out.println("Debug 1");
                 Articulo articulo = new Articulo();
                 articulo.setBody(text);
                 articulo.setUsuario(usuario);
@@ -287,12 +291,15 @@ public class Rutas {
 
                 int size = usuario.getArticulos().size();
                 articulo.setTitulo("Articulo " + (size+1));
+                //System.out.println("Debug 2");
 
                 Set<Articulo> articulos = usuario.getArticulos();
                 articulos.add(articulo);
 
                 usuario.setArticulos(articulos);
+                //System.out.println("Debug 3");
                 ManejadorUsuario.getInstance().updateObject(usuario);
+                //System.out.println("Debug 4");
 
                 response.redirect("/profile");
 
@@ -444,8 +451,7 @@ public class Rutas {
             Usuario user = request.session().attribute("username");
             List<Usuario> listuser =new ArrayList<>();
 
-            for (Usuario item: user.getSolicitudes()
-                 ) {
+            for (Usuario item: user.getSolicitudes()) {
                 listuser.add(item);
             }
             System.out.println("Tiene un sise de: "+listuser.size());
@@ -484,6 +490,10 @@ public class Rutas {
         if(user == null)
         {
             halt(401, "No Autorizado");
+        }
+        else if (user.isEsAdmin())
+        {
+            response.redirect("adminUsuarios");
         }
     }
         private static String convertStreamToString(InputStream input)

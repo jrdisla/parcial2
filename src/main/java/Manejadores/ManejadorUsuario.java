@@ -46,4 +46,14 @@ public class ManejadorUsuario extends ManejadorDB<Usuario> {
             em.close();
         }
     }
+
+    public List<Usuario> getAllUsers()
+    {
+        EntityManager em = getEntityManager();
+        try {
+            return (List<Usuario>) em.createNamedQuery(Usuario.getAllUsers).getResultList();
+        }  finally {
+            em.close();
+        }
+    }
 }
