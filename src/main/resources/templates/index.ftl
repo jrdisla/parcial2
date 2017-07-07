@@ -101,6 +101,7 @@
                            <#if articulos??>
 
                                <#list articulos as Articulos>
+
                                    <a href="">${Articulos.usuario.nombre}
                                    <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
 

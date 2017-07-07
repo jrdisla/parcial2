@@ -129,7 +129,20 @@ public class Rutas {
                 Template resultTemplate = configuration.getTemplate("templates/index.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
-                List<Articulo> articulos = ManejadorArticulo.getInstance().getAllObjects();
+                List<Articulo> articulos = new ArrayList<>();
+                List<Amigos> amigos = new ArrayList<>();
+                for (Articulo item: usuario.getArticulos()
+                     ) {
+                    articulos.add(item);
+                }
+                for (Amigos item: usuario.getAmigos())
+                {
+                    for (Articulo item2: item.getUsuario().getArticulos())
+                    {
+                        articulos.add(item2);
+                    }
+                }
+
                 attributes.put("user",usuario);
                 attributes.put("articulos",articulos);
                 resultTemplate.process(attributes, writer);
