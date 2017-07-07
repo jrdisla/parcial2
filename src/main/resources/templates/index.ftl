@@ -93,20 +93,20 @@
             <div class="panel panel-default post">
               <div class="panel-body">
                  <div class="row">
-                   <div class="col-sm-2">
-                     <a href="profile.ftl" class="post-avatar thumbnail"><img src="img/user.png" alt=""><div class="text-center">DevUser1</div></a>
-                     <div class="likes text-center">7 Likes</div>
-                   </div>
+
                    <div class="col-sm-10">
                      <div class="bubble">
                        <div class="pointer">
-                       <#if user??>
-                           <#if user.articulos??>
-                               <#list user.articulos as Articulos>
+
+                           <#if articulos??>
+
+                               <#list articulos as Articulos>
+                                   <a href="">${Articulos.usuario.nombre}
                                    <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
+
                                </#list>
                            </#if>
-                       </#if>
+
                        </div>
                        <div class="pointer-border"></div>
                      </div>
@@ -124,14 +124,14 @@
                        <div class="comment">
                          <a href="#" class="comment-avatar pull-left"><img src="img/user.png" alt=""></a>
                          <div class="comment-text">
-                           <p>I am just going to paste in a paragraph, then we will add another clearfix.</p>
+                           <p></p>
                          </div>
                        </div>
                        <div class="clearfix"></div>
                        <div class="comment">
                          <a href="#" class="comment-avatar pull-left"><img src="img/user.png" alt=""></a>
                          <div class="comment-text">
-                           <p>I am just going to paste in a paragraph, then we will add another clearfix.</p>
+                           <p></p>
                          </div>
                        </div>
                        <div class="clearfix"></div>

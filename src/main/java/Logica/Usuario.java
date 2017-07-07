@@ -60,7 +60,7 @@ public class Usuario implements Serializable {
     private Imagenes foto_perfil;
     @OneToMany
     private Set<Album> albums = new HashSet<>();
-    @OneToMany
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
     private Set<Articulo> articulos = new HashSet<>();
     @OneToMany
     private Set<Amigos> amigos = new HashSet<>();

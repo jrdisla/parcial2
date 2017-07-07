@@ -23,7 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import static spark.Spark.*;
-
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 
 public class Rutas {
@@ -35,7 +35,7 @@ public class Rutas {
             staticFiles.externalLocation(System.getProperty("java.io.tmpdir"));
             final Configuration configuration = new Configuration(new Version(2, 3, 0));
             configuration.setClassForTemplateLoading(Rutas.class, "/");
-          //  enableDebugScreen();
+           enableDebugScreen();
 
             Spark.get("/Login", (request, response) -> {
 
@@ -70,12 +70,17 @@ public class Rutas {
             });
 
             Spark.get("/profile", (request, response) -> {
-
+                Usuario usuario = request.session().attribute("username");
                 Template resultTemplate = configuration.getTemplate("templates/profile.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
+                List<Articulo> articulos = new ArrayList<>();
 
-                Usuario usuario = request.session().attribute("username");
+                for (Articulo item:usuario.getArticulos() )
+                {
+                    articulos.add(item);
+                }
+
                 Imagenes imagenes = usuario.getFoto_perfil();
                 List<Amigos> amigos = new ArrayList<>();
                 List<String> paths = new ArrayList<>();
@@ -84,10 +89,16 @@ public class Rutas {
                     amigos.add(item);
                 }
 
+
+                for (Articulo item: articulos
+                     ) {
+                    System.out.println(item.getBody());
+                }
                 String path = imagenes.getPath();
                 attributes.put("ver",usuario.getFoto_perfil().getPath());
                 attributes.put("user",usuario);
                 attributes.put("image",amigos);
+                attributes.put("articulo",articulos);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -114,14 +125,13 @@ public class Rutas {
             return modelAndView(attributes,"profile.ftl");
         });
             Spark.get("/index", (request, response) -> {
-
+                Usuario usuario = request.session().attribute("username");
                 Template resultTemplate = configuration.getTemplate("templates/index.ftl");
                 StringWriter writer = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
-
-                Usuario usuario = request.session().attribute("username");
-
+                List<Articulo> articulos = ManejadorArticulo.getInstance().getAllObjects();
                 attributes.put("user",usuario);
+                attributes.put("articulos",articulos);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
@@ -165,7 +175,7 @@ public class Rutas {
                 return writer;
             });
 
-            Spark.get("/adminUsuarios",(request, response) -> {
+            Spark.get("/zonaAdmin",(request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/zonaAdmin.ftl");
                 StringWriter writer = new StringWriter();
@@ -299,7 +309,7 @@ public class Rutas {
                 Session session = request.session(true);
                 Usuario usuario = session.attribute("username");
 
-                String text = request.queryParams("opinion");
+                String text = request.queryParams("opinion_2");
                 Articulo articulo = new Articulo();
                 articulo.setBody(text);
                 articulo.setUsuario(usuario);
@@ -307,11 +317,8 @@ public class Rutas {
 
                 int size = usuario.getArticulos().size();
                 articulo.setTitulo("Articulo " + (size+1));
-
-                Set<Articulo> articulos = usuario.getArticulos();
-                articulos.add(articulo);
-
-                usuario.setArticulos(articulos);
+                usuario.getArticulos().add(articulo);
+                ManejadorArticulo.getInstance().insertIntoDatabase(articulo);
                 ManejadorUsuario.getInstance().updateObject(usuario);
 
                 response.redirect("/profile");
@@ -401,22 +408,27 @@ public class Rutas {
             StringWriter writer = new StringWriter();
             Map<String, Object> attributes = new HashMap<>();
             Usuario user = request.session().attribute("username");
-
+            List<Amigos> amigos = ManejadorAmigos.getInstance().getAllObjects();
             List<Usuario> listuser = new ArrayList<>();
             for (Usuario item: ManejadorUsuario.getInstance().getUserBuUP(user.getLugar_nacimiento(),user.getCiudad())
                     ) {
                 if (!item.getEmail().equalsIgnoreCase(user.getEmail()))
                 {
-                    if(ManejadorAmigos.getInstance().getAllObjects().size() !=0) {
-                        for (Amigos amigo : ManejadorAmigos.getInstance().getAllObjects()
-                                ) {
-                            if (!amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail())) {
-                                listuser.add(item);
-                            }
-                        }
+                    if(ManejadorAmigos.getInstance().getAllObjects().size() == 0) {
+                        System.out.println("AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+                        listuser.add(item);
                     }
                     else
-                    {listuser.add(item);}
+                    {
+                    for (int i = 0; i< amigos.size();i++)
+                    {
+                        if (!amigos.get(i).getUsuario().getEmail().equalsIgnoreCase(item.getEmail()))
+                        {
+                            listuser.add(item);
+                        }
+                    }
+
+                    }
                 }
             }
             attributes.put("listuser",listuser);
@@ -446,18 +458,15 @@ public class Rutas {
             Usuario user2 = ManejadorUsuario.getInstance().findObjectWithId(id);
 
             Amigos amigo_new = new Amigos();
-            Amigos amigos_new_2 = new Amigos();
-
             amigo_new.setUsuario(user2);
-            amigos_new_2.setUsuario(user);
-
             ManejadorAmigos.getInstance().insertIntoDatabase(amigo_new);
-            ManejadorAmigos.getInstance().insertIntoDatabase(amigos_new_2);
-
             user.getAmigos().add(amigo_new);
-            user2.getAmigos().add(amigos_new_2);
-
             ManejadorUsuario.getInstance().updateObject(user);
+
+            Amigos amigos_new_2 = new Amigos();
+            amigos_new_2.setUsuario(user);
+            ManejadorAmigos.getInstance().insertIntoDatabase(amigos_new_2);
+            user2.getAmigos().add(amigos_new_2);
             ManejadorUsuario.getInstance().updateObject(user2);
 
             return "";
@@ -474,22 +483,22 @@ public class Rutas {
             for (Usuario item: user.getSolicitudes()
                     ) {
 
-                if(amigos_add.size()!= 0){
-                for (Amigos amigo : amigos_add) {
-                    System.out.println("llegue aqui mg1");
-                    if (amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail())) {
-                        System.out.println("ya esta agregado");
-                    } else if (item.getEmail().equalsIgnoreCase(user.getEmail())) {
-                        System.out.println("es usted mismo");
-                    } else {
-
-                        listuser.add(item);
-                    }
-                }
+                if(amigos_add.size()== 0){
+                    listuser.add(item);
                 }
                 else
                 {
-                    listuser.add(item);
+                    for (Amigos amigo : amigos_add) {
+                        System.out.println("llegue aqui mg1");
+                        if (amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail())) {
+                            System.out.println("ya esta agregado");
+                        } else if (item.getEmail().equalsIgnoreCase(user.getEmail())) {
+                            System.out.println("es usted mismo");
+                        } else {
+                            System.out.println("AQUIIIIIIIIIIIIIIIIIIIIII");
+                            listuser.add(item);
+                        }
+                    }
                 }
 
             }

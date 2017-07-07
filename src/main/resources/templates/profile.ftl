@@ -110,7 +110,7 @@
                       </form>
                         <#if user??>
                             <#if user.articulos??>
-                              <#list user.articulos as Articulos>
+                              <#list articulo as Articulos>
                                   <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
                               </#list>
                             </#if>
