@@ -50,8 +50,12 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/index">Home</a></li>
-            <li><a href="/members">Members</a></li>
+              <li><a href="/zonaAdmin">Zona Administracion</a></li>
+              <li><a href="/members">Members</a></li>
             <!--<li><a href="groups.ftl">Groups</a></li> -->
+            <#if user.esAdmin>
+
+            </#if>
             <li><a href="/photos">Photos</a></li>
             <li><a href="/profile">Profile</a></li>
           </ul>
@@ -93,7 +97,7 @@
                     <div class="panel-body">
                       <form action = "/addText" method="post">
                         <div class="form-group">
-                          <textarea class="form-control" name= "opinion"placeholder="Write on the wall"></textarea>
+                          <textarea class="form-control" name="opinion" placeholder="Write on the wall"></textarea>
                         </div>
                         <button type="submit" style="margin-bottom: 30px" class="btn btn-default">Submit</button>
                         <div class="pull-right">
