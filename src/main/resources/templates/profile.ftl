@@ -136,16 +136,10 @@
                       </#if>
                    </#if>
                    -->-->
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                  <li><a href="profile.ftl" class="thumbnail"><img src="img/user.png" alt=""></a></li>
-                </ul>
+                <#list image as images>
+                    <li><a href="/profile/${images.usuario.id}" class="thumbnail"><img src="/temp/${images.usuario.foto_perfil.path}" alt="">${images.usuario.nombre}</a></li>
+                </#list>
+
                 <div class="clearfix"></div>
                 <a class="btn btn-primary" href="#">View All Friends</a>
               </div>

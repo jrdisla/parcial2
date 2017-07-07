@@ -11,29 +11,19 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 import spark.Spark;
-import spark.utils.IOUtils;
-import sun.util.calendar.BaseCalendar;
-
-import javax.imageio.ImageIO;
 import javax.servlet.MultipartConfigElement;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.util.jar.Attributes;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import static spark.Spark.*;
-import static spark.debug.DebugScreen.enableDebugScreen;
+
 
 
 public class Rutas {
@@ -86,13 +76,42 @@ public class Rutas {
 
                 Usuario usuario = request.session().attribute("username");
                 Imagenes imagenes = usuario.getFoto_perfil();
+                List<Amigos> amigos = new ArrayList<>();
+                List<String> paths = new ArrayList<>();
+                for (Amigos item: usuario.getAmigos()
+                     ) {
+                    amigos.add(item);
+                }
+
                 String path = imagenes.getPath();
                 attributes.put("ver","/temp/"+path);
                 attributes.put("user",usuario);
+                attributes.put("image",amigos);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
+        Spark.get("/profile/:id", (request, response) -> {
+            int id = Integer.parseInt(request.params("id"));
+            Template resultTemplate = configuration.getTemplate("templates/profile_aux.ftl");
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+            Usuario user = request.session().attribute("username");
+            Usuario usuario = ManejadorUsuario.getInstance().findObjectWithId(id);
+            Imagenes imagenes = usuario.getFoto_perfil();
+            List<Amigos> amigos = new ArrayList<>();
+            List<String> paths = new ArrayList<>();
+            for (Amigos item: usuario.getAmigos()
+                    ) {
+                paths.add(item.getUsuario().getFoto_perfil().getPath());
+            }
 
+            String path = imagenes.getPath();
+            attributes.put("ver","/temp/"+path);
+            attributes.put("user",user);
+            attributes.put("image",paths);
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
             Spark.get("/index", (request, response) -> {
 
                 Template resultTemplate = configuration.getTemplate("templates/index.ftl");
@@ -388,14 +407,16 @@ public class Rutas {
                     ) {
                 if (!item.getEmail().equalsIgnoreCase(user.getEmail()))
                 {
-                    for (Amigos amigo: ManejadorAmigos.getInstance().getAllObjects()
-                                                ) {
-                        if(!amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail()))
-                        {
-                                                   listuser.add(item);
+                    if(ManejadorAmigos.getInstance().getAllObjects().size() !=0) {
+                        for (Amigos amigo : ManejadorAmigos.getInstance().getAllObjects()
+                                ) {
+                            if (!amigo.getUsuario().getEmail().equalsIgnoreCase(item.getEmail())) {
+                                listuser.add(item);
+                            }
                         }
                     }
-
+                    else
+                    {listuser.add(item);}
                 }
             }
             attributes.put("listuser",listuser);
