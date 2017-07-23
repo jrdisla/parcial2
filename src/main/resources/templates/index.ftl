@@ -128,7 +128,9 @@
 
                                    <a href="">${Articulos.usuario.nombre}
                                    <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
+                               <#if Articulos.imagen??>
                                    <li><a href="/hola" class="thumbnail"><img src="${Articulos.imagen.path}" alt=""></a></li>
+                               </#if>
                                </#list>
                            </#if>
 

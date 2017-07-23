@@ -356,8 +356,9 @@ public class Rutas {
                     Imagenes imagen = new Imagenes();
                     imagen.setImagen(byteP);
                     imagen.setPath(temp2.getName());
-
+                    if(temp.toFile().length()>0){
                     articulo.setImagen(imagen);
+                }
                 }
                 catch (IOException e) {
                     e.printStackTrace();
