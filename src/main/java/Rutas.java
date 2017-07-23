@@ -249,8 +249,6 @@ public class Rutas {
                 ArticuloPreferencia item = ManejadorArticuloPreferencia.getInstance().getItByArtiUser(user.getId(),article.getId());
 
                 if (item != null) {
-
-
                     if (item.getPreferencia().substring(0, 3).equalsIgnoreCase("DIS")) {
 
                         int ida = item.getId();
@@ -288,7 +286,16 @@ public class Rutas {
                 } else {
 
                     ManejadorArticuloPreferencia.getInstance().insertIntoDatabase(articleLikes);
-                    article.setCount_(1);
+                    int likes2 = article.getCount_();
+                    if(likes2==0){
+                    likes2++;
+                    article.setCount_(likes2);}
+                    else
+                    {
+                        int dislikes = article.getDislike();
+                        dislikes--;
+                        article.setDislike(dislikes);
+                    }
                     ManejadorArticulo.getInstance().updateObject(article);
 
                 }
@@ -335,7 +342,16 @@ public class Rutas {
                 }
                 else {
                     ManejadorArticuloPreferencia.getInstance().insertIntoDatabase(articlePreference);
-                    article.setDislike(1);
+                    int dislikes = article.getDislike();
+                    if(dislikes == 0){
+                    dislikes++;
+                    article.setDislike(dislikes);}
+                    else
+                    {
+                        int likes = article.getCount_();
+                        likes--;
+                        article.setCount_(likes);
+                    }
                     ManejadorArticulo.getInstance().updateObject(article);
                 }
 
