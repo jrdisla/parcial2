@@ -45,13 +45,28 @@
               <input type="email" id="email" name="email" placeholder="Your Email" value="" class="radius" required/>
             </div>
             <div>
-            <input type="text" id="remail" name="countries" placeholder="Countries" class="radius" required/>
+                <!--
+            <input type="text" id="remail" name="countries" placeholder="Countries" class="radius" required/> -->
+                <#if cons??>
+                    <select name="countries" class="radius">
+                        <#list cons as c>
+                            <option id="remail" class="radius" value=${c}>${c}</option>
+                        </#list>
+                    </select>
+                </#if>
             </div>
               <div>
                   <input type="text" id="remail" name="city" placeholder="City" class="radius" required/>
               </div>
               <div>
-                  <input type="text" id="remail" name="languages" placeholder="Languages" class="radius" required />
+                  <!--<input type="text" id="remail" name="languages" placeholder="Languages" class="radius" required /> -->
+              <#if languages??>
+                  <select name="languages" class="radius">
+                      <#list languages as idioma>
+                          <option id="remail" class="radius" value=${idioma}>${idioma}</option>
+                      </#list>
+                  </select>
+              </#if>
               </div>
               <div>
                   <input type="date" id="remail" name="date_b" placeholder="Birthday" class="radius" required />

@@ -110,7 +110,7 @@
                       </form>
                         <#if user??>
                             <#if user.articulos??>
-                              <#list articulo as Articulos>
+                              <#list user.articulos as Articulos>
                                   <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
                               </#list>
                             </#if>
@@ -136,9 +136,12 @@
                       </#if>
                    </#if>
                    -->-->
-                <#list image as images>
-                    <li><a href="/ver/${images.usuario.id}" class="thumbnail"><img src="${images.usuario.foto_perfil.path}" alt="">${images.usuario.nombre}</a></li>
-                </#list>
+                <#if image??>
+                    <#list image as images>
+                        <li><a href="/ver/${images.usuario.id}" class="thumbnail"><img src="${images.usuario.foto_perfil.path}" alt="">${images.usuario.nombre}</a></li>
+                    </#list>
+                </#if>
+
 
                 <div class="clearfix"></div>
                 <a class="btn btn-primary" href="#">View All Friends</a>

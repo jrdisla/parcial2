@@ -566,6 +566,34 @@ public class Rutas {
             StringWriter writer = new StringWriter();
             Map<String, Object> attributes = new HashMap<>();
 
+            String[] countries = Locale.getISOCountries();
+            List<String> cons = new ArrayList<String>();
+            List<String> languages = new ArrayList<String>();
+            for (String countryCode : countries) {
+
+                Locale obj = new Locale("", countryCode);
+                Locale locale = new Locale(countryCode);
+                cons.add(obj.getDisplayCountry());
+                if(locale.getDisplayLanguage().length() > 4)
+                {
+                    languages.add(locale.getDisplayLanguage());
+                    System.out.println(obj.getDisplayCountry());
+                    System.out.println(obj.getDisplayLanguage());
+                }
+            }
+
+            Set<String> set = new HashSet<String>();
+            languages.add("English");
+            set.addAll(languages);
+            languages.clear();
+            languages.addAll(set);
+            languages.sort(String::compareToIgnoreCase);
+
+            cons.sort(String::compareToIgnoreCase);
+
+            attributes.put("cons",cons);
+            attributes.put("languages",languages);
+
             resultTemplate.process(attributes, writer);
             return writer;
         });
