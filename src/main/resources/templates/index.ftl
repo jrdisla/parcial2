@@ -63,7 +63,7 @@
               <div class="panel-body">
                 <form method="post" action="/addText" enctype="multipart/form-data">
                   <div class="form-group">
-                    <textarea formenctype="multipart/form-data" name="opinion_2" class="form-control" placeholder="Write on the wall"></textarea>
+                    <textarea  name="opinion_2"class="form-control" placeholder="Write on the wall"></textarea>
                   </div>
 
                   <div class="pull-right">

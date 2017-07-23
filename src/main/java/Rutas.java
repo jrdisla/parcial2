@@ -76,14 +76,14 @@ public class Rutas {
                 Map<String, Object> attributes = new HashMap<>();
                 List<Articulo> articulos = new ArrayList<>();
 
-                for (Articulo item:usuario.getArticulos() )
+               /* for (Articulo item:usuario.getArticulos() )
                 {
                     if(item.getBody() == null)
                     {
                         item.setBody("HOLA");
                     }
                     articulos.add(item);
-                }
+                }*/
 
                 Imagenes imagenes = usuario.getFoto_perfil();
                 List<Amigos> amigos = new ArrayList<>();
@@ -326,11 +326,8 @@ public class Rutas {
 
                 Session session = request.session(true);
                 Usuario usuario = session.attribute("username");
-                String text = request.queryParams("opinion_2");
                 Articulo articulo = new Articulo();
-                articulo.setBody(text);
-                articulo.setUsuario(usuario);
-                articulo.setFecha(new Date());
+
 
                 int size = usuario.getArticulos().size();
                 articulo.setTitulo("Articulo " + (size+1));
@@ -342,6 +339,10 @@ public class Rutas {
                 Path temp = Paths.get(upload.getAbsolutePath() + file_name+".jpeg");
                 request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
                 File ima = new File(System.getProperty("java.io.tmpdir"));
+                String text = getStringFromInputStream(request.raw().getPart("opinion_2").getInputStream());
+                articulo.setBody(text);
+                articulo.setUsuario(usuario);
+                articulo.setFecha(new Date());
                 try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
 
                     Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
@@ -603,5 +604,34 @@ public class Rutas {
           }
           return output.toByteArray();
         }
+
+    private static String getStringFromInputStream(InputStream is) {
+
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+
+            br = new BufferedReader(new InputStreamReader(is));
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return sb.toString();
+
+    }
 }
 

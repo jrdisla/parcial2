@@ -125,12 +125,12 @@
     .btn-file {
         position: relative;
         overflow: hidden;
+        min-width: 100%;
     }
     .btn-file input[type=file] {
         position: absolute;
         top: 0;
         right: 0;
-        min-width: 100%;
         min-height: 100%;
         font-size: 100px;
         text-align: right;

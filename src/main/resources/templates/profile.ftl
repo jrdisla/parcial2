@@ -187,5 +187,66 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
+
+  <style>
+      .btn-file {
+          position: relative;
+          overflow: hidden;
+          min-width: 100%;
+      }
+      .btn-file input[type=file] {
+          position: absolute;
+          top: 0;
+          right: 0;
+          min-height: 100%;
+          font-size: 100px;
+          text-align: right;
+          filter: alpha(opacity=0);
+          opacity: 0;
+          outline: none;
+          background: white;
+          cursor: inherit;
+          display: block;
+      }
+
+      #img-upload{
+          width: 100%;
+      }
+  </style>
+
+  <style>
+      #clock{
+          background-image:url('');
+          background-size:cover;
+          background-position: center;
+          height: 200px; width: 200px;
+          border: 1px solid #bbb;
+      }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="js/bootstrap-imageupload.js"></script>
+
+  <script>
+      var $imageupload = $('.imageupload');
+      $imageupload.imageupload();
+
+      $('#imageupload-disable').on('click', function() {
+          $imageupload.imageupload('disable');
+          $(this).blur();
+      })
+
+      $('#imageupload-enable').on('click', function() {
+          $imageupload.imageupload('enable');
+          $(this).blur();
+      })
+
+      $('#imageupload-reset').on('click', function() {
+          $imageupload.imageupload('reset');
+          $(this).blur();
+      });
+  </script>
+
   </body>
 </html>
