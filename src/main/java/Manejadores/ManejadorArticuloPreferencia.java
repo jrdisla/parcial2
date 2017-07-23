@@ -4,6 +4,7 @@ import Logica.ArticuloPreferencia;
 import Logica.ComentarioPreferenciaArti;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 /**
  * Created by jrdis on 16/6/2017.
@@ -28,6 +29,20 @@ public class ManejadorArticuloPreferencia extends ManejadorDB <ArticuloPreferenc
                     .setParameter("articleId",commentId)
                     .getSingleResult();
         } catch (Exception ex) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public ArticuloPreferencia getItByArtiUser(int userId, int articleId){
+        EntityManager em = getEntityManager();
+        try {
+            return (ArticuloPreferencia) em.createNamedQuery(ArticuloPreferencia.getLikeDis)
+                    .setParameter("userId",userId)
+                    .setParameter("articleId",articleId)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
             return null;
         } finally {
             em.close();

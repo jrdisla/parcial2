@@ -135,9 +135,10 @@ public class Rutas {
                 Map<String, Object> attributes = new HashMap<>();
                 List<Articulo> articulos = new ArrayList<>();
                 List<Amigos> amigos = new ArrayList<>();
-                for (Articulo item: usuario.getArticulos()
+          /*      for (Articulo item: usuario.getArticulos()
                      ) {
                     articulos.add(item);
+
                 }
                 for (Amigos item: usuario.getAmigos())
                 {
@@ -145,14 +146,42 @@ public class Rutas {
                     {
                         articulos.add(item2);
                     }
-                }
+                }*/
+
+                articulos = ManejadorArticulo.getInstance().getAllObjects();
+
 
 
                 attributes.put("user",usuario);
+
                 attributes.put("articulos",articulos);
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
+
+        Spark.get("/articulo/valida/:id", (request, response) -> {
+
+            String id = request.params(":id");
+            int id_ = Integer.parseInt(id);
+
+            Usuario user = request.session().attribute("username");
+            String comment = request.queryParams("comment");
+
+            ComentarioArticulo comentarioArticulo = new ComentarioArticulo();
+            comentarioArticulo.setBody(comment);
+            Articulo arti_c = ManejadorArticulo.getInstance().findObjectWithId(id_);
+            comentarioArticulo.setArticulo(arti_c);
+            comentarioArticulo.setUser(user);
+            ManejadorComentarioArticulo.getInstance().insertIntoDatabase(comentarioArticulo);
+            arti_c.getComentarioArticulo().add(comentarioArticulo);
+            ManejadorArticulo.getInstance().updateObject(arti_c);
+
+            response.redirect("/index");
+            return "";
+        });
+
+
+
 
             Spark.get("/moreDataUser", (request, response) -> {
 
@@ -205,6 +234,117 @@ public class Rutas {
                 resultTemplate.process(attributes, writer);
                 return writer;
             });
+
+        Spark.get("/preferences/likes/:id/:arti",(request, response) -> {
+
+            int id = Integer.parseInt(request.params(":id"));
+
+            Usuario user = request.session().attribute("username");
+            int id_c = Integer.parseInt(request.params(":arti"));
+            Articulo article = ManejadorArticulo.getInstance().findObjectWithId(id_c);
+
+            if (id == 1) {
+
+                ArticuloPreferencia articleLikes = new ArticuloPreferencia(user, article,"LIKE");
+                ArticuloPreferencia item = ManejadorArticuloPreferencia.getInstance().getItByArtiUser(user.getId(),article.getId());
+
+                if (item != null) {
+
+
+                    if (item.getPreferencia().substring(0, 3).equalsIgnoreCase("DIS")) {
+
+                        int ida = item.getId();
+                        System.out.println(item.getId());
+                        ManejadorArticuloPreferencia.getInstance().deleteObjectWithId(ida);
+                        articleLikes.setPreferencia("LIKE");
+
+                        int likes = article.getCount_();
+                        likes++;
+                        article.setCount_(likes);
+                        ManejadorArticuloPreferencia.getInstance().insertIntoDatabase(articleLikes);
+                        int disl = article.getDislike();
+                        if(disl>0)
+                        {
+                            disl--;
+                            article.setDislike(disl);
+                        }
+                        ManejadorArticulo.getInstance().updateObject(article);
+
+                    }
+
+                    else {
+                        int id_a = item.getId();
+                        ManejadorArticuloPreferencia.getInstance().deleteObjectWithId(id_a);
+                        int like = article.getCount_();
+                        if(like>0)
+                        {
+                            like--;
+                            article.setCount_(like);
+                        }
+                        ManejadorArticulo.getInstance().updateObject(article);
+                        response.redirect("/index");
+
+                    }
+                } else {
+
+                    ManejadorArticuloPreferencia.getInstance().insertIntoDatabase(articleLikes);
+                    article.setCount_(1);
+                    ManejadorArticulo.getInstance().updateObject(article);
+
+                }
+            }
+
+            else {
+
+                ArticuloPreferencia articlePreference = new ArticuloPreferencia(user, article,"DISLIKE");
+                ArticuloPreferencia item = ManejadorArticuloPreferencia.getInstance().getItByArtiUser(user.getId(), article.getId());
+
+                if (item != null) {
+                    if (item.getPreferencia().substring(0, 3).equalsIgnoreCase("LIK")) {
+
+                        int ida = item.getId();
+                        ManejadorArticuloPreferencia.getInstance().deleteObjectWithId(ida);
+                        articlePreference.setPreferencia("DISLIKE");
+                        int dislikes = article.getDislike();
+                        dislikes++;
+                        article.setDislike(dislikes);
+                        ManejadorArticuloPreferencia.getInstance().insertIntoDatabase(articlePreference);
+
+                        int disl = article.getCount_();
+                        if(disl>0)
+                        {
+                            disl--;
+                            article.setCount_(disl);
+                        }
+
+                        ManejadorArticulo.getInstance().updateObject(article);
+                    }
+                    else {
+                        int id_a = item.getId();
+                        ManejadorArticuloPreferencia.getInstance().deleteObjectWithId(id_a);
+
+                        int disl = article.getDislike();
+                        if(disl>0)
+                        {
+                            disl--;
+                            article.setDislike(disl);
+                        }
+                        ManejadorArticulo.getInstance().updateObject(article);
+                        response.redirect("/index");
+                    }
+                }
+                else {
+                    ManejadorArticuloPreferencia.getInstance().insertIntoDatabase(articlePreference);
+                    article.setDislike(1);
+                    ManejadorArticulo.getInstance().updateObject(article);
+                }
+
+            }
+            response.redirect("/index");
+            return "";
+        });
+
+
 
             Spark.post("/addUser", (request, response) -> {
 
@@ -554,6 +694,8 @@ public class Rutas {
             resultTemplate.process(attributes, writer);
             return writer;
         });
+
+
 
             before("/profile",(request, response) -> {
                 autorizado(request,response);

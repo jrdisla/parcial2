@@ -110,7 +110,7 @@
                         </div>
                     </div>
                   </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" id="imageupload-enable" style="margin-top: 30px" class="btn btn-default">Submit</button>
                 </form>
               </div>
             </div>
@@ -129,44 +129,30 @@
                                    <a href="">${Articulos.usuario.nombre}
                                    <textarea class="form-control" style="margin-bottom: 30px" name= "opinion" readonly> ${Articulos.body}</textarea>
                                <#if Articulos.imagen??>
-                                   <li><a href="/hola" class="thumbnail"><img src="${Articulos.imagen.path}" alt=""></a></li>
+                                   <li><a href= ${Articulos.imagen.path} class="thumbnail"><img src="${Articulos.imagen.path}" alt=""height="250" width="250"></a></li>
                                </#if>
+
+                                       <a href="/preferences/likes/1/${Articulos.id}" class="btn btn-danger"  role="button"><span class="badge">${Articulos.count_}</span> LIKES </a>
+                                       <a href="/preferences/likes/2/${Articulos.id}" class="btn btn-danger"  role="button"><span class="badge">${Articulos.dislike}</span> DISLIKES</a>
+                                               <h4>Leave a Comment:</h4>
+
+                                               <form action="/articulo/valida/${Articulos.id}" method="get" role="form">
+
+                                                   <div class="comment-form">
+                                                           <div class="form-group">
+                                                               <input type="text" name="comment" class="form-control" placeholder="enter comment">
+                                                           </div>
+                                                           <button type="submit" class="btn btn-default">Add</button>
+                                                   </div>
+
+                                               </form>
                                </#list>
                            </#if>
 
                        </div>
                        <div class="pointer-border"></div>
                      </div>
-                     <p class="post-actions"><a href="#">Comment</a> - <a href="#">Like</a> - <a href="#">Follow</a> - <a href="#">Share</a></p>
-                     <div class="comment-form">
-                       <form class="form-inline">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="enter comment">
-                        </div>
-                        <button type="submit" class="btn btn-default">Add</button>
-                      </form>
-                     </div>
-                     <div class="clearfix"></div>
-                     <div class="comments">
-                       <div class="comment">
-                         <a href="#" class="comment-avatar pull-left"><img src="img/user.png" alt=""></a>
-                         <div class="comment-text">
-                           <p></p>
-                         </div>
-                       </div>
-                       <div class="clearfix"></div>
-                       <div class="comment">
-                         <a href="#" class="comment-avatar pull-left"><img src="img/user.png" alt=""></a>
-                         <div class="comment-text">
-                           <p></p>
-                         </div>
-                       </div>
-                       <div class="clearfix"></div>
-                     </div>
-                   </div>
-                 </div>
-              </div>
-            </div>
+
             <!--<div class="panel panel-default post">
               <div class="panel-body">
                  <div class="row">
@@ -339,6 +325,7 @@
       });
   </script>
 
+
   <style>
       #panel, #flip {
           padding: 5px;
@@ -349,6 +336,10 @@
       #panel {
           padding: 5px;
           display: none;
+      }
+      #textarea {
+          width: 175px;
+          height: 75px;
       }
   </style>
   <style>

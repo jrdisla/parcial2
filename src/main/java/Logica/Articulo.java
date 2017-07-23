@@ -60,6 +60,26 @@ public class Articulo implements Serializable {
     private String titulo;
     @Column(name = "imagen",length = 500000000)
     private Imagenes imagen;
+    @Column(name = "count_")
+    private int count_;
+    @Column(name = "dislike")
+    private int dislike;
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setDislike(int dislike) {
+        this.dislike = dislike;
+    }
+
+    public int getCount_() {
+        return count_;
+    }
+
+    public void setCount_(int count_) {
+        this.count_ = count_;
+    }
 
     public Articulo() {
     }
@@ -167,4 +187,6 @@ public class Articulo implements Serializable {
     public void setImagen(Imagenes imagen) {
         this.imagen = imagen;
     }
+
+
 }

@@ -15,6 +15,7 @@ import java.io.Serializable;
                 name = "ArtiPrefe.getByArtiUser",
                 query = "SELECT artiLikeDis FROM Logica.ArticuloPreferencia artiLikeDis WHERE artiLikeDis.usuario.id = :userId " +
                         "AND artiLikeDis.articulo.id = :articleId"
+
         )
 })
 public class ArticuloPreferencia implements Serializable {
