@@ -53,8 +53,9 @@
 
 <h2>Rest Services</h2>
 
-<button type="button" onclick="addInput()" class="btn btn-success">Mostrar publicaciones de un usuario</button>
-<button type="button" class="btn btn-info">Realizar un post</button>
+<div>
+    ${code}
+</div>
 
 
 <span id="response"></span>
@@ -63,7 +64,7 @@
     {
         //document.getElementById('response').innerHTML +='<br/><label id="user2"for="user">Username</label><br/><input type="text" name="username" id="user" /><br/>';
         //document.getElementById('response').innerHTML +='<br/> <button class="btn btn-info" type="submit">Buscar</button>'
-        document.getElementById('response').innerHTML +='</br> <form action="/Cliente/search-rest" method="post"> <br/> <label id="user2"for="user">Username</label><br/><input type="text" name="username" id="user" /><br/> <br/> <button class="btn btn-info" type="submit">Buscar</button> </form>';
+        document.getElementById('response').innerHTML +='</br> <form action="/search-rest" method="post"> <br/> <label id="user2"for="user">Username</label><br/><input type="text" name="username" id="user" /><br/> <br/> <button class="btn btn-info" type="submit">Buscar</button> </form>';
         document.getElementById('user').style.width="260px";
 
     }
