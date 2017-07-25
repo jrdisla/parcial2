@@ -69,11 +69,7 @@ public class Rutas {
             Map<String, Object> attributes = new HashMap<>();
             Main_Rest main_rest = new Main_Rest();
             String output = main_rest.getOut(user);
-            output = output.replaceAll("\"", "");
-            output = output.replace('[',' ');
-            output = output.replace(']',' ');
-            List<String> articulos = Arrays.asList(output.split("\\s*,\\s*"));
-            output = automaticHtmlCode(articulos);
+            output = automaticHtmlCode(output);
           //  String corchete = "[]";
            // output = output.replaceAll(corchete, "");
 
@@ -899,10 +895,15 @@ public class Rutas {
 
     }
 
-    private static String automaticHtmlCode(List<String> data) {
+    private static String automaticHtmlCode(String output) {
 
         String htmlCode = "";
         int index = 0;
+
+        output = output.replaceAll("\"", "");
+        output = output.replace('[',' ');
+        output = output.replace(']',' ');
+        List<String> data = Arrays.asList(output.split("\\s*,\\s*"));
 
         List<Articulo_Body> articulo_bodies = new ArrayList<>();
         List<Articulo_Body> articulo_bodies_titulo = new ArrayList<>();
