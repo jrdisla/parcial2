@@ -1,3 +1,4 @@
+import Client_Soap.StartSoap;
 import Logica.Usuario;
 import Manejadores.ManejadorUsuario;
 import Soap.SoapArranque;
@@ -32,10 +33,12 @@ public class Main {
         {
             e.printStackTrace();
         }
-            uploadDir.createNewFile();
-        DowDir.createNewFile();
-      Rutas.StartProyect(uploadDir,DowDir);
 
+        uploadDir.createNewFile();
+        DowDir.createNewFile();
+        Rutas.StartProyect(uploadDir,DowDir);
+
+        StartSoap.Run();
         SoapArranque.init();
 
     }
