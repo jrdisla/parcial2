@@ -76,7 +76,7 @@
                             <ul>
                             <#list listuser as user>
                                 <h1 class="page-header">${user.nombre}</h1>
-                                <img src="${user.foto_perfil.path}" class="img-thumbnail" alt="error" />
+                                <img src="${user.foto_perfil.path}" class="img-thumbnail" alt=""height="250" width="250" />
                                 <li><strong>Email :</strong> ${user.email}</li>
                                 <li><strong>City: </strong> ${user.ciudad}</li>
                                 <li><strong>Gender: </strong>${user.sexo}</li>

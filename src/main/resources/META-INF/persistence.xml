@@ -15,6 +15,8 @@
         <class>Logica.Usuario</class>
         <class>Logica.Imagenes</class>
         <class>Logica.Amigos</class>
+        <class>Logica.Notifications</class>
+
         <properties>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />-->
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/parcial2" />

@@ -77,6 +77,7 @@ public class Usuario implements Serializable {
     @Column(name = "contraseña")
     private String contraseña;
 
+
     public Usuario() {
 
     }
@@ -302,4 +303,6 @@ public class Usuario implements Serializable {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+
 }

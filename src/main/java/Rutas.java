@@ -287,6 +287,7 @@ public class Rutas {
             Map<String, Object> attributes = new HashMap<>();
             List<Articulo> articulos = new ArrayList<>();
             List<Amigos> amigos = new ArrayList<>();
+
           /*      for (Articulo item: usuario.getArticulos()
                      ) {
                     articulos.add(item);
@@ -326,6 +327,9 @@ public class Rutas {
             ManejadorComentarioArticulo.getInstance().insertIntoDatabase(comentarioArticulo);
             arti_c.getComentarioArticulo().add(comentarioArticulo);
             ManejadorArticulo.getInstance().updateObject(arti_c);
+
+
+
 
             response.redirect("/index");
             return "";
