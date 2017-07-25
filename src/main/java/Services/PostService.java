@@ -56,7 +56,7 @@ public class PostService {
         return list;
     }
 
-    public Articulo postearArticulo(String msj)
+    public String postearArticulo(String msj)
     {
         Usuario usuario = ManejadorUsuario.getInstance().GetUser("cliente@gmail.com");
         Articulo articulo = new Articulo();
@@ -72,6 +72,6 @@ public class PostService {
             e.printStackTrace();
         }
 
-        return articulo;
+        return "Inserted Succesfully";
     }
 }

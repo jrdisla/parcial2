@@ -1,5 +1,7 @@
+import Client_Soap.StartSoap;
 import Logica.Usuario;
 import Manejadores.ManejadorUsuario;
+import Soap.SoapArranque;
 import org.h2.tools.Server;
 
 import java.io.File;
@@ -31,9 +33,13 @@ public class Main {
         {
             e.printStackTrace();
         }
-            uploadDir.createNewFile();
+
+        uploadDir.createNewFile();
         DowDir.createNewFile();
-      Rutas.StartProyect(uploadDir,DowDir);
+        Rutas.StartProyect(uploadDir,DowDir);
+
+        StartSoap.Run();
+        SoapArranque.init();
 
     }
 }
