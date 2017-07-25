@@ -47,6 +47,7 @@
            <!-- <li><a href="groups.ftl">Groups</a></li> -->
             <li><a href="/photos">Photos</a></li>
             <li><a href="/profile">Profile</a></li>
+              <li><a href="/Geo">Places around You</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -104,8 +105,6 @@
                                 <!-- bootstrap-imageupload method buttons. -->
 
                                 <button type="submit" id="imageupload-enable" style="margin-top: 30px" class="btn btn-success">Upload</button>
-
-
 
                         </div>
                     </div>

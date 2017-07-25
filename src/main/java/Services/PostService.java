@@ -51,8 +51,7 @@ public class PostService {
             }
         }
 
-        //  list.add("hola1");
-        //  list.add("hola2");
+
         return list;
     }
 

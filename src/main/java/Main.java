@@ -38,8 +38,8 @@ public class Main {
         DowDir.createNewFile();
         Rutas.StartProyect(uploadDir,DowDir);
 
-        StartSoap.Run();
-        SoapArranque.init();
+      //  StartSoap.Run();
+       // SoapArranque.init();
 
     }
 }

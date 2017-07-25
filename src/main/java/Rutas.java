@@ -11,6 +11,7 @@ import Utilidades.JsonUtilidades;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
@@ -21,6 +22,7 @@ import spark.Response;
 import spark.Session;
 import spark.Spark;
 import javax.servlet.MultipartConfigElement;
+import javax.ws.rs.core.MultivaluedMap;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,6 +50,7 @@ public class Rutas {
 
 
         enableDebugScreen();
+
         Spark.get("/Cliente", (request, response) -> {
 
             Template resultTemplate = configuration.getTemplate("templates/Clientes/rest-index.ftl");
@@ -58,7 +61,15 @@ public class Rutas {
             return writer;
         });
 
+        Spark.get("/Geo", (request, response) -> {
 
+            Template resultTemplate = configuration.getTemplate("templates/geo.html");
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
 
         Spark.post("/Cliente/search-rest", (request, response) -> {
 
@@ -70,29 +81,68 @@ public class Rutas {
             Main_Rest main_rest = new Main_Rest();
             String output = main_rest.getOut(user);
             output = automaticHtmlCode(output);
-          //  String corchete = "[]";
-           // output = output.replaceAll(corchete, "");
-
             attributes.put("code",output);
             resultTemplate.process(attributes, writer);
             return writer;
         });
 
-        Spark.get("/Cliente2", (request, response) -> {
+        Spark.post("/Cliente/post-rest", (request, response) -> {
 
-            Template resultTemplate = configuration.getTemplate("templates/Clientes/Soap-index.ftl");
+            Template resultTemplate = configuration.getTemplate("templates/Clientes/post.ftl");
             StringWriter writer = new StringWriter();
             Map<String, Object> attributes = new HashMap<>();
 
             resultTemplate.process(attributes, writer);
             return writer;
         });
+
+        Spark.post("/post", (request, response) -> {
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+            String username = getStringFromInputStream(request.raw().getPart("username").getInputStream());;
+            String image_path ;
+            Date nowDate = new Date();
+            String file_name = "img_example_"  + nowDate.getSeconds() + (ManejadorImagen.getInstance().getAllObjects().size() + 1);
+
+            Path temp = Paths.get(upload.getAbsolutePath() + file_name + ".jpeg");
+
+            File ima = new File(System.getProperty("java.io.tmpdir"));
+            String body = getStringFromInputStream(request.raw().getPart("opinion_2").getInputStream());
+
+            try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
+
+                Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Tamano de image: " + temp.toFile().length());
+                byte[] byteP;
+                byteP = Files.readAllBytes(temp);
+                File temp2 = File.createTempFile("image", "jpeg", ima);
+                FileOutputStream fos = new FileOutputStream(temp2);
+                fos.write(byteP);
+                Imagenes imagen = new Imagenes();
+                imagen.setImagen(byteP);
+                imagen.setPath(temp2.getName());
+                image_path = imagen.getPath();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw e;
+            }
+
+
+            MultivaluedMap formData = new MultivaluedMapImpl();
+            formData.add("username", username);
+            formData.add("body", body);
+            formData.add("path", image_path);
+
+            Main_Rest main_rest = new Main_Rest();
+            main_rest.post(formData);
+
+            return "";
+        });
         path("/rest", () -> {
             //filtros especificos:
-           /* afterAfter("/*", (request, response) -> { //indicando que todas las llamadas retorna un json.
+            afterAfter("/*", (request, response) -> { //indicando que todas las llamadas retorna un json.
                 response.header("Content-Type", ACCEPT_TYPE);
             });
-            */
+
             //rutas del api
             get("/articulos/:email", (request, response) -> {
                 String user = request.params("email");
@@ -100,26 +150,32 @@ public class Rutas {
                 return PostService.getInstancia().getAllArticulo(user);
             }, JsonUtilidades.json());
 
-            path("/post", () -> {
+           Spark.post("/addTextrest", (request, response) -> {
 
-           //     get("/", (request, response) -> {
-         //           //return PostService.getInstancia().getUsuario("twindark1@gmail.com");
-         //           return PostService.getInstancia().getAllArticulos("twindark1@gmail.com");
-            //    }, JsonUtilidades.json());
+               System.out.println();
+               String username = request.queryParams("username");
+               System.out.println(username);
+                Usuario usuario = ManejadorUsuario.getInstance().GetUser(username);
+                Articulo articulo = new Articulo();
+               System.out.println("EL USERRRRRRR: "+usuario.getEmail());
+                int size = usuario.getArticulos().size();
+                articulo.setTitulo("Articulo " + (size + 1));
+                usuario.getArticulos().add(articulo);
 
-                //retorna los articulos de un usuario
-         //       Spark.get("/:email", (request, response) -> {
-         //           return PostService.getInstancia().getAllArticulos(request.params("email"));
-         //       }, JsonUtilidades.json());
+                articulo.setBody(request.queryParams("body"));
+                articulo.setUsuario(usuario);
+                articulo.setFecha(new Date());
 
-                /*
-                //crea un estudiante
-                Spark.post("/", Main_Rest.ACCEPT_TYPE, (request, response) -> {
-                    Estudiante estudiante = new Gson().fromJson(request.body(), Estudiante.class);
-                    return PostService.crearEstudiante(estudiante);
-                }, JsonUtilidades.json());
-                */
+                Imagenes imagen = new Imagenes();
+                imagen.setPath(request.queryParams("path"));
+                articulo.setImagen(imagen);
+                ManejadorArticulo.getInstance().insertIntoDatabase(articulo);
+                ManejadorUsuario.getInstance().updateObject(usuario);
+                response.redirect("/Cliente");
+
+                return "";
             });
+
         });
 
         Spark.get("/", (request, response) -> {
@@ -577,15 +633,14 @@ public class Rutas {
             Path temp = Paths.get(upload.getAbsolutePath() + file_name + ".jpeg");
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
             File ima = new File(System.getProperty("java.io.tmpdir"));
-            String text = getStringFromInputStream(request.raw().getPart("opinion_2").getInputStream());
-            articulo.setBody(text);
+            String text = getStringFromInputStream(request.raw().getPart("opinion_2").getInputStream()); // tienes que pedir el valor despues de
+            articulo.setBody(text); //Pero son valores de un input que le estoy pasando
             articulo.setUsuario(usuario);
             articulo.setFecha(new Date());
             try (InputStream input = request.raw().getPart("image-file").getInputStream()) {
 
                 Files.copy(input, temp, StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Tamano de image: " + temp.toFile().length());
-
                 byte[] byteP;
                 byteP = Files.readAllBytes(temp);
                 File temp2 = File.createTempFile("image", "jpeg", ima);
@@ -608,6 +663,8 @@ public class Rutas {
 
             return "";
         });
+
+
 
         Spark.get("/register", (request, response) -> {
 
@@ -898,7 +955,6 @@ public class Rutas {
     private static String automaticHtmlCode(String output) {
 
         String htmlCode = "";
-        int index = 0;
 
         output = output.replaceAll("\"", "");
         output = output.replace('[',' ');

@@ -4,6 +4,8 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 /**
  * Created by jrdis on 16/6/2017.
  */
@@ -23,6 +25,17 @@ public class Main_Rest {
 
       String output = response.getEntity(String.class);
       return output;
+  }
+
+ public void post ( MultivaluedMap formData)
+  {
+      Client client = Client.create();
+      WebResource webResource = client
+              .resource("http://localhost:4567/rest/addTextrest");
+      ClientResponse response = webResource
+              .type("application/x-www-form-urlencoded")
+              .post(ClientResponse.class, formData);
+
   }
 
     }
