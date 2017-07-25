@@ -2,10 +2,14 @@
  * Created by cesarjose on 6/29/17.
  */
 
+import Cliente_REST.Main_Rest;
 import Logica.*;
 import Services.PostService;
 import com.google.gson.Gson;
 import Utilidades.JsonUtilidades;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
@@ -49,6 +53,22 @@ public class Rutas {
             StringWriter writer = new StringWriter();
             Map<String, Object> attributes = new HashMap<>();
 
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
+
+
+
+        Spark.post("/Cliente/search-rest", (request, response) -> {
+
+            Template resultTemplate = configuration.getTemplate("templates/Clientes/ver_post.ftl");
+            String user = request.queryParams("username");
+            System.out.println(user);
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+            Main_Rest main_rest = new Main_Rest();
+            String output = main_rest.getOut(user);
+            attributes.put("code",output.substring(0,3));
             resultTemplate.process(attributes, writer);
             return writer;
         });
