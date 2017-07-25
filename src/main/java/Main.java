@@ -20,6 +20,9 @@ public class Main {
         //ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
         //manejadorUsuario.insertIntoDatabase(usuario);
 
+        Usuario user = new Usuario("cliente@gmail.com","admin","admin",true,"admin");
+        ManejadorUsuario.getInstance().insertIntoDatabase(user);
+
         try
         {
             Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();

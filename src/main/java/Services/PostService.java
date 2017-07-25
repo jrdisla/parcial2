@@ -2,12 +2,10 @@ package Services;
 
 import Logica.Articulo;
 import Logica.Usuario;
+import Manejadores.ManejadorArticulo;
 import Manejadores.ManejadorUsuario;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by cesarjose on 7/23/17.
@@ -49,5 +47,24 @@ public class PostService {
 
         System.out.println(ans.size());
         return ans;
+    }
+
+    public Articulo postearArticulo(String msj)
+    {
+        Usuario usuario = ManejadorUsuario.getInstance().GetUser("cliente@gmail.com");
+        Articulo articulo = new Articulo();
+
+        articulo.setTitulo("Hello");
+        articulo.setFecha(new Date());
+        articulo.setBody(msj);
+        articulo.setUsuario(usuario);
+
+        try {
+            ManejadorArticulo.getInstance().insertIntoDatabase(articulo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return articulo;
     }
 }

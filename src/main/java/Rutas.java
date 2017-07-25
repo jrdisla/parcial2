@@ -5,6 +5,7 @@
 import Logica.*;
 import Services.PostService;
 import Utilidades.JsonUtilidades;
+import com.google.gson.Gson;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
@@ -81,6 +82,12 @@ public class Rutas {
                     return PostService.getInstancia().getAllArticulos(request.params("email"));
                 }, JsonUtilidades.json());
 
+                Spark.post("/",(request, response) -> {
+                    String text = request.queryParams("mensaje");
+                    Articulo articulo = new Gson().fromJson(request.body(), Articulo.class);
+                    return PostService.getInstancia().postearArticulo(text);
+                }, JsonUtilidades.json());
+                
                 /*
                 //crea un estudiante
                 Spark.post("/", Main.ACCEPT_TYPE, (request, response) -> {
