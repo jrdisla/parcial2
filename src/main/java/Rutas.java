@@ -120,7 +120,12 @@ public class Rutas {
                 Imagenes imagen = new Imagenes();
                 imagen.setImagen(byteP);
                 imagen.setPath(temp2.getName());
-                image_path = imagen.getPath();
+                if(temp.toFile().length() > 0){
+                image_path = imagen.getPath();}
+                else
+                {
+                    image_path = "no";
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 throw e;
@@ -168,7 +173,11 @@ public class Rutas {
 
                 Imagenes imagen = new Imagenes();
                 imagen.setPath(request.queryParams("path"));
-                articulo.setImagen(imagen);
+               System.out.println("EL PATHHHHHHHHHHHHHHHHH"+imagen.getPath());
+                if(!imagen.getPath().equalsIgnoreCase("no")) {
+                    articulo.setImagen(imagen);
+                }
+
                 ManejadorArticulo.getInstance().insertIntoDatabase(articulo);
                 ManejadorUsuario.getInstance().updateObject(usuario);
                 response.redirect("/Cliente");

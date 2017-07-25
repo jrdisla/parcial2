@@ -22,663 +22,636 @@
     <table id="14" parent="4" name="COMENTARIO_ALBUM_PREFES"/>
     <table id="15" parent="4" name="COMENTARIO_PREFERENCIA_ARTICULOS"/>
     <table id="16" parent="4" name="IMAGENES"/>
-    <table id="17" parent="4" name="NOTIFICACIONES"/>
-    <table id="18" parent="4" name="USUARIO"/>
-    <table id="19" parent="4" name="USUARIOS"/>
-    <table id="20" parent="4" name="USUARIOS_ALBUM"/>
-    <table id="21" parent="4" name="USUARIOS_AMIGOS"/>
-    <table id="22" parent="4" name="USUARIOS_USUARIOS"/>
-    <column id="23" parent="5" name="ID">
+    <table id="17" parent="4" name="USUARIO"/>
+    <table id="18" parent="4" name="USUARIOS"/>
+    <table id="19" parent="4" name="USUARIOS_ALBUM"/>
+    <table id="20" parent="4" name="USUARIOS_AMIGOS"/>
+    <table id="21" parent="4" name="USUARIOS_USUARIOS"/>
+    <column id="22" parent="5" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="5" name="DESCRIPCION">
+    <column id="23" parent="5" name="DESCRIPCION">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="25" parent="5" name="FECHA">
+    <column id="24" parent="5" name="FECHA">
       <Position>3</Position>
       <DataType>TIMESTAMP(23,10)|93</DataType>
     </column>
-    <column id="26" parent="5" name="TITULO">
+    <column id="25" parent="5" name="TITULO">
       <Position>4</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="27" parent="5" name="USUARIO">
+    <column id="26" parent="5" name="USUARIO">
       <Position>5</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="28" parent="5" name="CONSTRAINT_3">
+    <key id="27" parent="5" name="CONSTRAINT_3">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="29" parent="5" name="FKG3K7QL9MMMJME5DGUFKQR3FM2">
+    <foreign-key id="28" parent="5" name="FKG3K7QL9MMMJME5DGUFKQR3FM2">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="30" parent="6" name="ALBUM_ID">
+    <column id="29" parent="6" name="ALBUM_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="31" parent="6" name="IMAGENES_ID">
+    <column id="30" parent="6" name="IMAGENES_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="32" parent="6" name="CONSTRAINT_E">
+    <key id="31" parent="6" name="CONSTRAINT_E">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ALBUM_ID
 IMAGENES_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="33" parent="6" name="FKP8NEWF1GEAMJVLNJPP08QYCFV">
+    <foreign-key id="32" parent="6" name="FKP8NEWF1GEAMJVLNJPP08QYCFV">
       <ColNames>ALBUM_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ALBUM</RefTableName>
       <RefKeyName>CONSTRAINT_3</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="34" parent="6" name="FKQ2QVQ93SA7O59HYKGS3MX9XAQ">
+    <foreign-key id="33" parent="6" name="FKQ2QVQ93SA7O59HYKGS3MX9XAQ">
       <ColNames>IMAGENES_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>IMAGENES</RefTableName>
       <RefKeyName>CONSTRAINT_F</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="35" parent="7" name="ID">
+    <column id="34" parent="7" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="7" name="PREFERENCIA">
+    <column id="35" parent="7" name="PREFERENCIA">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="37" parent="7" name="ALBUM">
+    <column id="36" parent="7" name="ALBUM">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="38" parent="7" name="USUARIO">
+    <column id="37" parent="7" name="USUARIO">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="39" parent="7" name="CONSTRAINT_32">
+    <key id="38" parent="7" name="CONSTRAINT_32">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="40" parent="7" name="FKFV1US1EKXVVNPQXQS6FML4BCM">
+    <foreign-key id="39" parent="7" name="FKFV1US1EKXVVNPQXQS6FML4BCM">
       <ColNames>ALBUM</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ALBUM</RefTableName>
       <RefKeyName>CONSTRAINT_3</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="41" parent="7" name="FKQBFS4F42VR0TSH2D6IRLWYIKV">
+    <foreign-key id="40" parent="7" name="FKQBFS4F42VR0TSH2D6IRLWYIKV">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="42" parent="8" name="ID">
+    <column id="41" parent="8" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="43" parent="8" name="USUARIO_ID">
+    <column id="42" parent="8" name="USUARIO_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
     </column>
-    <key id="44" parent="8" name="CONSTRAINT_7">
+    <key id="43" parent="8" name="CONSTRAINT_7">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="45" parent="8" name="FKIVY9W844EN15ETW074M6YSFAX">
+    <foreign-key id="44" parent="8" name="FKIVY9W844EN15ETW074M6YSFAX">
       <ColNames>USUARIO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="46" parent="9" name="ID">
+    <column id="45" parent="9" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="47" parent="9" name="BODY">
+    <column id="46" parent="9" name="BODY">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="48" parent="9" name="COUNT_">
+    <column id="47" parent="9" name="COUNT_">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
     </column>
-    <column id="49" parent="9" name="DISLIKE">
+    <column id="48" parent="9" name="DISLIKE">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
     </column>
-    <column id="50" parent="9" name="FECHA">
+    <column id="49" parent="9" name="FECHA">
       <Position>5</Position>
       <DataType>TIMESTAMP(23,10)|93</DataType>
     </column>
-    <column id="51" parent="9" name="IMAGEN">
+    <column id="50" parent="9" name="IMAGEN">
       <Position>6</Position>
       <DataType>VARBINARY(500000000)|-3</DataType>
     </column>
-    <column id="52" parent="9" name="TITULO">
+    <column id="51" parent="9" name="TITULO">
       <Position>7</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="53" parent="9" name="USUARIO">
+    <column id="52" parent="9" name="USUARIO">
       <Position>8</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="54" parent="9" name="CONSTRAINT_C">
+    <key id="53" parent="9" name="CONSTRAINT_C">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="55" parent="9" name="FKA9W8LI2QRU8BDK77BTNCDE3IB">
+    <foreign-key id="54" parent="9" name="FKA9W8LI2QRU8BDK77BTNCDE3IB">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="56" parent="10" name="ID">
+    <column id="55" parent="10" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="57" parent="10" name="PREFERENCIA">
+    <column id="56" parent="10" name="PREFERENCIA">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="58" parent="10" name="ARTICULO">
+    <column id="57" parent="10" name="ARTICULO">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="59" parent="10" name="USUARIO">
+    <column id="58" parent="10" name="USUARIO">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="60" parent="10" name="CONSTRAINT_6">
+    <key id="59" parent="10" name="CONSTRAINT_6">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="61" parent="10" name="FKJRR5W53YO5F7ODUCXD2CBUPJ9">
+    <foreign-key id="60" parent="10" name="FKJRR5W53YO5F7ODUCXD2CBUPJ9">
       <ColNames>ARTICULO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ARTICULOS</RefTableName>
       <RefKeyName>CONSTRAINT_C</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="62" parent="10" name="FK1C7OO2MPW83Q6POYFSYD9122W">
+    <foreign-key id="61" parent="10" name="FK1C7OO2MPW83Q6POYFSYD9122W">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="63" parent="11" name="ID">
+    <column id="62" parent="11" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="64" parent="11" name="BODY">
+    <column id="63" parent="11" name="BODY">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="65" parent="11" name="ARTICULO">
+    <column id="64" parent="11" name="ARTICULO">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="66" parent="11" name="USUARIO">
+    <column id="65" parent="11" name="USUARIO">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="67" parent="11" name="CONSTRAINT_AF">
+    <key id="66" parent="11" name="CONSTRAINT_AF">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="68" parent="11" name="FKGMD2LXBYUMUKJSA10T8F1JT4X">
+    <foreign-key id="67" parent="11" name="FKGMD2LXBYUMUKJSA10T8F1JT4X">
       <ColNames>ARTICULO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ARTICULOS</RefTableName>
       <RefKeyName>CONSTRAINT_C</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="69" parent="11" name="FK7S9C9HKA2M74FKUNXXBR71817">
+    <foreign-key id="68" parent="11" name="FK7S9C9HKA2M74FKUNXXBR71817">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="70" parent="12" name="COMENTARIOARTICULO_ID">
+    <column id="69" parent="12" name="COMENTARIOARTICULO_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="71" parent="12" name="COMENTARIOPREFERENCIAARTIS_ID">
+    <column id="70" parent="12" name="COMENTARIOPREFERENCIAARTIS_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="72" parent="12" name="CONSTRAINT_67">
+    <key id="71" parent="12" name="CONSTRAINT_67">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>COMENTARIOARTICULO_ID
 COMENTARIOPREFERENCIAARTIS_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="73" parent="12" name="FKP8FQ6WVCSGP8YN5L3HK4RX9TU">
+    <foreign-key id="72" parent="12" name="FKP8FQ6WVCSGP8YN5L3HK4RX9TU">
       <ColNames>COMENTARIOARTICULO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>COMENTARIOARTICULOS</RefTableName>
       <RefKeyName>CONSTRAINT_AF</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="74" parent="12" name="FKRW5APJWG52L6GVLEN16PKUD4W">
+    <foreign-key id="73" parent="12" name="FKRW5APJWG52L6GVLEN16PKUD4W">
       <ColNames>COMENTARIOPREFERENCIAARTIS_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>COMENTARIO_PREFERENCIA_ARTICULOS</RefTableName>
       <RefKeyName>CONSTRAINT_4</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="75" parent="13" name="ID">
+    <column id="74" parent="13" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="76" parent="13" name="CUERPO">
+    <column id="75" parent="13" name="CUERPO">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="77" parent="13" name="ALBUM">
+    <column id="76" parent="13" name="ALBUM">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="78" parent="13" name="USUARIO">
+    <column id="77" parent="13" name="USUARIO">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="79" parent="13" name="CONSTRAINT_2">
+    <key id="78" parent="13" name="CONSTRAINT_2">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="80" parent="13" name="FK3W5FNBSMF11AU1S5NOYP2H5IU">
+    <foreign-key id="79" parent="13" name="FK3W5FNBSMF11AU1S5NOYP2H5IU">
       <ColNames>ALBUM</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ALBUM</RefTableName>
       <RefKeyName>CONSTRAINT_3</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="81" parent="13" name="FKEQCAQNRY9W6WSWE4VQP7XVMYM">
+    <foreign-key id="80" parent="13" name="FKEQCAQNRY9W6WSWE4VQP7XVMYM">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="82" parent="14" name="ID">
+    <column id="81" parent="14" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="83" parent="14" name="PREFERENCIA">
+    <column id="82" parent="14" name="PREFERENCIA">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="84" parent="14" name="COMENTARIOALBUM">
+    <column id="83" parent="14" name="COMENTARIOALBUM">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="85" parent="14" name="USUARIO">
+    <column id="84" parent="14" name="USUARIO">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="86" parent="14" name="CONSTRAINT_A">
+    <key id="85" parent="14" name="CONSTRAINT_A">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="87" parent="14" name="FK5LWMIC0K8KOU12QISXUF8P3TN">
+    <foreign-key id="86" parent="14" name="FK5LWMIC0K8KOU12QISXUF8P3TN">
       <ColNames>COMENTARIOALBUM</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>COMENTARIOS_ALBUM</RefTableName>
       <RefKeyName>CONSTRAINT_2</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="88" parent="14" name="FKP6M0EK1WTM457E3WXD4LSVP05">
+    <foreign-key id="87" parent="14" name="FKP6M0EK1WTM457E3WXD4LSVP05">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="89" parent="15" name="ID">
+    <column id="88" parent="15" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="90" parent="15" name="PREFERENCIA">
+    <column id="89" parent="15" name="PREFERENCIA">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="91" parent="15" name="COMENTARIOARTICULO_ID">
+    <column id="90" parent="15" name="COMENTARIOARTICULO_ID">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
     </column>
-    <column id="92" parent="15" name="USUARIO">
+    <column id="91" parent="15" name="USUARIO">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="93" parent="15" name="CONSTRAINT_4">
+    <key id="92" parent="15" name="CONSTRAINT_4">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="94" parent="15" name="FK5AESBDEYKNDV913BMLR9NOS2X">
+    <foreign-key id="93" parent="15" name="FK5AESBDEYKNDV913BMLR9NOS2X">
       <ColNames>COMENTARIOARTICULO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>COMENTARIOARTICULOS</RefTableName>
       <RefKeyName>CONSTRAINT_AF</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="95" parent="15" name="FKKM93FRRYDSJ2A50A5509TKPXD">
+    <foreign-key id="94" parent="15" name="FKKM93FRRYDSJ2A50A5509TKPXD">
       <ColNames>USUARIO</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="96" parent="16" name="ID">
+    <column id="95" parent="16" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="97" parent="16" name="IMAGEN">
+    <column id="96" parent="16" name="IMAGEN">
       <Position>2</Position>
       <DataType>VARBINARY(500000000)|-3</DataType>
     </column>
-    <column id="98" parent="16" name="PATH">
+    <column id="97" parent="16" name="PATH">
       <Position>3</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="99" parent="16" name="ALBUM">
+    <column id="98" parent="16" name="ALBUM">
       <Position>4</Position>
       <DataType>INTEGER(10)|4</DataType>
     </column>
-    <key id="100" parent="16" name="CONSTRAINT_F">
+    <key id="99" parent="16" name="CONSTRAINT_F">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="101" parent="16" name="FK4F8YS5RQFFAM5TDYUIFJRV4R">
+    <foreign-key id="100" parent="16" name="FK4F8YS5RQFFAM5TDYUIFJRV4R">
       <ColNames>ALBUM</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ALBUM</RefTableName>
       <RefKeyName>CONSTRAINT_3</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="102" parent="17" name="ID">
+    <column id="101" parent="17" name="ARTICULO_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="103" parent="17" name="NOTIFICATION">
-      <Position>2</Position>
-      <DataType>VARCHAR(255)|12</DataType>
-    </column>
-    <column id="104" parent="17" name="USUARIO">
-      <Position>3</Position>
-      <DataType>INTEGER(10)|4</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <key id="105" parent="17" name="CONSTRAINT_8">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="106" parent="17" name="FKFKM3VXES4N0QNOFEPGNO7MFCL">
-      <ColNames>USUARIO</ColNames>
-      <RefSchemaName>PUBLIC</RefSchemaName>
-      <RefTableName>USUARIOS</RefTableName>
-      <RefKeyName>CONSTRAINT_39</RefKeyName>
-      <RefColNames>ID</RefColNames>
-    </foreign-key>
-    <column id="107" parent="18" name="ARTICULO_ID">
-      <Position>1</Position>
-      <DataType>INTEGER(10)|4</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="108" parent="18" name="USUARIOS_PERMITIDOS_ID">
+    <column id="102" parent="17" name="USUARIOS_PERMITIDOS_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="109" parent="18" name="ETIQUETAS_ID">
+    <column id="103" parent="17" name="ETIQUETAS_ID">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="110" parent="18" name="CONSTRAINT_22">
+    <key id="104" parent="17" name="CONSTRAINT_22">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ARTICULO_ID
 ETIQUETAS_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="111" parent="18" name="FK1S29D1Y52JW5NDOOE1O6MSMUE">
+    <foreign-key id="105" parent="17" name="FK1S29D1Y52JW5NDOOE1O6MSMUE">
       <ColNames>ARTICULO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ARTICULOS</RefTableName>
       <RefKeyName>CONSTRAINT_C</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="112" parent="18" name="FKHLD12U5H1JPLVM6KPDRKTD89L">
+    <foreign-key id="106" parent="17" name="FKHLD12U5H1JPLVM6KPDRKTD89L">
       <ColNames>USUARIOS_PERMITIDOS_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="113" parent="18" name="FKQG8QJMVYF9CUA0G12AABEDCXJ">
+    <foreign-key id="107" parent="17" name="FKQG8QJMVYF9CUA0G12AABEDCXJ">
       <ColNames>ETIQUETAS_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="114" parent="19" name="ID">
+    <column id="108" parent="18" name="ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="115" parent="19" name="APELLIDO">
+    <column id="109" parent="18" name="APELLIDO">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="116" parent="19" name="CIUDAD">
+    <column id="110" parent="18" name="CIUDAD">
       <Position>3</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="117" parent="19" name="CONTRASEÑA">
+    <column id="111" parent="18" name="CONTRASEÑA">
       <Position>4</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="118" parent="19" name="DESCRIPCION">
+    <column id="112" parent="18" name="DESCRIPCION">
       <Position>5</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="119" parent="19" name="EMAIL">
+    <column id="113" parent="18" name="EMAIL">
       <Position>6</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="120" parent="19" name="ESADMIN">
+    <column id="114" parent="18" name="ESADMIN">
       <Position>7</Position>
       <DataType>BOOLEAN(1)|16</DataType>
     </column>
-    <column id="121" parent="19" name="FECHA_NACI">
+    <column id="115" parent="18" name="FECHA_NACI">
       <Position>8</Position>
       <DataType>TIMESTAMP(23,10)|93</DataType>
     </column>
-    <column id="122" parent="19" name="FECHA_REGISTRO">
+    <column id="116" parent="18" name="FECHA_REGISTRO">
       <Position>9</Position>
       <DataType>TIMESTAMP(23,10)|93</DataType>
     </column>
-    <column id="123" parent="19" name="FOTO">
+    <column id="117" parent="18" name="FOTO">
       <Position>10</Position>
       <DataType>VARBINARY(500000000)|-3</DataType>
     </column>
-    <column id="124" parent="19" name="IDIOMAS">
+    <column id="118" parent="18" name="IDIOMAS">
       <Position>11</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="125" parent="19" name="CUENTA_IG">
+    <column id="119" parent="18" name="CUENTA_IG">
       <Position>12</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="126" parent="19" name="LUGAR_NACI">
+    <column id="120" parent="18" name="LUGAR_NACI">
       <Position>13</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="127" parent="19" name="LUGARES_ESTUDIO">
+    <column id="121" parent="18" name="LUGARES_ESTUDIO">
       <Position>14</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="128" parent="19" name="LUGARES_TRABAJO">
+    <column id="122" parent="18" name="LUGARES_TRABAJO">
       <Position>15</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="129" parent="19" name="NOMBRE">
+    <column id="123" parent="18" name="NOMBRE">
       <Position>16</Position>
       <DataType>VARCHAR(255)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="130" parent="19" name="SEXO">
+    <column id="124" parent="18" name="SEXO">
       <Position>17</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <index id="131" parent="19" name="UK_KFSP0S1TFLM1CWLJ8IDHQSAD0_INDEX_3">
+    <index id="125" parent="18" name="UK_KFSP0S1TFLM1CWLJ8IDHQSAD0_INDEX_3">
       <ColNames>EMAIL</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="132" parent="19" name="CONSTRAINT_39">
+    <key id="126" parent="18" name="CONSTRAINT_39">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="133" parent="20" name="USUARIO_ID">
+    <column id="127" parent="19" name="USUARIO_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="134" parent="20" name="ALBUMS_ID">
+    <column id="128" parent="19" name="ALBUMS_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="135" parent="20" name="CONSTRAINT_1">
+    <key id="129" parent="19" name="CONSTRAINT_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USUARIO_ID
 ALBUMS_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="136" parent="20" name="FKJRDXHS4FQ4LB9UWE19MJ1O9JO">
+    <foreign-key id="130" parent="19" name="FKJRDXHS4FQ4LB9UWE19MJ1O9JO">
       <ColNames>USUARIO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="137" parent="20" name="FK7G9JGPOKB3THSLQTRK8QBODF4">
+    <foreign-key id="131" parent="19" name="FK7G9JGPOKB3THSLQTRK8QBODF4">
       <ColNames>ALBUMS_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>ALBUM</RefTableName>
       <RefKeyName>CONSTRAINT_3</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="138" parent="21" name="USUARIO_ID">
+    <column id="132" parent="20" name="USUARIO_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="139" parent="21" name="AMIGOS_ID">
+    <column id="133" parent="20" name="AMIGOS_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="140" parent="21" name="CONSTRAINT_14">
+    <key id="134" parent="20" name="CONSTRAINT_14">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USUARIO_ID
 AMIGOS_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="141" parent="21" name="FK27DYMM2D9FLS37014KYAM4DK2">
+    <foreign-key id="135" parent="20" name="FK27DYMM2D9FLS37014KYAM4DK2">
       <ColNames>USUARIO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="142" parent="21" name="FK3TKHSYEII66L9THSD3H9ETDYM">
+    <foreign-key id="136" parent="20" name="FK3TKHSYEII66L9THSD3H9ETDYM">
       <ColNames>AMIGOS_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>AMIGOS</RefTableName>
       <RefKeyName>CONSTRAINT_7</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <column id="143" parent="22" name="USUARIO_ID">
+    <column id="137" parent="21" name="USUARIO_ID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="144" parent="22" name="SOLICITUDES_ID">
+    <column id="138" parent="21" name="SOLICITUDES_ID">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="145" parent="22" name="CONSTRAINT_16">
+    <key id="139" parent="21" name="CONSTRAINT_16">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USUARIO_ID
 SOLICITUDES_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="146" parent="22" name="FKDPUJD62F3DVGR432424K9B8RB">
+    <foreign-key id="140" parent="21" name="FKDPUJD62F3DVGR432424K9B8RB">
       <ColNames>USUARIO_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
       <RefKeyName>CONSTRAINT_39</RefKeyName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="147" parent="22" name="FKCBC3XCAITUWESDMU5K4CXG5YH">
+    <foreign-key id="141" parent="21" name="FKCBC3XCAITUWESDMU5K4CXG5YH">
       <ColNames>SOLICITUDES_ID</ColNames>
       <RefSchemaName>PUBLIC</RefSchemaName>
       <RefTableName>USUARIOS</RefTableName>
