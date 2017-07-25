@@ -38,15 +38,22 @@ public class PostService {
         //return usuarioList.stream().filter(est -> est.getEmail().equalsIgnoreCase(email)).findFirst().orElse(null);
     }
 
-    public List<Articulo> getAllArticulos(String username)
-    {
-        Usuario usuario = ManejadorUsuario.getInstance().GetUser(username);
-        System.out.println(usuario.getNombre() + " " + usuario.getApellido());
+    public List<String> getAllArticulo (String username) throws Exception {
+        List<Articulo> articulos = ManejadorArticulo.getInstance().getAllObjects();
+        List<Articulo> aux = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+        for (Articulo item: articulos
+                ) {
+            if(item != null && item.getUsuario().getEmail().equalsIgnoreCase(username))
+            {
+                list.add(item.getTitulo());
+                list.add(item.getBody());
+            }
+        }
 
-        List<Articulo> ans = new ArrayList<Articulo>(usuario.getArticulos());
-
-        System.out.println(ans.size());
-        return ans;
+        //  list.add("hola1");
+        //  list.add("hola2");
+        return list;
     }
 
     public Articulo postearArticulo(String msj)
