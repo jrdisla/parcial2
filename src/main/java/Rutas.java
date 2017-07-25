@@ -4,13 +4,11 @@
 
 import Logica.*;
 import Services.PostService;
-import com.google.gson.Gson;
 import Utilidades.JsonUtilidades;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
 import Manejadores.*;
-import javafx.geometry.Pos;
 import spark.Request;
 import spark.Response;
 import spark.Session;
@@ -43,6 +41,26 @@ public class Rutas {
 
 
         enableDebugScreen();
+
+        Spark.get("/Cliente", (request, response) -> {
+
+            Template resultTemplate = configuration.getTemplate("templates/Clientes/rest-index.ftl");
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
+
+        Spark.get("/Cliente2", (request, response) -> {
+
+            Template resultTemplate = configuration.getTemplate("templates/Clientes/Soap-index.ftl");
+            StringWriter writer = new StringWriter();
+            Map<String, Object> attributes = new HashMap<>();
+
+            resultTemplate.process(attributes, writer);
+            return writer;
+        });
 
         path("/rest", () -> {
             //filtros especificos:
@@ -797,7 +815,8 @@ public class Rutas {
         Usuario user = ses.attribute("username");
 
         if (user == null) {
-            halt(401, "No Autorizado");
+            //halt(401, "No Autorizado");
+            response.redirect("/Login");
         }
     }
     private static String convertStreamToString(InputStream input) {
