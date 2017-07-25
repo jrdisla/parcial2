@@ -4,13 +4,12 @@
 
 import Logica.*;
 import Services.PostService;
-import com.google.gson.Gson;
 import Utilidades.JsonUtilidades;
+import com.google.gson.Gson;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
 import Manejadores.*;
-import javafx.geometry.Pos;
 import spark.Request;
 import spark.Response;
 import spark.Session;
@@ -43,6 +42,7 @@ public class Rutas {
 
 
         enableDebugScreen();
+
         Spark.get("/Cliente", (request, response) -> {
 
             Template resultTemplate = configuration.getTemplate("templates/Clientes/rest-index.ftl");
@@ -62,6 +62,7 @@ public class Rutas {
             resultTemplate.process(attributes, writer);
             return writer;
         });
+
         path("/rest", () -> {
             //filtros especificos:
            /* afterAfter("/*", (request, response) -> { //indicando que todas las llamadas retorna un json.
@@ -69,27 +70,27 @@ public class Rutas {
             });
             */
             //rutas del api
-            get("/articulos/:email", (request, response) -> {
-                String user = request.params("email");
-                System.out.println(user);
-                return PostService.getInstancia().getAllArticulo(user);
-            }, JsonUtilidades.json());
-
             path("/post", () -> {
 
-           //     get("/", (request, response) -> {
-         //           //return PostService.getInstancia().getUsuario("twindark1@gmail.com");
-         //           return PostService.getInstancia().getAllArticulos("twindark1@gmail.com");
-            //    }, JsonUtilidades.json());
+                get("/", (request, response) -> {
+                    //return PostService.getInstancia().getUsuario("twindark1@gmail.com");
+                    return PostService.getInstancia().getAllArticulos("twindark1@gmail.com");
+                }, JsonUtilidades.json());
 
                 //retorna los articulos de un usuario
-         //       Spark.get("/:email", (request, response) -> {
-         //           return PostService.getInstancia().getAllArticulos(request.params("email"));
-         //       }, JsonUtilidades.json());
+                Spark.get("/:email", (request, response) -> {
+                    return PostService.getInstancia().getAllArticulos(request.params("email"));
+                }, JsonUtilidades.json());
+
+                Spark.post("/",(request, response) -> {
+                    String text = request.queryParams("mensaje");
+                    Articulo articulo = new Gson().fromJson(request.body(), Articulo.class);
+                    return PostService.getInstancia().postearArticulo(text);
+                }, JsonUtilidades.json());
 
                 /*
                 //crea un estudiante
-                Spark.post("/", Main_Rest.ACCEPT_TYPE, (request, response) -> {
+                Spark.post("/", Main.ACCEPT_TYPE, (request, response) -> {
                     Estudiante estudiante = new Gson().fromJson(request.body(), Estudiante.class);
                     return PostService.crearEstudiante(estudiante);
                 }, JsonUtilidades.json());
@@ -821,7 +822,8 @@ public class Rutas {
         Usuario user = ses.attribute("username");
 
         if (user == null) {
-            halt(401, "No Autorizado");
+            //halt(401, "No Autorizado");
+            response.redirect("/Login");
         }
     }
     private static String convertStreamToString(InputStream input) {

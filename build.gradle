@@ -14,6 +14,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'com.h2database:h2:1.4.191'
     compile 'org.freemarker:freemarker:2.3.26-incubating'
+    compile group: 'org.eclipse.jetty', name: 'jetty-http-spi', version: '9.4.4.v20170414'
+
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
     //compile group: 'com.sparkjava', name: 'spark-core', version: '2.5'
     compile 'com.sparkjava:spark-core:2.6.0'
