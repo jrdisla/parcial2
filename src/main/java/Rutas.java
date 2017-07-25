@@ -2,6 +2,7 @@
  * Created by cesarjose on 6/29/17.
  */
 
+import Cliente_REST.Articulo_Body;
 import Cliente_REST.Main_Rest;
 import Logica.*;
 import Services.PostService;
@@ -68,7 +69,15 @@ public class Rutas {
             Map<String, Object> attributes = new HashMap<>();
             Main_Rest main_rest = new Main_Rest();
             String output = main_rest.getOut(user);
-            attributes.put("code",output.substring(0,3));
+            output = output.replaceAll("\"", "");
+            output = output.replace('[',' ');
+            output = output.replace(']',' ');
+            List<String> articulos = Arrays.asList(output.split("\\s*,\\s*"));
+            output = automaticHtmlCode(articulos);
+          //  String corchete = "[]";
+           // output = output.replaceAll(corchete, "");
+
+            attributes.put("code",output);
             resultTemplate.process(attributes, writer);
             return writer;
         });
@@ -888,6 +897,60 @@ public class Rutas {
 
         return sb.toString();
 
+    }
+
+    private static String automaticHtmlCode(List<String> data) {
+
+        String htmlCode = "";
+        int index = 0;
+
+        List<Articulo_Body> articulo_bodies = new ArrayList<>();
+        List<Articulo_Body> articulo_bodies_titulo = new ArrayList<>();
+
+        for (int i = 0; i < data.size();i++) {
+
+            Articulo_Body articulo_body = new Articulo_Body();
+            if(i == 0)
+            {
+                articulo_body.setTitulo(data.get(i));
+                articulo_bodies_titulo.add(articulo_body);
+            }
+            if(i>0) {
+                if (i % 2 == 0) {
+                    articulo_body.setTitulo(data.get(i));
+                    articulo_bodies_titulo.add(articulo_body);
+                }
+            }
+        }
+
+        for (int j = 0; j < data.size();j++) {
+
+            Articulo_Body articulo_body = new Articulo_Body();
+            if (j==1) {
+                articulo_body.setBody(data.get(j));
+                articulo_bodies.add(articulo_body);
+            }
+            if(j>1) {
+                if (j % 2 != 0) {
+                    articulo_body.setBody(data.get(j));
+                    articulo_bodies.add(articulo_body);
+                }
+            }
+        }
+
+        for (int i =0;i< articulo_bodies.size();i++
+             ) {
+
+
+
+        htmlCode += "<tr"  + "/';\">" + "\n\t\t" +
+                "<td>" + articulo_bodies_titulo.get(i).getTitulo() + "</td>" + "\n\t\t" +
+                "<td>" + articulo_bodies.get(i).getBody() + "</td>" + "\n\t\t" +
+                "</td>" + "\n\t    " +
+                "</tr>\n\t    ";
+    }
+
+        return htmlCode;
     }
 
 }
