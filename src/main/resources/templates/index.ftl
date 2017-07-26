@@ -145,6 +145,14 @@
                                                    </div>
 
                                                </form>
+                                   <#if comet??>
+                                   <#list comet as comment>
+                                       <#if comment.articulo.id == Articulos.id>
+                                           <p> ${comment.body} </p>
+
+                                       </#if>
+                                   </#list>
+                                   </#if>
                                </#list>
                            </#if>
 

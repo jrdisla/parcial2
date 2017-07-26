@@ -71,7 +71,7 @@
     {
         //document.getElementById('response').innerHTML +='<br/><label id="user2"for="user">Username</label><br/><input type="text" name="username" id="user" /><br/>';
         //document.getElementById('response').innerHTML +='<br/> <button class="btn btn-info" type="submit">Buscar</button>'
-        document.getElementById('response').innerHTML +='</br> <form action="/Cliente/post-rest" method="post">  <button class="btn btn-info" type="submit">Buscar</button> </form>';
+        document.getElementById('response').innerHTML +='</br> <form action="/Cliente/post-rest" method="post">  <button class="btn btn-info" type="submit">Postear</button> </form>';
         document.getElementById('user').style.width="260px";
 
     }

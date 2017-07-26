@@ -311,10 +311,9 @@ public class Rutas {
                 }*/
 
             articulos = ManejadorArticulo.getInstance().getAllObjects();
-
-
+            List<ComentarioArticulo> comentarioArticulos = ManejadorComentarioArticulo.getInstance().getAllObjects();
             attributes.put("user", usuario);
-
+            attributes.put("comet",comentarioArticulos);
             attributes.put("articulos", articulos);
             resultTemplate.process(attributes, writer);
             return writer;
